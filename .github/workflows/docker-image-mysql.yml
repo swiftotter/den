@@ -18,7 +18,6 @@ jobs:
       fail-fast: false
       matrix:
         version:
-          - "5.7"
           - "8.0"
 
     steps:
