@@ -51,5 +51,5 @@ jobs:
           context: images/nginx
           platforms: linux/amd64,linux/arm64
           build-args: NGINX_VERSION=${{ matrix.version }}
-          push: ${{ github.ref == 'refs/heads/develop' && !env.ACT }}
+          push: ${{ github.ref == 'refs/heads/main' && !env.ACT }}
           tags: ghcr.io/${{ github.repository_owner }}/den-nginx:${{ matrix.version }}
