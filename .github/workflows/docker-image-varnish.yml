@@ -36,7 +36,7 @@ jobs:
         uses: docker/login-action@v2
         with:
           registry: ghcr.io
-          username: ${{ github.actor }}
+          username: ${{ github.repository_owner }}
           password: ${{ secrets.GITHUB_TOKEN }}
         if: ${{ !env.ACT }}
 
@@ -58,4 +58,4 @@ jobs:
           platforms: linux/amd64,linux/arm64
           build-args: VARNISH_VERSION=${{ env.VARNISH_VERSION }}
           push: ${{ github.ref == 'refs/heads/develop' && !env.ACT }}
-          tags: ghcr.io/${{ github.actor }}/den-varnish:${{ matrix.version }}
+          tags: ghcr.io/${{ github.repository_owner }}/den-varnish:${{ matrix.version }}
