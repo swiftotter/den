@@ -33,13 +33,21 @@ if [[ -z ${SEARCH_PATH} ]]; then
 fi
 
 ## login to docker hub as needed
+if [[ ${DOCKER_USERNAME:-} ]]; then
+  echo "Attempting non-interactive docker login (via provided credentials)"
+  echo "${DOCKER_PASSWORD:-}" | docker login -u "${DOCKER_USERNAME:-}" --password-stdin ${DOCKER_REGISTRY:-docker.io}
+elif [[ -t 1 ]]; then
+  echo "Attempting interactive docker login (tty)"
+  docker login ${DOCKER_REGISTRY:-docker.io}
+fi
+## login to github container registry as needed
 if [[ ${PUSH_FLAG} ]]; then
-  if [[ ${DOCKER_USERNAME:-} ]]; then
+  if [[ ${GITHUB_CRI_USERNAME:-} ]]; then
     echo "Attempting non-interactive docker login (via provided credentials)"
-    echo "${DOCKER_PASSWORD:-}" | docker login -u "${DOCKER_USERNAME:-}" --password-stdin ${DOCKER_REGISTRY:-docker.io}
+    echo "${GITHUB_CRI_PASSWORD:-}" | docker login -u "${GITHUB_CRI_USERNAME:-}" --password-stdin ${GITHUB_CRI_REGISTRY:-ghcr.io}
   elif [[ -t 1 ]]; then
     echo "Attempting interactive docker login (tty)"
-    docker login ${DOCKER_REGISTRY:-docker.io}
+    docker login ${GITHUB_CRI_REGISTRY:-ghcr.io}
   fi
 fi
 

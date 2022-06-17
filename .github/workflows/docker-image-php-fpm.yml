@@ -27,6 +27,8 @@ jobs:
           PHP_VARIANT: ${{ matrix.php_variant }}
           DOCKER_USERNAME: ${{ secrets.DOCKER_USERNAME }}
           DOCKER_PASSWORD: ${{ secrets.DOCKER_PASSWORD }}
+          GITHUB_CRI_PASSWORD: ${{ secrets.GITHUB_TOKEN }}
+          GITHUB_CRI_USERNAME: ${{ github.repository_owner }}
 
   magento1:
     name: PHP-FPM ${{ matrix.php_version }} (magento1)
