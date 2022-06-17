@@ -41,7 +41,6 @@ elif [[ -t 1 ]]; then
   docker login ${DOCKER_REGISTRY:-docker.io}
 fi
 ## login to github container registry as needed
-if [[ ${PUSH_FLAG} ]]; then
   if [[ ${GITHUB_CRI_USERNAME:-} ]]; then
     echo "Attempting non-interactive docker login (via provided credentials)"
     echo "${GITHUB_CRI_PASSWORD:-}" | docker login -u "${GITHUB_CRI_USERNAME:-}" --password-stdin ${GITHUB_CRI_REGISTRY:-ghcr.io}
@@ -49,7 +48,6 @@ if [[ ${PUSH_FLAG} ]]; then
     echo "Attempting interactive docker login (tty)"
     docker login ${GITHUB_CRI_REGISTRY:-ghcr.io}
   fi
-fi
 
 ## define image repository to push
 WARDEN_IMAGE_REPOSITORY="${WARDEN_IMAGE_REPOSITORY:-"ghcr.io/swiftotter"}"

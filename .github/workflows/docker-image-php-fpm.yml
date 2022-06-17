@@ -46,6 +46,8 @@ jobs:
           PHP_VERSION: ${{ matrix.php_version }}
           DOCKER_USERNAME: ${{ secrets.DOCKER_USERNAME }}
           DOCKER_PASSWORD: ${{ secrets.DOCKER_PASSWORD }}
+          GITHUB_CRI_PASSWORD: ${{ secrets.GITHUB_TOKEN }}
+          GITHUB_CRI_USERNAME: ${{ github.repository_owner }}
 
   magento2:
     name: PHP-FPM ${{ matrix.php_version }} (magento2)
@@ -63,3 +65,5 @@ jobs:
           PHP_VERSION: ${{ matrix.php_version }}
           DOCKER_USERNAME: ${{ secrets.DOCKER_USERNAME }}
           DOCKER_PASSWORD: ${{ secrets.DOCKER_PASSWORD }}
+          GITHUB_CRI_PASSWORD: ${{ secrets.GITHUB_TOKEN }}
+          GITHUB_CRI_USERNAME: ${{ github.repository_owner }}
