@@ -44,8 +44,8 @@ RUN chmod +x /usr/local/bin/install-php-extensions && install-php-extensions \
 COPY --from=composer:1 /usr/bin/composer /usr/bin/composer1
 COPY --from=composer:2 /usr/bin/composer /usr/bin/composer2
 
-# Install jq
-RUN apk update && apk add jq bash patch pv vim mariadb-client
+# Install helpful utilities
+RUN apk --no-cache add jq bash patch pv nano vim mariadb-client
 
 # Override stop signal to stop process gracefully
 # https://github.com/php/php-src/blob/17baa87faddc2550def3ae7314236826bc1b1398/sapi/fpm/php-fpm.8.in#L163
