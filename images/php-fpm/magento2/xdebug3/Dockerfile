@@ -3,10 +3,7 @@ ARG PHP_VERSION
 FROM ${ENV_SOURCE_IMAGE}:${PHP_VERSION}-magento2
 USER root
 
-RUN set -eux \
-    && dnf install -y php-pecl-xdebug3 \
-    && dnf clean all \
-    && rm -rf /var/cache/dnf
+RUN install-php-extensions xdebug-stable
 
 COPY xdebug3/etc/*.ini /etc/
 COPY xdebug3/etc/php.d/*.ini /etc/php.d/
