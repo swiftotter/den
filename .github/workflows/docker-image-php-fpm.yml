@@ -12,58 +12,405 @@ on:
       - main
 jobs:
   php-fpm:
-    name: FPM ${{ matrix.php_version }}
+    name: PHP-FPM ${{ matrix.php_version }}
     runs-on: ubuntu-latest
+    continue-on-error: ${{ matrix.experimental }}
     strategy:
       fail-fast: false
       matrix:
         php_version: [ "7.2", "7.3", "7.4", "8.0", "8.1" ]
+        node_version: [ "14", "16", "18"]
+        experimental: [ false ]
+        include:
+          - php_version: 8.2
+            experimental: true
     steps:
       - uses: actions/checkout@v1
-      - run: ./images/scripts/build.sh --push "${BUILD_GROUP}"
-        env:
-          BUILD_GROUP: php-fpm
-          PHP_VERSION: ${{ matrix.php_version }}
-          PHP_VARIANT: ${{ matrix.php_variant }}
-          DOCKER_USERNAME: ${{ secrets.DOCKER_USERNAME }}
-          DOCKER_PASSWORD: ${{ secrets.DOCKER_PASSWORD }}
-          GITHUB_CRI_PASSWORD: ${{ secrets.GITHUB_TOKEN }}
-          GITHUB_CRI_USERNAME: ${{ github.repository_owner }}
+      - uses: docker/setup-qemu-action@v1
+      - uses: docker/setup-buildx-action@v1
+
+      - name: Login to Github Container Registry
+        uses: docker/login-action@v2
+        with:
+          registry: ghcr.io
+          username: ${{ github.repository_owner }}
+          password: ${{ secrets.GITHUB_TOKEN }}
+        if: ${{ !env.ACT }}
+
+      - name: Login to Docker Hub
+        uses: docker/login-action@v2
+        with:
+          username: ${{ secrets.DOCKER_USERNAME }}
+          password: ${{ secrets.DOCKER_PASSWORD }}
+        if: ${{ !env.ACT }}
+
+      - uses: docker/build-push-action@v3
+        with:
+          file: images/php-fpm/Dockerfile
+          context: images/php-fpm/context
+          platforms: linux/amd64,linux/arm64
+          build-args: |
+            PHP_VERSION=${{ matrix.php_version }}
+            NODE_VERSION=${{ matrix.node_version }}
+          push: ${{ github.ref == 'refs/heads/main' && !env.ACT }}
+          tags: ghcr.io/${{ github.repository_owner }}/den-php-fpm:${{ matrix.php_version }}-node${{ matrix.node_version }}
+
+  xdebug:
+    name: PHP-FPM ${{ matrix.php_version }} + XDebug
+    runs-on: ubuntu-latest
+    needs: php-fpm
+    continue-on-error: ${{ matrix.experimental }}
+    strategy:
+      fail-fast: false
+      matrix:
+        php_version: [ "7.2", "7.3", "7.4", "8.0", "8.1" ]
+        node_version: [ "14", "16", "18"]
+        experimental: [ false ]
+        include:
+          - php_version: 8.2
+            experimental: true
+    steps:
+      - uses: actions/checkout@v1
+      - uses: docker/setup-qemu-action@v1
+      - uses: docker/setup-buildx-action@v1
+
+      - name: Login to Github Container Registry
+        uses: docker/login-action@v2
+        with:
+          registry: ghcr.io
+          username: ${{ github.repository_owner }}
+          password: ${{ secrets.GITHUB_TOKEN }}
+        if: ${{ !env.ACT }}
+
+      - name: Login to Docker Hub
+        uses: docker/login-action@v2
+        with:
+          username: ${{ secrets.DOCKER_USERNAME }}
+          password: ${{ secrets.DOCKER_PASSWORD }}
+        if: ${{ !env.ACT }}
+
+      - uses: docker/build-push-action@v3
+        with:
+          file: images/php-fpm/xdebug3/Dockerfile
+          context: images/php-fpm/context
+          platforms: linux/amd64,linux/arm64
+          build-args: |
+            ENV_SOURCE_IMAGE=ghcr.io/${{ github.repository_owner }}/den-php-fpm
+            PHP_VERSION=${{ matrix.php_version }}-node${{ matrix.node_version }}
+          push: ${{ github.ref == 'refs/heads/main' && !env.ACT }}
+          tags: ghcr.io/${{ github.repository_owner }}/den-php-fpm-debug:${{ matrix.php_version }}-node${{ matrix.node_version }}
+
+  blackfire:
+    name: PHP-FPM ${{ matrix.php_version }} + Blackfire
+    runs-on: ubuntu-latest
+    needs: php-fpm
+    continue-on-error: ${{ matrix.experimental }}
+    strategy:
+      fail-fast: false
+      matrix:
+        php_version: [ "7.2", "7.3", "7.4", "8.0", "8.1" ]
+        node_version: [ "14", "16", "18"]
+        experimental: [ false ]
+        include:
+          - php_version: 8.2
+            experimental: true
+    steps:
+      - uses: actions/checkout@v1
+      - uses: docker/setup-qemu-action@v1
+      - uses: docker/setup-buildx-action@v1
+
+      - name: Login to Github Container Registry
+        uses: docker/login-action@v2
+        with:
+          registry: ghcr.io
+          username: ${{ github.repository_owner }}
+          password: ${{ secrets.GITHUB_TOKEN }}
+        if: ${{ !env.ACT }}
+
+      - name: Login to Docker Hub
+        uses: docker/login-action@v2
+        with:
+          username: ${{ secrets.DOCKER_USERNAME }}
+          password: ${{ secrets.DOCKER_PASSWORD }}
+        if: ${{ !env.ACT }}
+
+      - uses: docker/build-push-action@v3
+        with:
+          file: images/php-fpm/blackfire/Dockerfile
+          context: images/php-fpm/context
+          platforms: linux/amd64,linux/arm64
+          build-args: |
+            ENV_SOURCE_IMAGE=ghcr.io/${{ github.repository_owner }}/den-php-fpm
+            PHP_VERSION=${{ matrix.php_version }}-node${{ matrix.node_version }}
+          push: ${{ github.ref == 'refs/heads/main' && !env.ACT }}
+          tags: ghcr.io/${{ github.repository_owner }}/den-php-fpm-blackfire:${{ matrix.php_version }}-node${{ matrix.node_version }}
 
   magento1:
-    name: PHP-FPM ${{ matrix.php_version }} (magento1)
+    name: Magento 1 PHP-FPM ${{ matrix.php_version }}
     runs-on: ubuntu-latest
-    needs: php-fpm
+    needs: [ php-fpm ]
+    continue-on-error: ${{ matrix.experimental }}
     strategy:
       fail-fast: false
       matrix:
         php_version: [ "7.2", "7.3", "7.4", "8.0", "8.1" ]
+        node_version: [ "14", "16", "18"]
+        experimental: [ false ]
+        include:
+          - php_version: 8.2
+            experimental: true
     steps:
       - uses: actions/checkout@v1
-      - run: ./images/scripts/build.sh --push "${BUILD_GROUP}"
-        env:
-          BUILD_GROUP: php-fpm/magento1
-          PHP_VERSION: ${{ matrix.php_version }}
-          DOCKER_USERNAME: ${{ secrets.DOCKER_USERNAME }}
-          DOCKER_PASSWORD: ${{ secrets.DOCKER_PASSWORD }}
-          GITHUB_CRI_PASSWORD: ${{ secrets.GITHUB_TOKEN }}
-          GITHUB_CRI_USERNAME: ${{ github.repository_owner }}
+      - uses: docker/setup-qemu-action@v1
+      - uses: docker/setup-buildx-action@v1
+
+      - name: Login to Github Container Registry
+        uses: docker/login-action@v2
+        with:
+          registry: ghcr.io
+          username: ${{ github.repository_owner }}
+          password: ${{ secrets.GITHUB_TOKEN }}
+        if: ${{ !env.ACT }}
+
+      - name: Login to Docker Hub
+        uses: docker/login-action@v2
+        with:
+          username: ${{ secrets.DOCKER_USERNAME }}
+          password: ${{ secrets.DOCKER_PASSWORD }}
+        if: ${{ !env.ACT }}
+
+      - uses: docker/build-push-action@v3
+        with:
+          file: images/php-fpm/magento1/Dockerfile
+          context: images/php-fpm/context
+          platforms: linux/amd64,linux/arm64
+          build-args: |
+            ENV_SOURCE_IMAGE=ghcr.io/${{ github.repository_owner }}/den-php-fpm
+            PHP_VERSION=${{ matrix.php_version }}-node${{ matrix.node_version }}
+          push: ${{ github.ref == 'refs/heads/main' && !env.ACT }}
+          tags: ghcr.io/${{ github.repository_owner }}/den-php-fpm-magento1:${{ matrix.php_version }}-node${{ matrix.node_version }}
+
+  magento1-xdebug:
+    name: Magento 1 PHP-FPM ${{ matrix.php_version }} + XDebug
+    runs-on: ubuntu-latest
+    needs: [ magento1 ]
+    continue-on-error: ${{ matrix.experimental }}
+    strategy:
+      fail-fast: false
+      matrix:
+        php_version: [ "7.2", "7.3", "7.4", "8.0", "8.1" ]
+        node_version: [ "14", "16", "18"]
+        experimental: [ false ]
+        include:
+          - php_version: 8.2
+            experimental: true
+    steps:
+      - uses: actions/checkout@v1
+      - uses: docker/setup-qemu-action@v1
+      - uses: docker/setup-buildx-action@v1
+
+      - name: Login to Github Container Registry
+        uses: docker/login-action@v2
+        with:
+          registry: ghcr.io
+          username: ${{ github.repository_owner }}
+          password: ${{ secrets.GITHUB_TOKEN }}
+        if: ${{ !env.ACT }}
+
+      - name: Login to Docker Hub
+        uses: docker/login-action@v2
+        with:
+          username: ${{ secrets.DOCKER_USERNAME }}
+          password: ${{ secrets.DOCKER_PASSWORD }}
+        if: ${{ !env.ACT }}
+
+      - uses: docker/build-push-action@v3
+        with:
+          file: images/php-fpm/magento1/xdebug3/Dockerfile
+          context: images/php-fpm/context
+          platforms: linux/amd64,linux/arm64
+          build-args: |
+            ENV_SOURCE_IMAGE=ghcr.io/${{ github.repository_owner }}/den-php-fpm-magento1
+            PHP_VERSION=${{ matrix.php_version }}-node${{ matrix.node_version }}
+          push: ${{ github.ref == 'refs/heads/main' && !env.ACT }}
+          tags: ghcr.io/${{ github.repository_owner }}/den-php-fpm-magento1-debug:${{ matrix.php_version }}-node${{ matrix.node_version }}
+
+  magento1-blackfire:
+    name: Magento 1 PHP-FPM ${{ matrix.php_version }} + Blackfire
+    runs-on: ubuntu-latest
+    needs: [ magento1 ]
+    continue-on-error: ${{ matrix.experimental }}
+    strategy:
+      fail-fast: false
+      matrix:
+        php_version: [ "7.2", "7.3", "7.4", "8.0", "8.1" ]
+        node_version: [ "14", "16", "18"]
+        experimental: [ false ]
+        include:
+          - php_version: 8.2
+            experimental: true
+    steps:
+      - uses: actions/checkout@v1
+      - uses: docker/setup-qemu-action@v1
+      - uses: docker/setup-buildx-action@v1
+
+      - name: Login to Github Container Registry
+        uses: docker/login-action@v2
+        with:
+          registry: ghcr.io
+          username: ${{ github.repository_owner }}
+          password: ${{ secrets.GITHUB_TOKEN }}
+        if: ${{ !env.ACT }}
+
+      - name: Login to Docker Hub
+        uses: docker/login-action@v2
+        with:
+          username: ${{ secrets.DOCKER_USERNAME }}
+          password: ${{ secrets.DOCKER_PASSWORD }}
+        if: ${{ !env.ACT }}
+
+      - uses: docker/build-push-action@v3
+        with:
+          file: images/php-fpm/magento1/blackfire/Dockerfile
+          context: images/php-fpm/context
+          platforms: linux/amd64,linux/arm64
+          build-args: |
+            ENV_SOURCE_IMAGE=ghcr.io/${{ github.repository_owner }}/den-php-fpm-magento1
+            PHP_VERSION=${{ matrix.php_version }}-node${{ matrix.node_version }}
+          push: ${{ github.ref == 'refs/heads/main' && !env.ACT }}
+          tags: ghcr.io/${{ github.repository_owner }}/den-php-fpm-magento1-blackfire:${{ matrix.php_version }}-node${{ matrix.node_version }}
 
   magento2:
-    name: PHP-FPM ${{ matrix.php_version }} (magento2)
+    name: Magento 2 PHP-FPM ${{ matrix.php_version }}
     runs-on: ubuntu-latest
-    needs: php-fpm
+    needs: [ php-fpm ]
+    continue-on-error: ${{ matrix.experimental }}
     strategy:
       fail-fast: false
       matrix:
         php_version: [ "7.2", "7.3", "7.4", "8.0", "8.1" ]
+        node_version: [ "14", "16", "18"]
+        experimental: [ false ]
+        include:
+          - php_version: 8.2
+            experimental: true
     steps:
       - uses: actions/checkout@v1
-      - run: ./images/scripts/build.sh --push "${BUILD_GROUP}"
-        env:
-          BUILD_GROUP: php-fpm/magento2
-          PHP_VERSION: ${{ matrix.php_version }}
-          DOCKER_USERNAME: ${{ secrets.DOCKER_USERNAME }}
-          DOCKER_PASSWORD: ${{ secrets.DOCKER_PASSWORD }}
-          GITHUB_CRI_PASSWORD: ${{ secrets.GITHUB_TOKEN }}
-          GITHUB_CRI_USERNAME: ${{ github.repository_owner }}
+      - uses: docker/setup-qemu-action@v1
+      - uses: docker/setup-buildx-action@v1
+
+      - name: Login to Github Container Registry
+        uses: docker/login-action@v2
+        with:
+          registry: ghcr.io
+          username: ${{ github.repository_owner }}
+          password: ${{ secrets.GITHUB_TOKEN }}
+        if: ${{ !env.ACT }}
+
+      - name: Login to Docker Hub
+        uses: docker/login-action@v2
+        with:
+          username: ${{ secrets.DOCKER_USERNAME }}
+          password: ${{ secrets.DOCKER_PASSWORD }}
+        if: ${{ !env.ACT }}
+
+      - uses: docker/build-push-action@v3
+        with:
+          file: images/php-fpm/magento2/Dockerfile
+          context: images/php-fpm/context
+          platforms: linux/amd64,linux/arm64
+          build-args: |
+            ENV_SOURCE_IMAGE=ghcr.io/${{ github.repository_owner }}/den-php-fpm
+            PHP_VERSION=${{ matrix.php_version }}-node${{ matrix.node_version }}
+          push: ${{ github.ref == 'refs/heads/main' && !env.ACT }}
+          tags: ghcr.io/${{ github.repository_owner }}/den-php-fpm-magento2:${{ matrix.php_version }}-node${{ matrix.node_version }}
+
+  magento2-xdebug:
+    name: Magento 2 PHP-FPM ${{ matrix.php_version }} + XDebug
+    runs-on: ubuntu-latest
+    needs: [ magento2 ]
+    continue-on-error: ${{ matrix.experimental }}
+    strategy:
+      fail-fast: false
+      matrix:
+        php_version: [ "7.2", "7.3", "7.4", "8.0", "8.1" ]
+        node_version: [ "14", "16", "18"]
+        experimental: [ false ]
+        include:
+          - php_version: 8.2
+            experimental: true
+    steps:
+      - uses: actions/checkout@v1
+      - uses: docker/setup-qemu-action@v1
+      - uses: docker/setup-buildx-action@v1
+
+      - name: Login to Github Container Registry
+        uses: docker/login-action@v2
+        with:
+          registry: ghcr.io
+          username: ${{ github.repository_owner }}
+          password: ${{ secrets.GITHUB_TOKEN }}
+        if: ${{ !env.ACT }}
+
+      - name: Login to Docker Hub
+        uses: docker/login-action@v2
+        with:
+          username: ${{ secrets.DOCKER_USERNAME }}
+          password: ${{ secrets.DOCKER_PASSWORD }}
+        if: ${{ !env.ACT }}
+
+      - uses: docker/build-push-action@v3
+        with:
+          file: images/php-fpm/magento2/xdebug3/Dockerfile
+          context: images/php-fpm/context
+          platforms: linux/amd64,linux/arm64
+          build-args: |
+            ENV_SOURCE_IMAGE=ghcr.io/${{ github.repository_owner }}/den-php-fpm-magento2
+            PHP_VERSION=${{ matrix.php_version }}-node${{ matrix.node_version }}
+          push: ${{ github.ref == 'refs/heads/main' && !env.ACT }}
+          tags: ghcr.io/${{ github.repository_owner }}/den-php-fpm-magento2-debug:${{ matrix.php_version }}-node${{ matrix.node_version }}
+
+  magento2-blackfire:
+    name: Magento 2 PHP-FPM ${{ matrix.php_version }} + Blackfire
+    runs-on: ubuntu-latest
+    needs: [ magento2 ]
+    continue-on-error: ${{ matrix.experimental }}
+    strategy:
+      fail-fast: false
+      matrix:
+        php_version: [ "7.2", "7.3", "7.4", "8.0", "8.1" ]
+        node_version: [ "14", "16", "18"]
+        experimental: [ false ]
+        include:
+          - php_version: 8.2
+            experimental: true
+    steps:
+      - uses: actions/checkout@v1
+      - uses: docker/setup-qemu-action@v1
+      - uses: docker/setup-buildx-action@v1
+
+      - name: Login to Github Container Registry
+        uses: docker/login-action@v2
+        with:
+          registry: ghcr.io
+          username: ${{ github.repository_owner }}
+          password: ${{ secrets.GITHUB_TOKEN }}
+        if: ${{ !env.ACT }}
+
+      - name: Login to Docker Hub
+        uses: docker/login-action@v2
+        with:
+          username: ${{ secrets.DOCKER_USERNAME }}
+          password: ${{ secrets.DOCKER_PASSWORD }}
+        if: ${{ !env.ACT }}
+
+      - uses: docker/build-push-action@v3
+        with:
+          file: images/php-fpm/magento2/blackfire/Dockerfile
+          context: images/php-fpm/context
+          platforms: linux/amd64,linux/arm64
+          build-args: |
+            ENV_SOURCE_IMAGE=ghcr.io/${{ github.repository_owner }}/den-php-fpm-magento2
+            PHP_VERSION=${{ matrix.php_version }}-node${{ matrix.node_version }}
+          push: ${{ github.ref == 'refs/heads/main' && !env.ACT }}
+          tags: ghcr.io/${{ github.repository_owner }}/den-php-fpm-magento2-blackfire:${{ matrix.php_version }}-node${{ matrix.node_version }}

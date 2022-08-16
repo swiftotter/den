@@ -1,57 +1,57 @@
-ARG PHP_SOURCE_IMAGE="docker.io/davidalger/php"
 ARG PHP_VERSION
-ARG PHP_VARIANT="fpm-loaders"
-FROM ${PHP_SOURCE_IMAGE}:${PHP_VERSION}-${PHP_VARIANT}
+ARG NODE_VERSION
 
-# Clear undesired settings from base fpm images
-ENV COMPOSER_ALLOW_SUPERUSER=
-ENV COMPOSER_HOME=
+FROM golang:alpine AS mhs-builder
+RUN go install github.com/mailhog/mhsendmail@latest
+
+FROM node:${NODE_VERSION:-18}-alpine AS node
+RUN npm install -g grunt-cli gulp
+
+FROM php:${PHP_VERSION:-8.1}-fpm-alpine
+USER root
 
 ENV MAILHOG_HOST    mailhog
 ENV MAILHOG_PORT    1025
 
-RUN dnf install -y which pv sudo bind-utils python3-pip bash-completion rsync socat oathtool \
-        wget ack make gcc gcc-c++ automake autoconf crontabs mariadb nano vim coreutils-common \
-    && dnf clean all \
-    && rm -rf /var/cache/dnf
+# PHP Extension Installer
+ADD https://github.com/mlocati/docker-php-extension-installer/releases/latest/download/install-php-extensions /usr/local/bin/
 
-RUN dnf install -y python2 \
-    && ln -s /bin/python2 /bin/python \
-    && dnf clean all \
-    && rm -rf /var/cache/dnf
+# Copy mhsendmail to PHP
+COPY --from=mhs-builder /go/bin/mhsendmail /usr/local/bin/mhsendmail
 
-ENV NODE_VERSION    10
-RUN npm install -g n \
-    && n install ${NODE_VERSION} \
-    && rm -rf /usr/local/n/versions/node
+# Copy Node to PHP
+COPY --from=node /usr/local/lib/node_modules /usr/local/lib/node_modules
+COPY --from=node /usr/local/bin/node /usr/local/bin/node
+RUN ln -s /usr/local/lib/node_modules/npm/bin/npm-cli.js /usr/local/bin/npm
+RUN ln -s /usr/local/lib/node_modules/gulp/bin/gulp.js /usr/local/bin/gulp
+RUN ln -s /usr/local/lib/node_modules/grunt-cli/bin/grunt /usr/local/bin/grunt
 
-COPY docker-entrypoint /usr/local/bin/
-COPY etc/profile.d/*.sh /etc/profile.d/
-COPY etc/*.ini /etc/
-COPY etc/php.d/*.ini /etc/php.d/
-COPY etc/php.d/05-additions.ini.template /etc/php.d/
+# Install PHP Extensions required by Magento OS, Adobe Commerce, and the UCT (pcntl)
+RUN chmod +x /usr/local/bin/install-php-extensions && install-php-extensions \
+    bcmath \
+    gd \
+    intl \
+    imagick \
+    pcntl \
+    pdo_mysql \
+    soap \
+    sockets \
+    sodium \
+    xsl \
+    zip
 
-# Install mhsendmail to support routing email through mailhog
-RUN mkdir -p /tmp/mhsendmail \
-    && cd /tmp/mhsendmail \
-    && curl -vLOs https://github.com/mailhog/mhsendmail/releases/download/v0.2.0/mhsendmail_linux_amd64 \
-    && chmod +x mhsendmail_linux_amd64 \
-    && mv mhsendmail_linux_amd64 /usr/local/bin/mhsendmail
+# Install Composer
+COPY --from=composer:1 /usr/bin/composer /usr/bin/composer1
+COPY --from=composer:2 /usr/bin/composer /usr/bin/composer2
 
-# Install awscli to support data backfill workflows using S3 storage; segno for QR code generation
-RUN pip3 install awscli segno --no-cache-dir
+# Install helpful utilities
+RUN apk --no-cache add jq bash patch pv nano vim mariadb-client
 
-# Configure www-data user as primary php-fpm user for better local dev experience
-RUN useradd www-data \
-    && chmod 0755 ~www-data \
-    && mkdir -p /var/www/html \
-    && chown www-data:www-data /var/www/html \
-    && echo "www-data ALL=(ALL) NOPASSWD:ALL" >> /etc/sudoers.d/nopasswd \
-    && PHP_FPM_USER=$(grep -i '^user = ' /etc/php-fpm.d/www.conf | awk '{print $3}') \
-    && PHP_FPM_GROUP=$(grep -i '^group = ' /etc/php-fpm.d/www.conf | awk '{print $3}') \
-    && find /var/log /var/lib/php -uid $(id -u ${PHP_FPM_USER}) | xargs chown www-data \
-    && find /var/log /var/lib/php -gid $(id -g ${PHP_FPM_GROUP}) | xargs chgrp www-data \
-    && perl -pi -e 's/^(user|group) = php-fpm$/$1 = www-data/g' /etc/php-fpm.d/www.conf
+# Override stop signal to stop process gracefully
+# https://github.com/php/php-src/blob/17baa87faddc2550def3ae7314236826bc1b1398/sapi/fpm/php-fpm.8.in#L163
+# Credit: davidalger
+STOPSIGNAL SIGQUIT
 
-WORKDIR /var/www/html
 USER www-data
+EXPOSE 9000
+CMD ["php-fpm"]
