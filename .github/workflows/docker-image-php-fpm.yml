@@ -229,7 +229,7 @@ jobs:
   magento1:
     name: Magento 1 PHP-FPM ${{ matrix.php_version }} - Node ${{ matrix.node_version }}
     runs-on: ubuntu-latest
-    needs: [ php-fpm ]
+    needs: [ php-node ]
     continue-on-error: ${{ matrix.experimental }}
     strategy:
       fail-fast: false
@@ -399,7 +399,7 @@ jobs:
   magento2:
     name: Magento 2 PHP-FPM ${{ matrix.php_version }} - Node ${{ matrix.node_version }}
     runs-on: ubuntu-latest
-    needs: [ php-fpm ]
+    needs: [ php-node ]
     continue-on-error: ${{ matrix.experimental }}
     strategy:
       fail-fast: false
