@@ -1,11 +1,7 @@
 ARG PHP_VERSION
-ARG NODE_VERSION
 
 FROM golang:alpine AS mhs-builder
 RUN go install github.com/mailhog/mhsendmail@latest
-
-FROM node:${NODE_VERSION:-18}-alpine AS node
-RUN npm install -g grunt-cli gulp
 
 FROM php:${PHP_VERSION:-8.1}-fpm-alpine
 USER root
@@ -18,13 +14,6 @@ ADD https://github.com/mlocati/docker-php-extension-installer/releases/latest/do
 
 # Copy mhsendmail to PHP
 COPY --from=mhs-builder /go/bin/mhsendmail /usr/local/bin/mhsendmail
-
-# Copy Node to PHP
-COPY --from=node /usr/local/lib/node_modules /usr/local/lib/node_modules
-COPY --from=node /usr/local/bin/node /usr/local/bin/node
-RUN ln -s /usr/local/lib/node_modules/npm/bin/npm-cli.js /usr/local/bin/npm
-RUN ln -s /usr/local/lib/node_modules/gulp/bin/gulp.js /usr/local/bin/gulp
-RUN ln -s /usr/local/lib/node_modules/grunt-cli/bin/grunt /usr/local/bin/grunt
 
 # Install PHP Extensions required by Magento OS, Adobe Commerce, and the UCT (pcntl)
 RUN chmod +x /usr/local/bin/install-php-extensions && install-php-extensions \
