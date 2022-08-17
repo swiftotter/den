@@ -69,8 +69,10 @@ jobs:
         php_version: [ "7.2", "7.3", "7.4", "8.0", "8.1" ]
         node_version: [ "14", "16", "18"]
         experimental: [ false ]
+        xdebug_type: [ "xdebug-stable" ]
         include:
           - php_version: 8.2.0beta2
+            xdebug_type: "xdebug"
             experimental: true
     steps:
       - uses: actions/checkout@v1
@@ -103,6 +105,7 @@ jobs:
           build-args: |
             ENV_SOURCE_IMAGE=ghcr.io/${{ github.repository_owner }}/den-php-fpm
             PHP_VERSION=${{ matrix.php_version }}-node${{ matrix.node_version }}
+            XDEBUG_TYPE=${{ matrix.xdebug_type }}
           push: ${{ github.ref == 'refs/heads/main' && !env.ACT }}
           tags: ghcr.io/${{ github.repository_owner }}/den-php-fpm-debug:${{ matrix.php_version }}-node${{ matrix.node_version }}
 
@@ -213,9 +216,11 @@ jobs:
         php_version: [ "7.2", "7.3", "7.4", "8.0", "8.1" ]
         node_version: [ "14", "16", "18"]
         experimental: [ false ]
+        xdebug_type: [ "xdebug-stable" ]
         include:
           - php_version: 8.2.0beta2
             experimental: true
+            xdebug_type: "xdebug"
     steps:
       - uses: actions/checkout@v1
       - uses: docker/setup-qemu-action@v1
@@ -247,6 +252,7 @@ jobs:
           build-args: |
             ENV_SOURCE_IMAGE=ghcr.io/${{ github.repository_owner }}/den-php-fpm-magento1
             PHP_VERSION=${{ matrix.php_version }}-node${{ matrix.node_version }}
+            XDEBUG_TYPE=${{ matrix.xdebug_type }}
           push: ${{ github.ref == 'refs/heads/main' && !env.ACT }}
           tags: ghcr.io/${{ github.repository_owner }}/den-php-fpm-magento1-debug:${{ matrix.php_version }}-node${{ matrix.node_version }}
 
@@ -357,9 +363,11 @@ jobs:
         php_version: [ "7.2", "7.3", "7.4", "8.0", "8.1" ]
         node_version: [ "14", "16", "18"]
         experimental: [ false ]
+        xdebug_type: [ "xdebug-stable" ]
         include:
           - php_version: 8.2.0beta2
             experimental: true
+            xdebug_type: "xdebug"
     steps:
       - uses: actions/checkout@v1
       - uses: docker/setup-qemu-action@v1
