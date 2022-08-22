@@ -1,0 +1,19 @@
+name: Validate Documentation
+on:
+  pull_request:
+    paths:
+      - docs/**
+      - .github/workflows/pull-request.yml
+jobs:
+  validate:
+    name: Build Documentation
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+      - uses: ammaraskar/sphinx-action@0.4
+        with:
+          docs-folder: "docs/"
+      - uses: actions/upload-artifact@v2
+        with:
+          name: documentation
+          path: docs/_build/html/
