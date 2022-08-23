@@ -5,8 +5,8 @@ services:
       - db
 
   db:
-    hostname: "${WARDEN_ENV_NAME}-mariadb"
-    image: ${WARDEN_IMAGE_REPOSITORY}/${MYSQL_DISTRIBUTION:-mariadb}:${MYSQL_DISTRIBUTION_VERSION:=${MARIADB_VERSION:-10.4}}
+    hostname: "${WARDEN_ENV_NAME}-db"
+    image: ${WARDEN_IMAGE_REPOSITORY}/den-${MYSQL_DISTRIBUTION:-mariadb}:${MYSQL_DISTRIBUTION_VERSION:=${MARIADB_VERSION:-10.4}}
     environment:
       - MYSQL_ROOT_PASSWORD=${MYSQL_ROOT_PASSWORD:-app}
       - MYSQL_DATABASE=${MYSQL_DATABASE:-app}

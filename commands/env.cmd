@@ -23,6 +23,10 @@ if [[ ${WARDEN_ENV_TYPE} =~ ^magento ]]; then
     export WARDEN_SVC_PHP_VARIANT=-${WARDEN_ENV_TYPE}
 fi
 
+if [[ ${NODE_VERSION} -ne 0 ]]; then
+    export WARDEN_SVC_PHP_NODE=-node${NODE_VERSION}
+fi
+
 ## configure xdebug version
 export XDEBUG_VERSION="debug" # xdebug2 image
 if [[ ${PHP_XDEBUG_3} -eq 1 ]]; then
