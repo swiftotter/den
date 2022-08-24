@@ -9,7 +9,7 @@ cat /usr/local/etc/php/conf.d/05-additions.ini.template \
 # append warden issued root ca cert to ca-bundle trusted by curl/openssl
 if [ -f /etc/ssl/warden-rootca-cert/ca.cert.pem ]; then
   sudo cp /etc/ssl/warden-rootca-cert/ca.cert.pem /usr/local/share/ca-certificates/warden-rootca-cert.crt
-  cat /usr/local/share/ca-certificates/warden-rootca-cert.crt >> /etc/ssl/certs/ca-certificates.crt
+  sudo cat /usr/local/share/ca-certificates/warden-rootca-cert.crt >> /etc/ssl/certs/ca-certificates.crt
 fi
 
 # update trust outside if condition above to allow mounting PEM files into /etc/pki/ca-trust/source/anchors
