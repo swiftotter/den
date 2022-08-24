@@ -2,17 +2,18 @@
 set -e
 
 # configure php additions.ini
-cat /etc/php.d/05-additions.ini.template \
+cat /usr/local/etc/php/conf.d/05-additions.ini.template \
   | envsubst '${MAILHOG_HOST} ${MAILHOG_PORT}' \
-  | sudo tee /etc/php.d/05-additions.ini
+  | sudo tee /usr/local/etc/php/conf.d/05-additions.ini
 
 # append warden issued root ca cert to ca-bundle trusted by curl/openssl
 if [ -f /etc/ssl/warden-rootca-cert/ca.cert.pem ]; then
-  sudo cp /etc/ssl/warden-rootca-cert/ca.cert.pem /etc/pki/ca-trust/source/anchors/warden-rootca-cert.pem
+  sudo cp /etc/ssl/warden-rootca-cert/ca.cert.pem /usr/local/share/ca-certificates/warden-rootca-cert.crt
+  cat /usr/local/share/ca-certificates/warden-rootca-cert.crt >> /etc/ssl/certs/ca-certificates.crt
 fi
 
 # update trust outside if condition above to allow mounting PEM files into /etc/pki/ca-trust/source/anchors
-sudo update-ca-trust
+sudo update-ca-certificates
 
 # start socat process in background to connect sockets used for agent access within container environment
 if [[ -S /run/host-services/ssh-auth.sock ]] \
@@ -27,7 +28,7 @@ fi
 sudo crond
 
 # install requested node version if not already installed
-NODE_INSTALLED="$(node -v | perl -pe 's/^v([0-9]+)\..*$/$1/')";
+NODE_INSTALLED="$(node -v | sed 's/v\([0-9]*\)\..*/\1/')";
 if [ "${NODE_INSTALLED}" != "${NODE_VERSION}" ] \
   || [ "${NODE_VERSION}" = "latest" ] || [ "${NODE_VERSION}" = "lts" ]
 then

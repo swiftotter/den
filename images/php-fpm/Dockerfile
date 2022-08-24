@@ -29,18 +29,32 @@ RUN chmod +x /usr/local/bin/install-php-extensions && install-php-extensions \
     xsl \
     zip
 
+COPY docker-entrypoint /usr/local/bin/
+COPY etc/profile.d/*.sh /etc/profile.d/
+COPY etc/*.ini /usr/local/etc/php/
+COPY etc/php.d/*.ini /usr/local/etc/php/conf.d/
+COPY etc/php.d/05-additions.ini.template /usr/local/etc/php/conf.d/
+
 # Install Composer
 COPY --from=composer:1 /usr/bin/composer /usr/bin/composer1
 COPY --from=composer:2 /usr/bin/composer /usr/bin/composer2
 
 # Install helpful utilities
-RUN apk --no-cache add jq bash patch pv nano vim mariadb-client sudo
+RUN apk --no-cache add jq bash patch pv nano vim mariadb-client sudo busybox-initscripts gettext ca-certificates
+
+# Configure www-data user as primary php-fpm user for better local dev experience
+RUN chmod 0755 ~www-data \
+    && mkdir -p /var/www/html \
+    && chown www-data:www-data /var/www/html \
+    && echo "www-data ALL=(ALL) NOPASSWD:ALL" >> /etc/sudoers.d/nopasswd
 
 # Override stop signal to stop process gracefully
 # https://github.com/php/php-src/blob/17baa87faddc2550def3ae7314236826bc1b1398/sapi/fpm/php-fpm.8.in#L163
 # Credit: davidalger
 STOPSIGNAL SIGQUIT
 
+ENTRYPOINT ["docker-entrypoint"]
+WORKDIR /var/www/html
 USER www-data
 EXPOSE 9000
 CMD ["php-fpm"]
