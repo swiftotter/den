@@ -21,11 +21,11 @@ function installSshConfig () {
 
 function assertWardenInstall {
   if [[ ! -f "${WARDEN_HOME_DIR}/.installed" ]] \
-    || [[ "${WARDEN_HOME_DIR}/.installed" -ot "${WARDEN_DIR}/bin/warden" ]]
+    || [[ "${WARDEN_HOME_DIR}/.installed" -ot "${WARDEN_DIR}/bin/den" ]]
   then
     [[ -f "${WARDEN_HOME_DIR}/.installed" ]] && echo "==> Updating warden" || echo "==> Starting initialization"
 
-    "${WARDEN_DIR}/bin/warden" install
+    "${WARDEN_DIR}/bin/den" install
 
     [[ -f "${WARDEN_HOME_DIR}/.installed" ]] && echo "==> Update complete" || echo "==> Initialization complete"
     date > "${WARDEN_HOME_DIR}/.installed"

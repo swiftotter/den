@@ -8,8 +8,9 @@ To configure your project with a non-default PHP version, add the following to t
 
 The versions of MariaDB/Mysql, Elasticsearch, Varnish, Redis, NodeJS and Composer may also be similarly configured using variables in the `.env` file:
 
-  * `MYSQL_DISTRIBUTION_VERSION` (Available distributions: `MYSQL_DISTRIBUTION=mysql` or `MYSQL_DISTRIBUTION=mariadb`)
+  * `DB_DISTRIBUTION_VERSION` (Available distributions: `DB_DISTRIBUTION=mysql` or `DB_DISTRIBUTION=mariadb`)
   * `ELASTICSEARCH_VERSION`
+  * `OPENSEARCH_VERSION`
   * `REDIS_VERSION`
   * `VARNISH_VERSION`
   * `RABBITMQ_VERSION`
@@ -85,5 +86,6 @@ The following variables can be added to the project's `.env` file to enable addi
 Start of some Magento 2 specific environments could be skipped by using variables in `.env` file:
 
   * `WARDEN_ELASTICSEARCH=0`
+  * `WARDEN_OPENSEARCH=0`
   * `WARDEN_VARNISH=0`
   * `WARDEN_RABBITMQ=0`

@@ -6,7 +6,7 @@ loadEnvConfig "${WARDEN_ENV_PATH}" || exit $?
 assertDockerRunning
 
 if (( ${#WARDEN_PARAMS[@]} == 0 )) || [[ "${WARDEN_PARAMS[0]}" == "help" ]]; then
-  warden env --help || exit $? && exit $?
+  den env --help || exit $? && exit $?
 fi
 
 ## allow return codes from sub-process to bubble up normally
@@ -16,7 +16,7 @@ trap '' ERR
 if [[ -f "${WARDEN_HOME_DIR}/.env" ]]; then
   eval "$(cat "${WARDEN_HOME_DIR}/.env" | sed 's/\r$//g' | grep "^WARDEN_")"
 fi
-export WARDEN_IMAGE_REPOSITORY="${WARDEN_IMAGE_REPOSITORY:-"docker.io/wardenenv"}"
+export WARDEN_IMAGE_REPOSITORY="${WARDEN_IMAGE_REPOSITORY:-"ghcr.io/swiftotter"}"
 
 ## configure environment type defaults
 if [[ ${WARDEN_ENV_TYPE} =~ ^magento ]]; then
@@ -25,6 +25,18 @@ fi
 
 if [[ ${NODE_VERSION} -ne 0 ]]; then
     export WARDEN_SVC_PHP_NODE=-node${NODE_VERSION}
+fi
+
+if [[ -z ${DB_DISTRIBUTION} ]]; then
+    export DB_DISTRIBUTION="mariadb"
+fi
+
+if [[ -z ${DB_DISTRIBUTION_VERSION} ]]; then
+    if [[ ${DB_DISTRIBUTION} == "mysql" ]]; then
+        export DB_DISTRIBUTION_VERSION=${MYSQL_VERSION:-8.0}
+    else
+        export DB_DISTRIBUTION_VERSION=${MARIADB_VERSION:-10.4}
+    fi
 fi
 
 ## configure xdebug version
@@ -178,7 +190,7 @@ fi
 if [[ "${WARDEN_PARAMS[0]}" == "stop" ]] \
     && [[ $OSTYPE =~ ^darwin ]] && [[ -f "${MUTAGEN_SYNC_FILE}" ]]
 then
-    warden sync pause
+    den sync pause
 fi
 
 ## pass ochestration through to docker-compose
@@ -189,27 +201,27 @@ docker-compose \
 ## resume mutagen sync if available and php-fpm container id hasn't changed
 if ([[ "${WARDEN_PARAMS[0]}" == "up" ]] || [[ "${WARDEN_PARAMS[0]}" == "start" ]]) \
     && [[ $OSTYPE =~ ^darwin ]] && [[ -f "${MUTAGEN_SYNC_FILE}" ]] \
-    && [[ $(warden sync list | grep -i 'Status: \[Paused\]' | wc -l | awk '{print $1}') == "1" ]] \
-    && [[ $(warden env ps -q php-fpm) ]] \
-    && [[ $(docker container inspect $(warden env ps -q php-fpm) --format '{{ .State.Status }}') = "running" ]] \
-    && [[ $(warden env ps -q php-fpm) = $(warden sync list | grep -i 'URL: docker' | awk -F'/' '{print $3}') ]]
+    && [[ $(den sync list | grep -i 'Status: \[Paused\]' | wc -l | awk '{print $1}') == "1" ]] \
+    && [[ $(den env ps -q php-fpm) ]] \
+    && [[ $(docker container inspect $(den env ps -q php-fpm) --format '{{ .State.Status }}') = "running" ]] \
+    && [[ $(den env ps -q php-fpm) = $(den sync list | grep -i 'URL: docker' | awk -F'/' '{print $3}') ]]
 then
-    warden sync resume
+    den sync resume
 fi
 
 ## start mutagen sync if needed
 if ([[ "${WARDEN_PARAMS[0]}" == "up" ]] || [[ "${WARDEN_PARAMS[0]}" == "start" ]]) \
     && [[ $OSTYPE =~ ^darwin ]] && [[ -f "${MUTAGEN_SYNC_FILE}" ]] \
-    && [[ $(warden sync list | grep -i 'Connection state: Connected' | wc -l | awk '{print $1}') != "2" ]] \
-    && [[ $(warden env ps -q php-fpm) ]] \
-    && [[ $(docker container inspect $(warden env ps -q php-fpm) --format '{{ .State.Status }}') = "running" ]]
+    && [[ $(den sync list | grep -i 'Connection state: Connected' | wc -l | awk '{print $1}') != "2" ]] \
+    && [[ $(den env ps -q php-fpm) ]] \
+    && [[ $(docker container inspect $(den env ps -q php-fpm) --format '{{ .State.Status }}') = "running" ]]
 then
-    warden sync start
+    den sync start
 fi
 
 ## stop mutagen sync if needed
 if [[ "${WARDEN_PARAMS[0]}" == "down" ]] \
     && [[ $OSTYPE =~ ^darwin ]] && [[ -f "${MUTAGEN_SYNC_FILE}" ]]
 then
-    warden sync stop
+    den sync stop
 fi

@@ -9,7 +9,7 @@ The below example demonstrates the from-scratch setup of the Shopware 6 applicat
 
 2.  From the root of your new project directory, run `env-init` to create the `.env` file with configuration needed for Warden and Docker to work with the project.
 
-        warden env-init exampleproject shopware
+        den env-init exampleproject shopware
 
     The result of this command is a `.env` file in the project root (tip: commit this to your VCS to share the configuration with other team members) having the following contents:
 
@@ -26,8 +26,8 @@ The below example demonstrates the from-scratch setup of the Shopware 6 applicat
         WARDEN_ELASTICSEARCH=0
         WARDEN_VARNISH=0
 
-        MYSQL_DISTRIBUTION=mariadb
-        MYSQL_DISTRIBUTION_VERSION=10.4
+        DB_DISTRIBUTION=mariadb
+        DB_DISTRIBUTION_VERSION=10.4
         NODE_VERSION=12
         COMPOSER_VERSION=2
         PHP_VERSION=7.4
@@ -38,7 +38,7 @@ The below example demonstrates the from-scratch setup of the Shopware 6 applicat
 
 3.  Sign an SSL certificate for use with the project (the input here should match the value of `TRAEFIK_DOMAIN` in the above `.env` example file):
 
-        warden sign-certificate exampleproject.test
+        den sign-certificate exampleproject.test
 
 4.  Configure the project to use `./webroot` so the Shopware installer won't overwrite Warden's `.env` file
 
@@ -50,7 +50,7 @@ The below example demonstrates the from-scratch setup of the Shopware 6 applicat
 
 6.  Next you'll want to start the project environment:
 
-        warden env up
+        den env up
 
     ```warning::
         If you encounter an error about ``Mounts denied``, follow the instructions in the error message and run ``warden env up`` again.
@@ -58,7 +58,7 @@ The below example demonstrates the from-scratch setup of the Shopware 6 applicat
 
 7.  Drop into a shell within the project environment. Commands following this step in the setup procedure will be run from within the `php-fpm` docker container this launches you into:
 
-        warden shell
+        den shell
 
 8.  Configure the `APP_URL` Shopware will use during installation:
 

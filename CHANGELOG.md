@@ -594,7 +594,7 @@ Docker images have all been re-located and/or mirrored to Quay with all built-in
 
 ## Version [0.1.0-beta2](https://github.com/davidalger/warden/tree/0.1.0-beta2)
 
-* Updated assertion to automatically execute "warden install" if installed metadata indicator is older than bin/warden.
+* Updated assertion to automatically execute "warden install" if installed metadata indicator is older than bin/den.
 * Fixed issue on Linux hosts where ssh_key.pub was unusable inside tunnel container due to bad permissions.
 
 ## Version [0.1.0-beta1](https://github.com/davidalger/warden/tree/0.1.0-beta1)
