@@ -12,7 +12,7 @@
 | SSH Host, Proxy Host, Server   | `tunnel.warden.test`                                             |
 | SSH Host Port                  | `2222`                                                           |
 | SSH User                       | `user`                                                           |
-| SSH private key file           | `~/.warden/tunnel/ssh_key`                                       |
+| SSH private key file           | `~/.den/tunnel/ssh_key`                                       |
 
 ### TablePlus
 ![TablePlus Connection Info](screenshots/tableplus-connection.png)

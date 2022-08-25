@@ -9,7 +9,7 @@ After running `warden svc up` for the first time following installation, the fol
 
 ### Customizable Settings
 
-When spinning up global services via `docker-compose` Warden uses `~/.warden` as the project directory allowing a `.env` placed at `~/.warden/.env` to function for overriding variables in the `docker-compose` configuration used to deploy these services.
+When spinning up global services via `docker-compose` Warden uses `~/.den` as the project directory allowing a `.env` placed at `~/.den/.env` to function for overriding variables in the `docker-compose` configuration used to deploy these services.
 
 The following options are available (with default values indicated):
 
@@ -21,4 +21,4 @@ The following options are available (with default values indicated):
     Setting ``TRAEFIK_LISTEN=0.0.0.0`` can be quite useful in some cases, but be aware that causing Traefik to listen for requests publicly poses a security risk when on public WiFi or networks otherwise outside of your control.
 ```
 
-After changing settings in `~/.warden/.env`, please run `warden svc up` to apply.
+After changing settings in `~/.den/.env`, please run `warden svc up` to apply.

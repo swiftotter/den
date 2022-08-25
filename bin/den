@@ -35,7 +35,7 @@ then
 fi
 
 ## define and export global shared directory paths
-export readonly WARDEN_HOME_DIR="${WARDEN_HOME_DIR:-"$HOME/.warden"}"
+export readonly WARDEN_HOME_DIR="${WARDEN_HOME_DIR:-"$HOME/.den"}"
 export readonly WARDEN_SSL_DIR="${WARDEN_HOME_DIR}/ssl"
 export readonly WARDEN_COMPOSER_DIR="${WARDEN_COMPOSER_DIR:-"$HOME/.composer"}"
 
