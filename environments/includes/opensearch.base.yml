@@ -14,7 +14,7 @@ services:
       - xpack.security.enabled=false
       - "ES_JAVA_OPTS=-Xms64m -Xmx512m"
     volumes:
-      - esdata:/usr/share/opensearch/data
+      - osdata:/usr/share/opensearch/data
 
   opensearch-dashboard:
     hostname: "${WARDEN_ENV_NAME}-opensearch-dashboard"
