@@ -40,10 +40,11 @@ COPY --from=composer:1 /usr/bin/composer /usr/bin/composer1
 COPY --from=composer:2 /usr/bin/composer /usr/bin/composer2
 
 # Install helpful utilities
-RUN apk --no-cache add jq bash patch pv nano vim mariadb-client sudo busybox-initscripts gettext ca-certificates
+RUN apk --no-cache add jq bash patch pv nano vim mariadb-client sudo busybox-initscripts gettext ca-certificates shadow
 
 # Configure www-data user as primary php-fpm user for better local dev experience
-RUN chmod 0755 ~www-data \
+RUN groupmod -g 1000 www-data && usermod -u 1000 www-data \
+    && chmod 0755 ~www-data \
     && mkdir -p /var/www/html \
     && chown www-data:www-data /var/www/html \
     && echo "www-data ALL=(ALL) NOPASSWD:ALL" >> /etc/sudoers.d/nopasswd
