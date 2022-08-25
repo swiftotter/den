@@ -10,23 +10,11 @@ services:
       - traefik.http.services.${WARDEN_ENV_NAME}-opensearch.loadbalancer.server.port=9200
       - traefik.docker.network=${WARDEN_ENV_NAME}_default
     environment:
+      - DISABLE_SECURITY_PLUGIN=true
       - discovery.type=single-node
-      - xpack.security.enabled=false
       - "ES_JAVA_OPTS=-Xms64m -Xmx512m"
     volumes:
       - osdata:/usr/share/opensearch/data
-
-  opensearch-dashboard:
-    hostname: "${WARDEN_ENV_NAME}-opensearch-dashboard"
-    image: opensearchproject/opensearch-dashboards:latest
-    labels:
-      - traefik.enable=true
-      - traefik.http.routers.${WARDEN_ENV_NAME}-elasticsearch-hq.tls=true
-      - traefik.http.routers.${WARDEN_ENV_NAME}-elasticsearch-hq.rule=Host(`opensearch-dashboard.${TRAEFIK_DOMAIN}`)
-      - traefik.http.services.${WARDEN_ENV_NAME}-elasticsearch-hq.loadbalancer.server.port=5601
-      - traefik.docker.network=${WARDEN_ENV_NAME}_default
-    environment:
-      OPENSEARCH_HOSTS: '["https://${WARDEN_ENV_NAME}-opensearch:9200"]'
 
 volumes:
   osdata:
