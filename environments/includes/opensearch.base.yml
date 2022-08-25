@@ -2,7 +2,7 @@ version: "3.5"
 services:
   opensearch:
     hostname: "${WARDEN_ENV_NAME}-opensearch"
-    image: ${WARDEN_IMAGE_REPOSITORY}/den-opensearch:${OPENSEARCH_VERSION:-7.8}
+    image: ${WARDEN_IMAGE_REPOSITORY}/den-opensearch:${OPENSEARCH_VERSION:-1.2}
     labels:
       - traefik.enable=true
       - traefik.http.routers.${WARDEN_ENV_NAME}-opensearch.tls=true
