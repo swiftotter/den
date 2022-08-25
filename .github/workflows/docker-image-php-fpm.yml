@@ -27,10 +27,6 @@ jobs:
       - uses: actions/checkout@v1
       - uses: docker/setup-qemu-action@v1
       - uses: docker/setup-buildx-action@v1
-      - uses: satackey/action-docker-layer-caching@v0.0.11
-        # Ignore the failure of a step and avoid terminating the job.
-        continue-on-error: true
-
       - name: Login to Github Container Registry
         uses: docker/login-action@v2
         with:
@@ -55,6 +51,8 @@ jobs:
             PHP_VERSION=${{ matrix.php_version }}
           push: ${{ github.ref == 'refs/heads/main' && !env.ACT }}
           tags: ghcr.io/${{ github.repository_owner }}/den-php-fpm:${{ matrix.php_version }}
+          cache-from: type=registry,ref=ghcr.io/${{ github.repository_owner }}/den-php-fpm:buildcache
+          cache-to: type=registry,ref=ghcr.io/${{ github.repository_owner }}/den-php-fpm:buildcache,mode=max
 
   php-node:
     name: PHP-FPM ${{ matrix.php_version }} + Node ${{ matrix.node_version }}
@@ -81,10 +79,6 @@ jobs:
       - uses: actions/checkout@v1
       - uses: docker/setup-qemu-action@v1
       - uses: docker/setup-buildx-action@v1
-      - uses: satackey/action-docker-layer-caching@v0.0.11
-        # Ignore the failure of a step and avoid terminating the job.
-        continue-on-error: true
-
       - name: Login to Github Container Registry
         uses: docker/login-action@v2
         with:
@@ -140,10 +134,6 @@ jobs:
       - uses: actions/checkout@v1
       - uses: docker/setup-qemu-action@v1
       - uses: docker/setup-buildx-action@v1
-      - uses: satackey/action-docker-layer-caching@v0.0.11
-        # Ignore the failure of a step and avoid terminating the job.
-        continue-on-error: true
-
       - name: Login to Github Container Registry
         uses: docker/login-action@v2
         with:
@@ -196,10 +186,6 @@ jobs:
       - uses: actions/checkout@v1
       - uses: docker/setup-qemu-action@v1
       - uses: docker/setup-buildx-action@v1
-      - uses: satackey/action-docker-layer-caching@v0.0.11
-        # Ignore the failure of a step and avoid terminating the job.
-        continue-on-error: true
-
       - name: Login to Github Container Registry
         uses: docker/login-action@v2
         with:
@@ -251,10 +237,6 @@ jobs:
       - uses: actions/checkout@v1
       - uses: docker/setup-qemu-action@v1
       - uses: docker/setup-buildx-action@v1
-      - uses: satackey/action-docker-layer-caching@v0.0.11
-        # Ignore the failure of a step and avoid terminating the job.
-        continue-on-error: true
-
       - name: Login to Github Container Registry
         uses: docker/login-action@v2
         with:
@@ -310,10 +292,6 @@ jobs:
       - uses: actions/checkout@v1
       - uses: docker/setup-qemu-action@v1
       - uses: docker/setup-buildx-action@v1
-      - uses: satackey/action-docker-layer-caching@v0.0.11
-        # Ignore the failure of a step and avoid terminating the job.
-        continue-on-error: true
-
       - name: Login to Github Container Registry
         uses: docker/login-action@v2
         with:
@@ -366,10 +344,6 @@ jobs:
       - uses: actions/checkout@v1
       - uses: docker/setup-qemu-action@v1
       - uses: docker/setup-buildx-action@v1
-      - uses: satackey/action-docker-layer-caching@v0.0.11
-        # Ignore the failure of a step and avoid terminating the job.
-        continue-on-error: true
-
       - name: Login to Github Container Registry
         uses: docker/login-action@v2
         with:
@@ -421,10 +395,6 @@ jobs:
       - uses: actions/checkout@v1
       - uses: docker/setup-qemu-action@v1
       - uses: docker/setup-buildx-action@v1
-      - uses: satackey/action-docker-layer-caching@v0.0.11
-        # Ignore the failure of a step and avoid terminating the job.
-        continue-on-error: true
-
       - name: Login to Github Container Registry
         uses: docker/login-action@v2
         with:
@@ -480,10 +450,6 @@ jobs:
       - uses: actions/checkout@v1
       - uses: docker/setup-qemu-action@v1
       - uses: docker/setup-buildx-action@v1
-      - uses: satackey/action-docker-layer-caching@v0.0.11
-        # Ignore the failure of a step and avoid terminating the job.
-        continue-on-error: true
-
       - name: Login to Github Container Registry
         uses: docker/login-action@v2
         with:
@@ -535,10 +501,6 @@ jobs:
       - uses: actions/checkout@v1
       - uses: docker/setup-qemu-action@v1
       - uses: docker/setup-buildx-action@v1
-      - uses: satackey/action-docker-layer-caching@v0.0.11
-        # Ignore the failure of a step and avoid terminating the job.
-        continue-on-error: true
-
       - name: Login to Github Container Registry
         uses: docker/login-action@v2
         with:
