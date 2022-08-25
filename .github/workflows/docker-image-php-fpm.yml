@@ -51,8 +51,8 @@ jobs:
             PHP_VERSION=${{ matrix.php_version }}
           push: ${{ github.ref == 'refs/heads/main' && !env.ACT }}
           tags: ghcr.io/${{ github.repository_owner }}/den-php-fpm:${{ matrix.php_version }}
-          cache-from: type=registry,ref=ghcr.io/${{ github.repository_owner }}/den-php-fpm:buildcache
-          cache-to: type=registry,ref=ghcr.io/${{ github.repository_owner }}/den-php-fpm:buildcache,mode=max
+          cache-from: type=registry,ref=ghcr.io/${{ github.repository_owner }}/den-php-fpm:${{ matrix.php_version }}-buildcache
+          cache-to: type=registry,ref=ghcr.io/${{ github.repository_owner }}/den-php-fpm:${{ matrix.php_version }}-buildcache,mode=max
 
   php-node:
     name: PHP-FPM ${{ matrix.php_version }} + Node ${{ matrix.node_version }}
