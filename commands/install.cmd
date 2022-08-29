@@ -17,33 +17,33 @@ if [[ ! -f "${WARDEN_SSL_DIR}/rootca/private/ca.key.pem" ]]; then
 fi
 
 if [[ ! -f "${WARDEN_SSL_DIR}/rootca/certs/ca.cert.pem" ]]; then
-  echo "==> Signing root certificate 'Warden Proxy Local CA ($(hostname -s))'"
+  echo "==> Signing root certificate 'Den Proxy Local CA ($(hostname -s))'"
   openssl req -new -x509 -days 7300 -sha256 -extensions v3_ca \
     -config "${WARDEN_DIR}/config/openssl/rootca.conf"        \
     -key "${WARDEN_SSL_DIR}/rootca/private/ca.key.pem"        \
     -out "${WARDEN_SSL_DIR}/rootca/certs/ca.cert.pem"         \
-    -subj "/C=US/O=Warden.dev/CN=Warden Proxy Local CA ($(hostname -s))"
+    -subj "/C=US/O=Warden.dev/CN=Den Proxy Local CA ($(hostname -s))"
 fi
 
 ## trust root ca differently on Fedora, Ubuntu and macOS
 if [[ "$OSTYPE" =~ ^linux ]] \
   && [[ -d /etc/pki/ca-trust/source/anchors ]] \
-  && [[ ! -f /etc/pki/ca-trust/source/anchors/warden-proxy-local-ca.cert.pem ]] \
+  && [[ ! -f /etc/pki/ca-trust/source/anchors/den-proxy-local-ca.cert.pem ]] \
   ## Fedora/CentOS
 then
   echo "==> Trusting root certificate (requires sudo privileges)"  
-  sudo cp "${WARDEN_SSL_DIR}/rootca/certs/ca.cert.pem" /etc/pki/ca-trust/source/anchors/warden-proxy-local-ca.cert.pem
+  sudo cp "${WARDEN_SSL_DIR}/rootca/certs/ca.cert.pem" /etc/pki/ca-trust/source/anchors/den-proxy-local-ca.cert.pem
   sudo update-ca-trust
 elif [[ "$OSTYPE" =~ ^linux ]] \
   && [[ -d /usr/local/share/ca-certificates ]] \
-  && [[ ! -f /usr/local/share/ca-certificates/warden-proxy-local-ca.crt ]] \
+  && [[ ! -f /usr/local/share/ca-certificates/den-proxy-local-ca.crt ]] \
   ## Ubuntu/Debian
 then
   echo "==> Trusting root certificate (requires sudo privileges)"
-  sudo cp "${WARDEN_SSL_DIR}/rootca/certs/ca.cert.pem" /usr/local/share/ca-certificates/warden-proxy-local-ca.crt
+  sudo cp "${WARDEN_SSL_DIR}/rootca/certs/ca.cert.pem" /usr/local/share/ca-certificates/den-proxy-local-ca.crt
   sudo update-ca-certificates
 elif [[ "$OSTYPE" == "darwin"* ]] \
-  && ! security dump-trust-settings -d | grep 'Warden Proxy Local CA' >/dev/null \
+  && ! security dump-trust-settings -d | grep 'Den Proxy Local CA' >/dev/null \
   ## Apple macOS
 then
   echo "==> Trusting root certificate (requires sudo privileges)"
