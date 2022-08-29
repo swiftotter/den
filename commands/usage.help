@@ -2,16 +2,17 @@
 [[ ! ${WARDEN_DIR} ]] && >&2 echo -e "\033[31mThis script is not intended to be run directly!\033[0m" && exit 1
 
 WARDEN_HEADER='
- _       __               __         
-| |     / /___ __________/ /__  ____ 
-| | /| / / __ `/ ___/ __  / _ \/ __ \
-| |/ |/ / /_/ / /  / /_/ /  __/ / / /
-|__/|__/\__,_/_/   \__,_/\___/_/ /_/ 
+    ____           
+   / __ \___  ____ 
+  / / / / _ \/ __ \
+ / /_/ /  __/ / / /
+/_____/\___/_/ /_/ 
+ Fork of Warden
 '
 
 WARDEN_USAGE=$(cat <<EOF
 ${WARDEN_HEADER:1}
-Warden version $(cat ${WARDEN_DIR}/version)
+Den version $(cat ${WARDEN_DIR}/version)
 
 \033[33mUsage:\033[0m
   command [options] [arguments]
