@@ -23,9 +23,6 @@ jobs:
           - "6.6"
           - "7.0"
           - "7.1"
-        include:
-          - version: "6.0"
-            suffix: "lts"
 
     steps:
       - uses: actions/checkout@v2
@@ -47,15 +44,10 @@ jobs:
           password: ${{ secrets.DOCKER_PASSWORD }}
         if: ${{ !env.ACT }}
 
-      - name: Set build-args
-        run: |-
-          VARNISH_VERSION="$(echo ${{ matrix.version }} | tr -d .)${{ matrix.suffix }}"
-          echo "VARNISH_VERSION=${VARNISH_VERSION}" | tee /dev/stderr >> $GITHUB_ENV
-
       - uses: docker/build-push-action@v3
         with:
           context: images/varnish
           platforms: linux/amd64,linux/arm64
-          build-args: VARNISH_VERSION=${{ env.VARNISH_VERSION }}
+          build-args: VARNISH_VERSION=${{ matrix.version }}
           push: ${{ github.ref == 'refs/heads/main' && !env.ACT }}
           tags: ghcr.io/${{ github.repository_owner }}/den-varnish:${{ matrix.version }}
