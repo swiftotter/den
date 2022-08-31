@@ -473,6 +473,7 @@ jobs:
           build-args: |
             ENV_SOURCE_IMAGE=ghcr.io/${{ github.repository_owner }}/den-php-fpm-magento2
             PHP_VERSION=${{ matrix.php_version }}-node${{ matrix.node_version }}
+            XDEBUG_TYPE=${{ matrix.xdebug_type }}
           push: ${{ github.ref == 'refs/heads/main' && !env.ACT }}
           tags: ghcr.io/${{ github.repository_owner }}/den-php-fpm-magento2-debug:${{ matrix.php_version }}-node${{ matrix.node_version }}
 
