@@ -55,7 +55,7 @@ fi
 if [[ -d ~/.warden/ssl/certs/ ]]; then
   domains_to_generate="$(diff -B <(ls ~/.den/ssl/certs/ | grep .key.pem | sed 's/.key.pem//' | grep -v warden.test)  <(ls ~/.warden/ssl/certs/ | grep .key.pem | sed 's/.key.pem//' | grep -v warden.test) | grep '^>' | sed 's/^>\ //')"
   if [[ -n "$domains_to_generate" ]]; then
-    echo Generating certificates that were there in Warden...
+    echo "Generating certificates present in Warden..."
 
     echo "$domains_to_generate" | while read i; do
       den sign-certificate "$i"
