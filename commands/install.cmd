@@ -81,7 +81,7 @@ fi
 if [[ ! -f "${WARDEN_HOME_DIR}/tunnel/ssh_key" ]]; then
   echo "==> Generating rsa key pair for tunnel into sshd service"
   mkdir -p "${WARDEN_HOME_DIR}/tunnel"
-  ssh-keygen -b 2048 -t rsa -f "${WARDEN_HOME_DIR}/tunnel/ssh_key" -N "" -C "user@tunnel.warden.test"
+  ssh-keygen -b 2048 -t rsa -f "${WARDEN_HOME_DIR}/tunnel/ssh_key" -N "" -C "user@tunnel.den.test"
 fi
 
 ## if host machine does not have composer installed, this directory will otherwise be created by docker with root:root
@@ -95,5 +95,5 @@ if [[ "$OSTYPE" =~ ^linux ]] && [[ "$(stat -c '%U' "${WARDEN_HOME_DIR}/tunnel/ss
   sudo chown root:root "${WARDEN_HOME_DIR}/tunnel/ssh_key.pub"
 fi
 
-## append settings for tunnel.warden.test in /etc/ssh/ssh_config
+## append settings for tunnel.den.test in /etc/ssh/ssh_config
 installSshConfig

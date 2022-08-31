@@ -29,7 +29,7 @@ WARDEN_SELENIUM_DEBUG=1
 
 **Default password for VNC session is `secret`**
 
-To preview the process of testing, you need any **VLC** client that provides **SSH Tunnel** support (eg. [Remmina](https://remmina.org/how-to-install-remmina/)). To preview the process of testing, you need to use `tunnel.warden.test:2222` (login: `user`):
+To preview the process of testing, you need any **VLC** client that provides **SSH Tunnel** support (eg. [Remmina](https://remmina.org/how-to-install-remmina/)). To preview the process of testing, you need to use `tunnel.den.test:2222` (login: `user`):
 
 ### Remote Desktop Viewer
 
@@ -43,7 +43,7 @@ To preview the process of testing, you need any **VLC** client that provides **S
 
 To preview the process in Mac OS X, you must first create an SSH tunnel to the docker instance hosting the VNC server.  That would look something like:
 
-    ssh -N -L localhost:5901:magento2_selenium_1:5900 tunnel.warden.test
+    ssh -N -L localhost:5901:magento2_selenium_1:5900 tunnel.den.test
 
 Where `5901` is the port on your local computer you want to use to access the VNC server.  Then, using Finder you can "Go > Connect to Server" `vnc://localhost:5901`.
 

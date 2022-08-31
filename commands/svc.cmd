@@ -26,9 +26,12 @@ if [[ "${WARDEN_PARAMS[0]}" == "up" ]]; then
         eval "$(grep "^WARDEN_SERVICE_DOMAIN" "${WARDEN_HOME_DIR}/.env")"
     fi
 
-    WARDEN_SERVICE_DOMAIN="${WARDEN_SERVICE_DOMAIN:-warden.test}"
+    WARDEN_SERVICE_DOMAIN="${WARDEN_SERVICE_DOMAIN:-den.test}"
     if [[ ! -f "${WARDEN_SSL_DIR}/certs/${WARDEN_SERVICE_DOMAIN}.crt.pem" ]]; then
         "${WARDEN_DIR}/bin/den" sign-certificate "${WARDEN_SERVICE_DOMAIN}"
+    fi
+    if [[ ! -f "${WARDEN_SSL_DIR}/certs/warden.test.crt.pem" ]]; then
+        "${WARDEN_DIR}/bin/den" sign-certificate "warden.test"
     fi
 
     ## copy configuration files into location where they'll be mounted into containers from

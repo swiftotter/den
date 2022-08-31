@@ -5,11 +5,16 @@ function installSshConfig () {
   if ! grep '## WARDEN START ##' /etc/ssh/ssh_config >/dev/null; then
     echo "==> Configuring sshd tunnel in host ssh_config (requires sudo privileges)"
     echo "    Note: This addition to the ssh_config file can sometimes be erased by a system"
-    echo "    upgrade requiring reconfiguring the SSH config for tunnel.warden.test."
+    echo "    upgrade requiring reconfiguring the SSH config for tunnel.den.test."
     cat <<-EOT | sudo tee -a /etc/ssh/ssh_config >/dev/null
 
 			## WARDEN START ##
 			Host tunnel.warden.test
+			HostName 127.0.0.1
+			User user
+			Port 2222
+			IdentityFile ~/.den/tunnel/ssh_key
+			Host tunnel.den.test
 			HostName 127.0.0.1
 			User user
 			Port 2222
@@ -36,7 +41,7 @@ function assertWardenInstall {
     date > "${WARDEN_HOME_DIR}/.installed"
   fi
 
-  ## append settings for tunnel.warden.test in /etc/ssh/ssh_config
+  ## append settings for tunnel.den.test in /etc/ssh/ssh_config
   #
   # NOTE: This function is called on every invocation of this assertion in an attempt to ensure
   # the ssh configuration for the tunnel is present following it's removal following a system

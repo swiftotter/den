@@ -17,7 +17,7 @@ if ! which remmina >/dev/null; then
   echo "Connect with your VNC client to 127.0.0.1:${EXPOSE_PORT}"
   echo "    Password: secret"
   echo "You can also use URL: vnc://127.0.0.1:${EXPOSE_PORT}/?VncPassword=secret"
-  ssh -N -L localhost:${EXPOSE_PORT}:${WARDEN_SELENIUM_VNC}:5900 tunnel.warden.test
+  ssh -N -L localhost:${EXPOSE_PORT}:${WARDEN_SELENIUM_VNC}:5900 tunnel.den.test
 else
 
   cat > "${WARDEN_ENV_PATH}/.remmina" <<-EOF
@@ -36,7 +36,7 @@ else
 	viewmode=1
 	window_width=1200
 	window_height=780
-	ssh_server=tunnel.warden.test:2222
+	ssh_server=tunnel.den.test:2222
 	protocol=VNC
 	EOF
 

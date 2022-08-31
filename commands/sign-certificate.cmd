@@ -36,7 +36,7 @@ openssl req -new -sha256 -config <(cat                            \
   )                                                               \
   -key "${WARDEN_SSL_DIR}/certs/${CERTIFICATE_NAME}.key.pem"      \
   -out "${WARDEN_SSL_DIR}/certs/${CERTIFICATE_NAME}.csr.pem"      \
-  -subj "/C=US/O=Warden.dev/CN=${CERTIFICATE_NAME}"
+  -subj "/C=US/O=Den.SwiftOtter.com/CN=${CERTIFICATE_NAME}"
 
 echo "==> Generating certificate ${CERTIFICATE_NAME}.crt.pem"
 openssl x509 -req -days 365 -sha256 -extensions v3_req            \
