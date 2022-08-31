@@ -17,12 +17,14 @@ COPY --from=mhs-builder /go/bin/mhsendmail /usr/local/bin/mhsendmail
 
 # Install PHP Extensions required by Magento OS, Adobe Commerce, and the UCT (pcntl)
 RUN chmod +x /usr/local/bin/install-php-extensions && install-php-extensions \
+    amqp \
     bcmath \
     gd \
     intl \
     imagick \
     pcntl \
     pdo_mysql \
+    redis \
     soap \
     sockets \
     sodium \
