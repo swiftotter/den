@@ -63,7 +63,7 @@ jobs:
       fail-fast: false
       matrix:
         php_version: [ "7.2", "7.3", "7.4", "8.0", "8.1" ]
-        node_version: [ "10", "11", "12", "13", "14", "15", "16", "17", "18"]
+        node_version: [ "10", "12", "13", "14", "15", "16", "17", "18"]
         experimental: [ false ]
         include:
           - php_version: 8.2.0beta2
@@ -114,7 +114,7 @@ jobs:
       fail-fast: false
       matrix:
         php_version: [ "7.2", "7.3", "7.4", "8.0", "8.1" ]
-        node_version: [ "10", "11", "12", "13", "14", "15", "16", "17", "18"]
+        node_version: [ "10", "12", "13", "14", "15", "16", "17", "18"]
         experimental: [ false ]
         xdebug_type: [ "xdebug-stable" ]
         include:
@@ -170,7 +170,7 @@ jobs:
       fail-fast: false
       matrix:
         php_version: [ "7.2", "7.3", "7.4", "8.0", "8.1" ]
-        node_version: [ "10", "11", "12", "13", "14", "15", "16", "17", "18"]
+        node_version: [ "10", "12", "13", "14", "15", "16", "17", "18"]
         experimental: [ false ]
         include:
           - php_version: 8.2.0beta2
@@ -221,7 +221,7 @@ jobs:
       fail-fast: false
       matrix:
         php_version: [ "7.2", "7.3", "7.4", "8.0", "8.1" ]
-        node_version: [ "10", "11", "12", "13", "14", "15", "16", "17", "18"]
+        node_version: [ "10", "12", "13", "14", "15", "16", "17", "18"]
         experimental: [ false ]
         include:
           - php_version: 8.2.0beta2
@@ -272,7 +272,7 @@ jobs:
       fail-fast: false
       matrix:
         php_version: [ "7.2", "7.3", "7.4", "8.0", "8.1" ]
-        node_version: [ "10", "11", "12", "13", "14", "15", "16", "17", "18"]
+        node_version: [ "10", "12", "13", "14", "15", "16", "17", "18"]
         experimental: [ false ]
         xdebug_type: [ "xdebug-stable" ]
         include:
@@ -328,7 +328,7 @@ jobs:
       fail-fast: false
       matrix:
         php_version: [ "7.2", "7.3", "7.4", "8.0", "8.1" ]
-        node_version: [ "10", "11", "12", "13", "14", "15", "16", "17", "18"]
+        node_version: [ "10", "12", "13", "14", "15", "16", "17", "18"]
         experimental: [ false ]
         include:
           - php_version: 8.2.0beta2
@@ -379,7 +379,7 @@ jobs:
       fail-fast: false
       matrix:
         php_version: [ "7.2", "7.3", "7.4", "8.0", "8.1" ]
-        node_version: [ "10", "11", "12", "13", "14", "15", "16", "17", "18"]
+        node_version: [ "10", "12", "13", "14", "15", "16", "17", "18"]
         experimental: [ false ]
         include:
           - php_version: 8.2.0beta2
@@ -430,7 +430,7 @@ jobs:
       fail-fast: false
       matrix:
         php_version: [ "7.2", "7.3", "7.4", "8.0", "8.1" ]
-        node_version: [ "10", "11", "12", "13", "14", "15", "16", "17", "18"]
+        node_version: [ "10", "12", "13", "14", "15", "16", "17", "18"]
         experimental: [ false ]
         xdebug_type: [ "xdebug-stable" ]
         include:
@@ -486,7 +486,7 @@ jobs:
       fail-fast: false
       matrix:
         php_version: [ "7.2", "7.3", "7.4", "8.0", "8.1" ]
-        node_version: [ "10", "11", "12", "13", "14", "15", "16", "17", "18"]
+        node_version: [ "10", "12", "13", "14", "15", "16", "17", "18"]
         experimental: [ false ]
         include:
           - php_version: 8.2.0beta2
