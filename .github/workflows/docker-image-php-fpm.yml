@@ -21,7 +21,7 @@ jobs:
         php_version: [ "7.2", "7.3", "7.4", "8.0", "8.1" ]
         experimental: [ false ]
         include:
-          - php_version: 8.2.0beta3
+          - php_version: 8.2-rc
             experimental: true
     steps:
       - uses: actions/checkout@v1
@@ -66,13 +66,13 @@ jobs:
         node_version: [ "10", "12", "13", "14", "15", "16", "17", "18"]
         experimental: [ false ]
         include:
-          - php_version: 8.2.0beta3
+          - php_version: 8.2-rc
             experimental: true
             node_version: 14
-          - php_version: 8.2.0beta3
+          - php_version: 8.2-rc
             experimental: true
             node_version: 16
-          - php_version: 8.2.0beta3
+          - php_version: 8.2-rc
             experimental: true
             node_version: 18
     steps:
@@ -118,15 +118,15 @@ jobs:
         experimental: [ false ]
         xdebug_type: [ "xdebug-stable" ]
         include:
-          - php_version: 8.2.0beta3
+          - php_version: 8.2-rc
             xdebug_type: "xdebug"
             experimental: true
             node_version: 14
-          - php_version: 8.2.0beta3
+          - php_version: 8.2-rc
             xdebug_type: "xdebug"
             experimental: true
             node_version: 16
-          - php_version: 8.2.0beta3
+          - php_version: 8.2-rc
             xdebug_type: "xdebug"
             experimental: true
             node_version: 18
@@ -173,13 +173,13 @@ jobs:
         node_version: [ "10", "12", "13", "14", "15", "16", "17", "18"]
         experimental: [ false ]
         include:
-          - php_version: 8.2.0beta3
+          - php_version: 8.2-rc
             experimental: true
             node_version: 14
-          - php_version: 8.2.0beta3
+          - php_version: 8.2-rc
             experimental: true
             node_version: 16
-          - php_version: 8.2.0beta3
+          - php_version: 8.2-rc
             experimental: true
             node_version: 18
     steps:
@@ -224,13 +224,13 @@ jobs:
         node_version: [ "10", "12", "13", "14", "15", "16", "17", "18"]
         experimental: [ false ]
         include:
-          - php_version: 8.2.0beta3
+          - php_version: 8.2-rc
             experimental: true
             node_version: 14
-          - php_version: 8.2.0beta3
+          - php_version: 8.2-rc
             experimental: true
             node_version: 16
-          - php_version: 8.2.0beta3
+          - php_version: 8.2-rc
             experimental: true
             node_version: 18
     steps:
@@ -276,15 +276,15 @@ jobs:
         experimental: [ false ]
         xdebug_type: [ "xdebug-stable" ]
         include:
-          - php_version: 8.2.0beta3
+          - php_version: 8.2-rc
             xdebug_type: "xdebug"
             experimental: true
             node_version: 14
-          - php_version: 8.2.0beta3
+          - php_version: 8.2-rc
             xdebug_type: "xdebug"
             experimental: true
             node_version: 16
-          - php_version: 8.2.0beta3
+          - php_version: 8.2-rc
             xdebug_type: "xdebug"
             experimental: true
             node_version: 18
@@ -331,13 +331,13 @@ jobs:
         node_version: [ "10", "12", "13", "14", "15", "16", "17", "18"]
         experimental: [ false ]
         include:
-          - php_version: 8.2.0beta3
+          - php_version: 8.2-rc
             experimental: true
             node_version: 14
-          - php_version: 8.2.0beta3
+          - php_version: 8.2-rc
             experimental: true
             node_version: 16
-          - php_version: 8.2.0beta3
+          - php_version: 8.2-rc
             experimental: true
             node_version: 18
     steps:
@@ -382,13 +382,13 @@ jobs:
         node_version: [ "10", "12", "13", "14", "15", "16", "17", "18"]
         experimental: [ false ]
         include:
-          - php_version: 8.2.0beta3
+          - php_version: 8.2-rc
             experimental: true
             node_version: 14
-          - php_version: 8.2.0beta3
+          - php_version: 8.2-rc
             experimental: true
             node_version: 16
-          - php_version: 8.2.0beta3
+          - php_version: 8.2-rc
             experimental: true
             node_version: 18
     steps:
@@ -434,15 +434,15 @@ jobs:
         experimental: [ false ]
         xdebug_type: [ "xdebug-stable" ]
         include:
-          - php_version: 8.2.0beta3
+          - php_version: 8.2-rc
             xdebug_type: "xdebug"
             experimental: true
             node_version: 14
-          - php_version: 8.2.0beta3
+          - php_version: 8.2-rc
             xdebug_type: "xdebug"
             experimental: true
             node_version: 16
-          - php_version: 8.2.0beta3
+          - php_version: 8.2-rc
             xdebug_type: "xdebug"
             experimental: true
             node_version: 18
@@ -489,13 +489,13 @@ jobs:
         node_version: [ "10", "12", "13", "14", "15", "16", "17", "18"]
         experimental: [ false ]
         include:
-          - php_version: 8.2.0beta3
+          - php_version: 8.2-rc
             experimental: true
             node_version: 14
-          - php_version: 8.2.0beta3
+          - php_version: 8.2-rc
             experimental: true
             node_version: 16
-          - php_version: 8.2.0beta3
+          - php_version: 8.2-rc
             experimental: true
             node_version: 18
     steps:
