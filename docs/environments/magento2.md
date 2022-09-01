@@ -26,6 +26,7 @@ The below example demonstrates the from-scratch setup of the Magento 2 applicati
 
         WARDEN_DB=1
         WARDEN_ELASTICSEARCH=1
+        WARDEN_ELASTICHQ=0
         WARDEN_VARNISH=1
         WARDEN_RABBITMQ=1
         WARDEN_REDIS=1
