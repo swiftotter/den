@@ -1,5 +1,5 @@
 ARG MYSQL_VERSION
-FROM mysql:${MYSQL_VERSION}-oracle
+FROM mysql:${MYSQL_VERSION}
 
 # MySQL 8.0 require skip-bin-log to avoid workarounds:
 # See: https://github.com/davidalger/warden/pull/403
