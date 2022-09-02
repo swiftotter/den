@@ -1,3 +1,7 @@
+if [ "$SHELL" != "/bin/bash" ]; then
+  exit 0
+fi
+
 # Setup history search ability (only bind when a tty is present)
 if [ -t 1 ]; then
     bind '"\e[A":history-search-backward'

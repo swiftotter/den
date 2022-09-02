@@ -1,5 +1,5 @@
 ## these images use n versions (use same node as root); add /usr/local/bin to root $PATH
-if [ $EUID = 0 ]; then
+if [[ "$EUID" = 0 || "$UID" = 0 ]]; then
   PATH=$(echo "$PATH" | sed -E 's#(/usr/local/sbin)#\1:/usr/local/bin#')
 fi
 
