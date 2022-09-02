@@ -19,6 +19,7 @@ COPY --from=mhs-builder /go/bin/mhsendmail /usr/local/bin/mhsendmail
 RUN chmod +x /usr/local/bin/install-php-extensions && install-php-extensions \
     amqp \
     bcmath \
+    exif \
     gd \
     intl \
     imagick \
