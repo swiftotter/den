@@ -1,5 +1,16 @@
 version: "3.5"
 services:
+  dashboard:
+    container_name: dashboard
+    image: nginx:alpine
+    volumes:
+      - ${WARDEN_SERVICE_DIR}/docker/dashboard:/usr/share/nginx/html
+    labels:
+      - traefik.enable=true
+      - traefik.http.routers.dashboard.tls=true
+      - traefik.http.routers.dashboard.rule=Host(`${WARDEN_SERVICE_DOMAIN:-den.test}`)||Host(`www.${WARDEN_SERVICE_DOMAIN:-den.test}`)
+      - traefik.http.services.dashboard.loadbalancer.server.port=80
+    restart: ${WARDEN_RESTART_POLICY:-always}
   traefik:
     container_name: traefik
     image: traefik:${TRAEFIK_VERSION:-2.2}

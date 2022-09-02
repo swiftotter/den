@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Den by SwiftOtter</title>
+    <style>
+        html {
+            background: #111;
+            color: #ddd;
+            font-family: sans-serif;
+        }
+        body {
+            max-width: 600px;
+            margin: 0 auto;
+        }
+        header {
+            text-align: center;
+            line-height: 1.5em;
+        }
+        header a {
+            text-decoration: none;
+            color: #99f;
+        }
+        header a:hover {
+            text-decoration: underline;
+        }
+        .den-mark {
+            line-height: 1;
+            display: inline-block;
+            text-align: left;
+            margin: 0 auto;
+            white-space: pre;
+            font-family: monospace;
+        }
+        .services-list {
+            display: flex;
+            flex-direction: row;
+            flex-wrap: wrap;
+            justify-content: center;
+            padding: 0;
+        }
+        .services-list li {
+            display: inline-block;
+            margin: 5px;
+            padding: 15px;
+            background-color: #222;
+        }
+        .services-list li a {
+            display: inline-block;
+            text-align: center;
+            width: 160px;
+            background-repeat: no-repeat;
+            background-position: center center;
+            background-size: contain;
+            padding-top: 195px;
+            color: white;
+            text-decoration: none;
+        }
+        .services-list li:hover {
+            box-shadow: #444 1px 1px 5px 2px
+        }
+        li.mailhog a {
+            background-image: url('https://mailhog.den.test/images/hog.png');
+        }
+        li.traefik a {
+            background-image: url('data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSI4NCIgaGVpZ2h0PSIyNCIgdmlld0JveD0iMCAwIDg0IDI0Ij4KICAgIDxnIGZpbGw9Im5vbmUiIGZpbGwtcnVsZT0ibm9uemVybyI+CiAgICAgICAgPHBhdGggZmlsbD0iI0ZGRiIgZD0iTTcuMTQyIDI0Yy0xLjI0MSAwLTIuMjMtLjQwNi0yLjk2My0xLjIxNy0uNzM1LS44MjItMS4xMDItMi4wODItMS4xMDItMy43ODF2LTkuNDdIMS4xMDFjLS4zNTYgMC0uNjMxLS4wODgtLjgyNi0uMjYzQy4wOTIgOS4wOTMgMCA4Ljg1OCAwIDguNTYyYzAtLjI4NS4wOTItLjUxNi4yNzUtLjY5MS4xODQtLjE4Ni40NTQtLjI4LjgxLS4yOGgxLjk5MmwuMzg5LTQuNjY5Yy4wMjItLjM1LjE3My0uNjUyLjQ1My0uOTA0LjI5Mi0uMjUyLjYxLS4zNzguOTU2LS4zNzguMzI0IDAgLjU5NC4xMDQuODEuMzEyLjIxNi4xOTcuMzI0LjQ4OC4zMjQuODcydjQuNzY4aDIuOThjLjM1NiAwIC42Mi4wOTMuNzkzLjI3OS4xODQuMTg2LjI3Ni40MjguMjc2LjcyMyAwIC42MjUtLjM1Ny45MzgtMS4wNy45MzhoLTIuOTh2OC45NmMwIDEuMTMuMTU3IDEuOTQ2LjQ3IDIuNDUuMzE0LjQ5My44MS43NCAxLjQ5Ljc0aC4xNzlsMS4xMDEtLjA1aC4wOTdjLjM1NiAwIC42MzcuMTE2Ljg0Mi4zNDYuMjA1LjIzLjMwOC40OTguMzA4LjgwNSAwIC4yNzQtLjA2LjUtLjE3OC42NzQtLjExOS4xNjUtLjMwMi4yODUtLjU1LjM2MmEzLjMxIDMuMzEgMCAwIDEtLjczLjE0OGMtLjIzNy4wMjItLjU1LjAzMy0uOTM5LjAzM2gtLjk1NnptNy43NzEgMGMtLjQwNSAwLS43NS0uMTItMS4wMzUtLjM1OC0uMjg0LS4yMzgtLjQyNy0uNTc0LS40MjctMS4wMDdWOS4yMjhjMC0uNDM0LjE0OC0uNzY0LjQ0NC0uOTkyYTEuNjIzIDEuNjIzIDAgMCAxIDEuMDUxLS4zNTdjLjQwNSAwIC43NS4xMTkgMS4wMzUuMzU3LjI5NS4yMjguNDQzLjU0Ny40NDMuOTZsLS4wMTYgMS45NWE0LjgxNSA0LjgxNSAwIDAgMSAxLjY0Mi0yLjUyYy44MzItLjY4MiAxLjgyOS0xLjAyNCAyLjk5LTEuMDI0LjM1IDAgLjYyNC4xMy44Mi4zOS4yMDkuMjYuMzEzLjU2NC4zMTMuOTEgMCAuMzI2LS4wOTMuNjA3LS4yOC44NDYtLjE4Ni4yMjctLjQ1NC4zNC0uODA0LjM0LTEuNDc4IDAtMi42MjguMzgtMy40NSAxLjEzOS0uODEuNzU4LTEuMjE1IDEuNzctMS4yMTUgMy4wMzh2OC4zN2MwIC40MzMtLjE1My43Ny0uNDYgMS4wMDdhMS42MjMgMS42MjMgMCAwIDEtMS4wNS4zNTh6bTQwLjYxLS4zODNhMS41MjIgMS41MjIgMCAwIDEtMS4wMzcuMzgzYy0uNCAwLS43NDUtLjEyOC0xLjAzNy0uMzgzLS4yOC0uMjY3LS40Mi0uNjMzLS40Mi0xLjFWOS41NzhoLTIuMTIzYy0uMzU3IDAtLjYyMS0uMDktLjc5NC0uMjY3YS45OTcuOTk3IDAgMCAxLS4yNi0uN2MwLS4yODguMDg3LS41MjcuMjYtLjcxNS4xNzMtLjE5LjQzNy0uMjg0Ljc5NC0uMjg0aDIuMTIyVjUuNDk2YzAtMS45ODcuNDEtMy4zOTcgMS4yMzItNC4yM0M1NS4wOC40MjIgNTYuMjE1IDAgNTcuNjYyIDBoMS45NzdjLjMxMyAwIC41NTYuMTE3LjcyOS4zNS4xODMuMjIyLjI3NS40ODguMjc1LjggMCAuMzEtLjA5Mi41NzctLjI3NS43OTktLjE3My4yMjItLjQyMS4zMzMtLjc0NS4zMzNoLTEuMzc4Yy0uNDY0IDAtLjgyNi4wNDQtMS4wODUuMTMzLS4yNi4wNzgtLjQ5Mi4yNi0uNjk3LjU1LS4xOTQuMjc3LS4zMy42ODItLjQwNSAxLjIxNS0uMDY1LjUyMi0uMDk3IDEuMjMzLS4wOTcgMi4xMzJ2MS4zaDIuNzM4Yy4zNTYgMCAuNjE2LjA5NC43NzguMjgzLjE3My4xODguMjU5LjQyNy4yNTkuNzE2IDAgLjY0NC0uMzQ2Ljk2Ni0xLjAzNy45NjZoLTIuNzM4djEyLjk0YzAgLjQ2Ny0uMTQ2LjgzMy0uNDM4IDEuMXptOS41NTctMjAuMDRjLS41OCAwLTEuMDQ1LS4xNjEtMS4zOTYtLjQ4NS0uMzUtLjMzNS0uNTI1LS43NjYtLjUyNS0xLjI5NSAwLS41MjkuMTc1LS45Ni41MjUtMS4yOTUuMzYyLS4zMzUuODMyLS41MDIgMS40MTMtLjUwMi41NyAwIDEuMDMuMTY3IDEuMzguNTAyLjM1LjMyNC41MjUuNzU1LjUyNSAxLjI5NSAwIC41MjktLjE3NS45Ni0uNTI2IDEuMjk1LS4zNS4zMjQtLjgxNS40ODYtMS4zOTYuNDg2ek02NS4wNTYgMjRhMS40OSAxLjQ5IDAgMCAxLTEuMDMtLjM4Yy0uMjgyLS4yNjMtLjQyNC0uNjM3LS40MjQtMS4xMjFWOS4wODdjMC0uNDYyLjE0Ny0uODI1LjQ0MS0xLjA4OWExLjU3MyAxLjU3MyAwIDAgMSAxLjA2Mi0uMzk2Yy4zOTIgMCAuNzMuMTMyIDEuMDEzLjM5Ni4yOTQuMjY0LjQ0LjYyNy40NCAxLjA5djEzLjQxYzAgLjQ2My0uMTUyLjgzMS0uNDU3IDEuMTA2YTEuNTEzIDEuNTEzIDAgMCAxLTEuMDQ1LjM5NnptOC40NC0uNDA3YTEuNTMgMS41MyAwIDAgMS0xLjA0OC4zOWMtLjQwMyAwLS43NDctLjEyNC0xLjAzLS4zNzQtLjI4NC0uMjYtLjQyNi0uNjI5LS40MjYtMS4xMDZWMS40NjRjMC0uNDU1LjE0Ny0uODEzLjQ0Mi0xLjA3My4zMDUtLjI2LjY2LS4zOTEgMS4wNjMtLjM5MS4zOTMgMCAuNzMxLjEzIDEuMDE1LjM5LjI5NC4yNi40NDIuNjE5LjQ0MiAxLjA3NFYxNC42Nmw3LjQyOC02Ljc2OGMuMjQtLjIwNy40OTYtLjMxLjc3LS4zMS4zNDggMCAuNjU0LjEzNi45MTUuNDA3LjI3My4yNzEuNDEuNTc1LjQxLjkxMSAwIC4zMDQtLjEzMi41OC0uMzkzLjgzbC01Ljk0IDUuMjg4IDYuNDk2IDYuODAyYy4yNC4yNS4zNi41MzEuMzYuODQ2IDAgLjM0Ny0uMTQyLjY1Ni0uNDI1LjkyNy0uMjczLjI3MS0uNTkuNDA3LS45NS40MDctLjM4MSAwLS43MDgtLjE1Mi0uOTgxLS40NTZsLTcuNjktOC4xMzV2Ny4wOTRjMCAuNDY2LS4xNTMuODMtLjQ1OSAxLjA5eiIvPgogICAgICAgIDxwYXRoIGZpbGw9IiM0Qjc2REQiIGQ9Ik0yOC45MyAyMy45OTNjLTEuOTQyLS4xNjMtMy40MjctLjczNC00LjUwNi0xLjczMi0xLjEtMS4wMTYtMS41Ny0yLjM0LTEuMzg0LTMuODg4LjIxNC0xLjc4MSAxLjA4My0zLjAzOSAyLjYwOC0zLjc3MyAxLjE3NS0uNTY1IDIuMzQ4LS43OCA0LjI1Ny0uNzgxIDEuMzU3IDAgMi40OTMuMTA4IDQuMjI3LjQwMS40MjkuMDczLjguMTMyLjgyNS4xMzIuMDM2IDAgLjA2NS0uMTMzLjE0NC0uNjY0LjE0Mi0uOTYuMTY3LTEuMjkyLjEyOS0xLjY3Ni0uMDQ2LS40NDgtLjEwNC0uNjYyLS4yNzktMS4wMDktLjQ1LS44OTUtMS41MTctMS40NDMtMy4yMzItMS42NTgtLjQ5LS4wNjItMS42MjItLjA3LTIuMTE0LS4wMTYtLjgyMy4wOS0xLjI4Mi4yMDYtMi4zMDYuNTgtLjYuMjE4LS42MDIuMjE4LS44NDEuMjA1LS40MTEtLjAyNC0uNjkyLS4yMDUtLjg3Mi0uNTYzLS4wNzQtLjE0Ny0uMDg3LS4yMDgtLjA4Ny0uNDA3IDAtLjI5OC4wOC0uNDU2LjM1OC0uNzA5LjYyMy0uNTY3IDEuNjcxLTEuMDUgMi43My0xLjI1OC42NzctLjEzMiAxLjAxLS4xNiAxLjkwMy0uMTU5LjkyMy4wMDIgMS41MTQuMDUyIDIuMzM1LjIgMS4zNjUuMjQ4IDIuNDAyLjY4MyAzLjE4MyAxLjMzOC4yMzIuMTk0LjU4Mi41NzcuNzMyLjhhLjQzMy40MzMgMCAwIDAgLjEwNS4xMjRjLjAxMiAwIC4wODctLjA4Mi4xNjgtLjE4MkMzOC4xOTcgNy44MyA0MC4xOSA2Ljk5OCA0Mi41MjYgN2MxLjY1MiAwIDMuMTg3LjQwOCA0LjMzMiAxLjE0OC45MDguNTg3IDEuNjQ1IDEuNDkgMS45NDMgMi4zODIuMTcxLjUxMi4xOTcuNzAxLjE5OSAxLjQ0NCAwIC40NjMtLjAxMi43NzUtLjAzOS45Mi0uMjY4IDEuNDYtLjkwNiAyLjQ3My0yLjAxMyAzLjE5My0uODkxLjU4LTIuMDEuOTItMy40NzQgMS4wNTMtLjczNi4wNjgtMi4wODQuMDYxLTIuOTU3LS4wMTQtLjc0LS4wNjMtMS42NS0uMTc1LTIuMDM4LS4yNWEzNC4xMiAzNC4xMiAwIDAgMC0xLjQ0Ni0uMjM2IDIyLjE1IDIyLjE1IDAgMCAwLS4xMTguNzJjLS4wOTcuNjI1LS4xMS43ODItLjExMyAxLjI4MS0uMDAyLjUwOC4wMDYuNTk3LjA2OS44MzIuMjAyLjc1NC42NDggMS4yNTggMS40NTggMS42NDguNzk3LjM4MyAxLjYzMS41NSAyLjg5My41NzUuNTU5LjAxMS44NDUuMDAzIDEuMTk0LS4wMzMuODQ3LS4wODcgMS4yMzMtLjE4MyAyLjM1OC0uNTg2LjI4LS4xLjU2Ny0uMTkxLjYzNi0uMjAzLjE0OS0uMDI0LjQyNi4wMjYuNTg3LjEwNi4yOTIuMTQ0LjUzNy41MjguNTM1Ljg0LS4wMDEuMzYyLS4xMjcuNTgyLS40OTcuODY4LS44ODMuNjg0LTIuMDEgMS4xMDQtMy4zNTcgMS4yNS0uNDguMDUtMS41NzYuMDU5LTIuMTA2LjAxNC0xLjQ5LS4xMjYtMi41MjYtLjM3NC0zLjQ3Mi0uODMzLS43MzgtLjM1Ny0xLjMwMS0uOC0xLjcyMi0xLjM1NmEyNC42OSAyNC42OSAwIDAgMC0uMTk1LS4yNTUgMS4zMDEgMS4zMDEgMCAwIDAtLjE1My4xNzUgNi4xMDQgNi4xMDQgMCAwIDEtMS40MjMgMS4yNTZjLS43NjMuNDgyLTEuODU5Ljg1LTIuOTY3Ljk5Ny0uMzMxLjA0NC0xLjQyOC4wOC0xLjcxLjA1N3ptMS45MDQtMi4wOGMuOTA2LS4xOTUgMS43MTItLjYzNSAyLjI5OC0xLjI1My41MzQtLjU2My45NzItMS40MDggMS4yMTMtMi4zMzguMTM2LS41MjUuMzYyLTEuOTg1LjMxMi0yLjAxNS0uMDItLjAxMi0uMTQtLjAzLS4yNjYtLjA0MmEzMS4zNjQgMzEuMzY0IDAgMCAxLS43OTktLjA5MmMtMS44Ni0uMjM0LTMuMDAyLS4zMjUtMy42NDItLjI5LTEuMjE3LjA2Ni0xLjcxMy4xNy0yLjQ0My41MS0uMzc0LjE3My0uNjMzLjM2Mi0uODM3LjYxLS4yOTMuMzU4LS40Ny43MTMtLjU5NCAxLjE5MS0uMDkuMzQ4LS4wOTkgMS4yNTktLjAxNSAxLjU1Mi4xNC40OTUuMzA3Ljc3NS42ODEgMS4xNDUuNTEzLjUwOCAxLjE5Ljg0NiAyLjAyOSAxLjAxNS40MjkuMDg3LjQxNi4wODYgMS4xMzQuMDc2LjUyMS0uMDA4LjcxNi0uMDIyLjkzLS4wNjh6bTExLjg1Ny02Ljg0NWMuNzU3LS4wNjUgMS4yMjItLjE4IDEuNzk0LS40NC40NzYtLjIxOC43NTItLjQ0IDEuMDE0LS44MTYuMzg1LS41NTIuNTM1LTEuMDc1LjUzMS0xLjg1Mi0uMDAzLS41NTQtLjA1LS43ODQtLjI0Ny0xLjE4Mi0uNDQtLjg4OC0xLjQ3LTEuNTI0LTIuODIyLTEuNzQxLS4zMzgtLjA1NS0xLjI0My0uMDQ1LTEuNTkuMDE2LS42NjQuMTE5LTEuMjI3LjMzNC0xLjcyMy42Ni0uOTE2LjYwNC0xLjU0OSAxLjUxMy0xLjkgMi43MzQtLjE0LjQ4LS4xNzYuNjYzLS4zIDEuNDlsLS4xMTMuNzYyLjE1Mi4wMTdjLjQ2LjA1IDEuNDk4LjE3MiAyLjEwMS4yNDcuMzguMDQ4Ljg0NS4wOTkgMS4wMzQuMTEzLjU0OS4wNDIgMS41MzEuMDM4IDIuMDY5LS4wMDh6Ii8+CiAgICA8L2c+Cjwvc3ZnPgo=');
+        }
+        li.dnsmasq a {
+            background-image: url('./img/Dnsmasq_icon.svg');
+        }
+    </style>
+</head>
+<body>
+<header>
+<div class="den-mark">
+    ____
+   / __ \___  ____
+  / / / / _ \/ __ \
+ / /_/ /  __/ / / /
+/_____/\___/_/ /_/
+</div><br>
+    by Swiftotter<br>
+    fork of Warden by David Alger<br>
+    v.in-dev<br>
+    <a href="https://github.com/swiftotter/den/releases">Check for Updates</a>
+</header>
+<ul class="services-list">
+    <li class="mailhog"><a href="https://mailhog.den.test/">Mailhog</a></li>
+    <li class="traefik"><a href="https://traefik.den.test/">Traefik</a></li>
+    <li class="dnsmasq"><a href="https://dnsmasq.den.test/">DNSMasq</a></li>
+</ul>
+</body>
+</html>
