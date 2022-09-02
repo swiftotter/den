@@ -42,20 +42,11 @@ jobs:
           password: ${{ secrets.DOCKER_PASSWORD }}
         if: ${{ !env.ACT }}
 
-      - name: Determine Version
-        run: |-
-          ESCAPED_VERSION="$(echo ${{ matrix.version }} | sed 's/\./\\\./g')"
-          VARNISH_VERSION=$(
-            docker run --rm gcr.io/go-containerregistry/crane:v0.8.0 ls varnish \
-            | egrep "^${ESCAPED_VERSION}(\.[0-9]+)?(\.[0-9]+)?(-alpine)?\$" | sort -Vr | head -n1
-          )
-          echo "VARNISH_VERSION=${VARNISH_VERSION}" | tee /dev/stderr >> $GITHUB_ENV
-
       - uses: docker/build-push-action@v3
         with:
           context: images/varnish
           platforms: linux/amd64,linux/arm64
-          build-args: VARNISH_VERSION=${{ env.VARNISH_VERSION }}
+          build-args: VARNISH_VERSION=${{ matrix.version }}
           push: ${{ github.ref == 'refs/heads/main' && !env.ACT }}
           tags: ghcr.io/${{ github.repository_owner }}/den-varnish:${{ matrix.version }}
   varnish-legacy:
@@ -103,7 +94,7 @@ jobs:
 
       - uses: docker/build-push-action@v3
         with:
-          context: images/varnish
+          context: images/varnish-legacy
           platforms: linux/amd64
           build-args: VARNISH_VERSION=${{ env.VARNISH_VERSION }}
           push: ${{ github.ref == 'refs/heads/main' && !env.ACT }}

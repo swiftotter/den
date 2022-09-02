@@ -1,5 +1,5 @@
-ARG VARNISH_VERSION=7.1
-FROM varnish:${VARNISH_VERSION}-alpine
+ARG VARNISH_VERSION=6.0
+FROM varnish:${VARNISH_VERSION}
 
 USER root
 
@@ -9,7 +9,6 @@ ENV VARNISHD_PARAMS -p default_ttl=3600 -p default_grace=3600 \
     -p feature=+esi_ignore_https -p feature=+esi_disable_xml_check
 
 COPY default.vcl /etc/varnish/default.vcl.template
-RUN apk add --no-cache gettext
 RUN chown -R varnish:varnish /etc/varnish
 
 ENV BACKEND_HOST    nginx
