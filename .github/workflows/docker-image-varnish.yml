@@ -60,6 +60,6 @@ jobs:
         with:
           context: images/varnish
           platforms: linux/amd64,linux/arm64
-          build-args: VARNISH_VERSION=${{ VARNISH_VERSION }}
+          build-args: VARNISH_VERSION=${{ env.VARNISH_VERSION }}
           push: ${{ github.ref == 'refs/heads/main' && !env.ACT }}
           tags: ghcr.io/${{ github.repository_owner }}/den-varnish:${{ matrix.version }}
