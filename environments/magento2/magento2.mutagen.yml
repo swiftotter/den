@@ -8,7 +8,7 @@ sync:
       vcs: false
       paths:
         # Root .git folder 
-         - "/.git/"
+        - "/.git/"
 
         # System files
         - ".DS_Store"
