@@ -4,7 +4,7 @@ ARG NODE_VERSION
 FROM node:${NODE_VERSION:-18}-alpine AS node
 RUN npm install -g grunt-cli gulp
 
-FROM ghcr.io/swiftotter/den-php-fpm:${PHP_VERSION:-8.1}
+FROM den-php-fpm:${PHP_VERSION:-8.1}
 USER root
 
 # Copy Node to PHP
