@@ -1,9 +1,9 @@
 FROM golang:alpine AS mhs-builder
 RUN go install github.com/mailhog/mhsendmail@latest
 
-ARG PHP_VERSION
 ARG ENV_SOURCE_IMAGE
-FROM ${ENV_SOURCE_IMAGE}:${PHP_VERSION:-8.1}-fpm-alpine
+ARG PHP_VERSION
+FROM ${ENV_SOURCE_IMAGE:-php}:${PHP_VERSION:-8.1}-fpm-alpine
 USER root
 
 ENV MAILHOG_HOST    mailhog
