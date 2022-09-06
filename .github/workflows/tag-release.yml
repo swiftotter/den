@@ -1,0 +1,25 @@
+name: Tag Release
+on:
+  workflow_dispatch:
+    inputs:
+      version:
+        description: 'The version to tag'
+        required: true
+        type: string
+jobs:
+  create-tag:
+    runs-on: ubuntu-latest
+    steps:
+      # Checkout Repo
+      # Update Files with provided version
+      # Make commit
+      # Create tag of commit
+      # Push tag
+      # Create draft release for commit
+  update-homebrew:
+    runs-on: ubuntu-latest
+    steps:
+      # Checkout homebrew-den
+      # Update files with data from create-tag
+      # Commit
+      # Push
