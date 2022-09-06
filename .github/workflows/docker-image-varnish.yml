@@ -18,6 +18,7 @@ jobs:
       fail-fast: false
       matrix:
         version:
+          - "6.0"
           - "6.6"
           - "7.0"
           - "7.1"
@@ -42,13 +43,23 @@ jobs:
           password: ${{ secrets.DOCKER_PASSWORD }}
         if: ${{ !env.ACT }}
 
+      - name: Determine Version
+        run: |-
+          ESCAPED_VERSION="$(echo ${{ matrix.version }} | sed 's/\./\\\./g')"
+          VARNISH_VERSION=$(
+            docker run --rm gcr.io/go-containerregistry/crane:v0.8.0 ls varnish \
+            | egrep "^${ESCAPED_VERSION}(\.[0-9]+)?(\.[0-9]+)?(-alpine)?\$" | sort -Vr | head -n1
+          )
+          echo "VARNISH_VERSION=${VARNISH_VERSION}" | tee /dev/stderr >> $GITHUB_ENV
+
       - uses: docker/build-push-action@v3
         with:
           context: images/varnish
           platforms: linux/amd64,linux/arm64
-          build-args: VARNISH_VERSION=${{ matrix.version }}
+          build-args: VARNISH_VERSION=${{ env.VARNISH_VERSION }}
           push: ${{ github.ref == 'refs/heads/main' && !env.ACT }}
           tags: ghcr.io/${{ github.repository_owner }}/den-varnish:${{ matrix.version }}
+
   varnish-legacy:
     name: Varnish Legacy
     runs-on: ubuntu-latest
@@ -90,52 +101,6 @@ jobs:
         with:
           context: images/varnish-legacy
           platforms: linux/amd64, linux/arm64
-          build-args: VARNISH_VERSION=${{ env.VARNISH_VERSION }}
-          push: ${{ github.ref == 'refs/heads/main' && !env.ACT }}
-          tags: ghcr.io/${{ github.repository_owner }}/den-varnish:${{ matrix.version }}
-  varnish-lts:
-    name: Varnish LTS
-    runs-on: ubuntu-latest
-
-    strategy:
-      fail-fast: false
-      matrix:
-        version:
-          - "6.0"
-
-    steps:
-      - uses: actions/checkout@v2
-      - uses: docker/setup-qemu-action@v1
-      - uses: docker/setup-buildx-action@v1
-
-      - name: Login to Github Container Registry
-        uses: docker/login-action@v2
-        with:
-          registry: ghcr.io
-          username: ${{ github.repository_owner }}
-          password: ${{ secrets.GITHUB_TOKEN }}
-        if: ${{ !env.ACT }}
-
-      - name: Login to Docker Hub
-        uses: docker/login-action@v2
-        with:
-          username: ${{ secrets.DOCKER_USERNAME }}
-          password: ${{ secrets.DOCKER_PASSWORD }}
-        if: ${{ !env.ACT }}
-
-      - name: Determine Version
-        run: |-
-          ESCAPED_VERSION="$(echo ${{ matrix.version }} | sed 's/\./\\\./g')"
-          VARNISH_VERSION=$(
-            docker run --rm gcr.io/go-containerregistry/crane:v0.8.0 ls varnish \
-            | egrep "^${ESCAPED_VERSION}(\.[0-9]+)?(\.[0-9]+)?(-alpine)?\$" | sort -Vr | head -n1
-          )
-          echo "VARNISH_VERSION=${VARNISH_VERSION}" | tee /dev/stderr >> $GITHUB_ENV
-
-      - uses: docker/build-push-action@v3
-        with:
-          context: images/varnish-legacy
-          platforms: linux/amd64,linux/arm64
           build-args: VARNISH_VERSION=${{ env.VARNISH_VERSION }}
           push: ${{ github.ref == 'refs/heads/main' && !env.ACT }}
           tags: ghcr.io/${{ github.repository_owner }}/den-varnish:${{ matrix.version }}

@@ -1,5 +1,5 @@
 ARG VARNISH_VERSION=7.1
-FROM varnish:${VARNISH_VERSION}-alpine
+FROM varnish:${VARNISH_VERSION}
 
 USER root
 
