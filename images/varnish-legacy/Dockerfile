@@ -3,6 +3,8 @@ FROM varnish:${VARNISH_VERSION}
 
 USER root
 
+RUN apt-get update && apt-get install -y gettext && rm -rf /var/lib/apt/lists/*
+
 ENV VCL_CONFIG      /etc/varnish/default.vcl
 ENV CACHE_SIZE      256m
 ENV VARNISHD_PARAMS -p default_ttl=3600 -p default_grace=3600 \
