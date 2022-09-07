@@ -4,7 +4,6 @@ on:
     - cron: "0 6 * * *"   # 6 AM daily
   push:
     paths:
-      - version
       - images/.trigger
       - images/php-fpm/**
       - .github/workflows/*php-fpm*
