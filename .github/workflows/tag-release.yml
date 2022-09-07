@@ -16,7 +16,7 @@ jobs:
           VERSION: ${{ inputs.version }}
         run: |-
           echo $VERSION > version
-          sed -i "s/v.in-dev/v.${VERSION}/" < docker/dashboard/index.html > docker/dashboard/index.html
+          sed "s/v.in-dev/v.${VERSION}/" < docker/dashboard/index.html > docker/dashboard/index.html
       - name: "Create Tag"
         env:
           VERSION: ${{ inputs.version }}
