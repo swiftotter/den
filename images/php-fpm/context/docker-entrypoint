@@ -13,7 +13,8 @@ if [ -f /etc/ssl/warden-rootca-cert/ca.cert.pem ]; then
 fi
 
 # update trust outside if condition above to allow mounting PEM files into /etc/pki/ca-trust/source/anchors
-sudo update-ca-certificates
+# https://github.com/gliderlabs/docker-alpine/issues/30
+sudo update-ca-certificates 2>/dev/null
 
 # start socat process in background to connect sockets used for agent access within container environment
 if [[ -S /run/host-services/ssh-auth.sock ]] \
@@ -26,14 +27,6 @@ fi
 
 # start crond as a background process
 sudo crond
-
-# install requested node version if not already installed
-NODE_INSTALLED="$(node -v | sed 's/v\([0-9]*\)\..*/\1/')";
-if [ "${NODE_INSTALLED}" != "${NODE_VERSION}" ] \
-  || [ "${NODE_VERSION}" = "latest" ] || [ "${NODE_VERSION}" = "lts" ]
-then
-  sudo /usr/local/bin/n "${NODE_VERSION}"
-fi
 
 # Configure composer2 as default when specified
 if [[ "${COMPOSER_VERSION:-}" == "2" ]]; then
