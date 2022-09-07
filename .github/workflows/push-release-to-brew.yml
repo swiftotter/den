@@ -1,0 +1,25 @@
+name: "Push Release to Brew"
+on:
+  release:
+    types: [published]
+jobs:
+  update-homebrew:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+        with:
+          token: ${{ secrets.TOKEN }}
+          repository: homebrew-den
+      - name: 'Update Version'
+        env:
+          VERSION: ${{ github.event.release.tag_name }}
+        run: |-
+          sudo apt-get install -y curl libdigest-sha-perl gettext-base
+          curl "https://github.com/swiftotter/den/archive/${VERSION}.tar.gz" -o release.tar.gz
+          export HASH=$(shasum -a256 release.tar.gz)
+          envsubst < Formula/den.rb.template > Formula/den.rb
+          git config user.name github-actions
+          git config user.email github-actions@github.com
+          git add Formula/den.rb
+          git commit -m "Mark v${VERSION}"
+          git push
