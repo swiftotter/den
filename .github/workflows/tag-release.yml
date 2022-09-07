@@ -22,6 +22,8 @@ jobs:
           VERSION: ${{ inputs.version }}
         run: |-
           git add ./*
+          git config user.name github-actions
+          git config user.email github-actions@github.com
           git commit -m "Tagged ${VERSION}"
           git tag ${VERSION}
           git push --tags
@@ -46,6 +48,8 @@ jobs:
           curl "https://github.com/swiftotter/den/archive/${VERSION}.tar.gz" -o release.tar.gz
           export HASH=$(shasum -a256 release.tar.gz)
           envsubst < Formula/den.rb.template > Formula/den.rb
+          git config user.name github-actions
+          git config user.email github-actions@github.com
           git add Formula/den.rb
           git commit -m "Mark v${VERSION}"
           git push
