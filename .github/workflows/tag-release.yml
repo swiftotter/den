@@ -1,0 +1,55 @@
+name: Tag Release
+on:
+  workflow_dispatch:
+    inputs:
+      version:
+        description: 'The version to tag'
+        required: true
+        type: string
+jobs:
+  create-tag:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+      - name: Update Files
+        env:
+          VERSION: ${{ inputs.version }}
+        run: |-
+          echo $VERSION > version
+          sed -i "s/v.in-dev/v.${VERSION}/" < docker/dashboard/index.html > docker/dashboard/index.html
+      - name: "Create Tag"
+        env:
+          VERSION: ${{ inputs.version }}
+        run: |-
+          git add ./*
+          git config user.name github-actions
+          git config user.email github-actions@github.com
+          git commit -m "Tagged ${VERSION}"
+          git tag ${VERSION}
+          git push --tags
+      - name: "Create Release"
+        uses: ncipollo/release-action@v1
+        with:
+          prerelease: true
+          tag: ${{ inputs.version }}
+  update-homebrew:
+    runs-on: ubuntu-latest
+    needs: [create-tag]
+    steps:
+      - uses: actions/checkout@v2
+        with:
+          token: ${{ secrets.TOKEN }}
+          repository: homebrew-den
+      - name: 'Update Version'
+        env:
+          VERSION: ${{ inputs.version }}
+        run: |-
+          sudo apt-get install -y curl libdigest-sha-perl gettext-base
+          curl "https://github.com/swiftotter/den/archive/${VERSION}.tar.gz" -o release.tar.gz
+          export HASH=$(shasum -a256 release.tar.gz)
+          envsubst < Formula/den.rb.template > Formula/den.rb
+          git config user.name github-actions
+          git config user.email github-actions@github.com
+          git add Formula/den.rb
+          git commit -m "Mark v${VERSION}"
+          git push
