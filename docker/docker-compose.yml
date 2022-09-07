@@ -2,9 +2,7 @@ version: "3.5"
 services:
   dashboard:
     container_name: dashboard
-    image: nginx:alpine
-    volumes:
-      - ${WARDEN_SERVICE_DIR}/docker/dashboard:/usr/share/nginx/html
+    build: ${WARDEN_SERVICE_DIR}/docker/dashboard
     labels:
       - traefik.enable=true
       - traefik.http.routers.dashboard.tls=true
