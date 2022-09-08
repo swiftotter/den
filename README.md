@@ -27,7 +27,7 @@ We at SwiftOtter are committed to maintaining Den in an open-source and accessib
 
 ## Contributing
 
-All contributions to the Den welcome: use-cases, documentation, code, patches, bug reports, feature requests, etc. Any and all contributions may be made by submitting [Issues](https://github.com/davidalger/warden/issues) and [Pull Requests](https://github.com/davidalger/warden/pulls) here on Github.
+All contributions to the Den welcome: use-cases, documentation, code, patches, bug reports, feature requests, etc. Any and all contributions may be made by submitting [Issues](https://github.com/swiftotter/den/issues) and [Pull Requests](https://github.com/swiftotter/den/pulls) here on Github.
 
 Please note that by submitting a pull request or otherwise contributing to the Den project, you warrant that each of your contributions is an original work and that you have full authority to grant rights to said contribution and by so doing you grant the owners of the Den project, and those who receive the contribution directly or indirectly, a perpetual, worldwide, non-exclusive, royalty-free, irrevocable license to make, have made, use, offer to sell, sell and import or otherwise dispose of the contributions alone or with the Warden project in it's entirety.
 
