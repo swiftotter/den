@@ -97,3 +97,11 @@ fi
 
 ## append settings for tunnel.den.test in /etc/ssh/ssh_config
 installSshConfig
+
+## Add optional Den configuration file
+if [[ ! -f "${WARDEN_HOME_DIR}/.env" ]]; then
+	cat >> "${WARDEN_HOME_DIR}/.env" <<-EOT
+		# Set to "1" to enable global Portainer service
+		DEN_SERVICE_PORTAINER=0
+	EOT
+fi
