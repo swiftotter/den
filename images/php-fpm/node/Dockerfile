@@ -5,7 +5,7 @@ ARG NODE_VERSION
 FROM node:${NODE_VERSION:-18}-alpine AS node
 RUN npm install -g grunt-cli gulp
 
-FROM ${ENV_SOURCE_IMAGE}:${PHP_VERSION:-8.1}
+FROM ${ENV_SOURCE_IMAGE}:${PHP_VERSION}
 USER root
 
 # Copy Node to PHP
