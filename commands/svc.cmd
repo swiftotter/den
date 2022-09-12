@@ -18,6 +18,18 @@ DOCKER_COMPOSE_ARGS=()
 DOCKER_COMPOSE_ARGS+=("-f")
 DOCKER_COMPOSE_ARGS+=("${WARDEN_DIR}/docker/docker-compose.yml")
 
+# Load optional service flags
+if [[ -f "${WARDEN_HOME_DIR}/.env" ]]; then
+    # Portainer service
+    eval "$(grep "^DEN_SERVICE_PORTAINER" "${WARDEN_HOME_DIR}/.env")"
+fi
+
+DEN_SERVICE_PORTAINER="${DEN_SERVICE_PORTAINER:-0}"
+if [[ "${DEN_SERVICE_PORTAINER}" == 1 ]]; then
+    DOCKER_COMPOSE_ARGS+=("-f")
+    DOCKER_COMPOSE_ARGS+=("${WARDEN_DIR}/docker/portainer-service.yml")
+fi
+
 ## special handling when 'svc up' is run
 if [[ "${WARDEN_PARAMS[0]}" == "up" ]]; then
 
