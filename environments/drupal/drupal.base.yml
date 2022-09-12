@@ -4,15 +4,3 @@ services:
     environment:
       - NGINX_PUBLIC=/web
       - NGINX_TEMPLATE=/drupal.conf
-
-#  php-fpm:
-#    labels:
-#      - traefik.enable=true
-#      - traefik.http.routers.${WARDEN_ENV_NAME}-livereload.tls=true
-#      - traefik.http.routers.${WARDEN_ENV_NAME}-livereload.priority=3
-#      - traefik.http.routers.${WARDEN_ENV_NAME}-livereload.rule=
-#          (HostRegexp(`{subdomain:.+}.${TRAEFIK_DOMAIN}`) || Host(`${TRAEFIK_DOMAIN}`))
-#            && (Path(`/livereload.js`) || Path(`/livereload`))
-#      - traefik.http.routers.${WARDEN_ENV_NAME}-livereload.service=${WARDEN_ENV_NAME}-livereload
-#      - traefik.http.services.${WARDEN_ENV_NAME}-livereload.loadbalancer.server.port=35729
-#      - traefik.docker.network=${WARDEN_ENV_NAME}_default

@@ -20,7 +20,7 @@ sync:
 
         # Drupal files
         - "web/sites/default/files/**"
-        - "private/**"
+        - "web/sites/default/private/**"
 
 
     permissions:
