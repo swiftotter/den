@@ -16,8 +16,8 @@ jobs:
         run: |-
           sudo apt-get install -y curl libdigest-sha-perl gettext-base
           curl "https://github.com/swiftotter/den/archive/${VERSION}.tar.gz" -o release.tar.gz
-          export HASH=$(shasum -a256 release.tar.gz)
-          envsubst < Formula/den.rb.template > Formula/den.rb
+          export HASH=$(shasum -a256 release.tar.gz | head -n1 | awk '{print $1;}')
+          envsubst '$HASH,$VERSION' < Formula/den.rb.template > Formula/den.rb
           git config user.name github-actions
           git config user.email github-actions@github.com
           git add Formula/den.rb
