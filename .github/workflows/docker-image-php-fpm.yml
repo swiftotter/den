@@ -117,14 +117,14 @@ jobs:
       max-parallel: 2
       matrix:
         php_version: [ "7.2", "7.3", "7.4", "8.0", "8.1" ]
-        node_version: [ false,  "10", "12", "13", "14", "15", "16", "17", "18"]
+        node_version: [ "x",  "10", "12", "13", "14", "15", "16", "17", "18"]
         experimental: [ false ]
         xdebug_type: [ "xdebug-stable" ]
         include:
           - php_version: 8.2-rc
             xdebug_type: "xdebug"
             experimental: true
-            node_version: false
+            node_version: "x"
           - php_version: 8.2-rc
             xdebug_type: "xdebug"
             experimental: true
@@ -157,7 +157,7 @@ jobs:
         if: ${{ !env.ACT }}
 
       - uses: docker/build-push-action@v3
-        if: matrix.node_version != false
+        if: matrix.node_version != "x"
         with:
           file: images/php-fpm/xdebug3/Dockerfile
           context: images/php-fpm/context
@@ -170,7 +170,7 @@ jobs:
           tags: ghcr.io/${{ github.repository_owner }}/den-php-fpm-debug:${{ matrix.php_version }}-node${{ matrix.node_version }}
 
       - uses: docker/build-push-action@v3
-        if: matrix.node_version == false
+        if: matrix.node_version == "x"
         with:
           file: images/php-fpm/xdebug3/Dockerfile
           context: images/php-fpm/context
@@ -192,12 +192,12 @@ jobs:
       max-parallel: 2
       matrix:
         php_version: [ "7.2", "7.3", "7.4", "8.0", "8.1" ]
-        node_version: [ false,  "10", "12", "13", "14", "15", "16", "17", "18"]
+        node_version: [ "x",  "10", "12", "13", "14", "15", "16", "17", "18"]
         experimental: [ false ]
         include:
           - php_version: 8.2-rc
             experimental: true
-            node_version: false
+            node_version: "x"
           - php_version: 8.2-rc
             experimental: true
             node_version: 14
@@ -227,7 +227,7 @@ jobs:
         if: ${{ !env.ACT }}
 
       - uses: docker/build-push-action@v3
-        if: matrix.node_version != false
+        if: matrix.node_version != "x"
         with:
           file: images/php-fpm/blackfire/Dockerfile
           context: images/php-fpm/context
@@ -239,7 +239,7 @@ jobs:
           tags: ghcr.io/${{ github.repository_owner }}/den-php-fpm-blackfire:${{ matrix.php_version }}-node${{ matrix.node_version }}
 
       - uses: docker/build-push-action@v3
-        if: matrix.node_version == false
+        if: matrix.node_version == "x"
         with:
           file: images/php-fpm/blackfire/Dockerfile
           context: images/php-fpm/context
@@ -260,12 +260,12 @@ jobs:
       max-parallel: 2
       matrix:
         php_version: [ "7.2", "7.3", "7.4", "8.0", "8.1" ]
-        node_version: [ false,  "10", "12", "13", "14", "15", "16", "17", "18"]
+        node_version: [ "x",  "10", "12", "13", "14", "15", "16", "17", "18"]
         experimental: [ false ]
         include:
           - php_version: 8.2-rc
             experimental: true
-            node_version: false
+            node_version: "x"
           - php_version: 8.2-rc
             experimental: true
             node_version: 14
