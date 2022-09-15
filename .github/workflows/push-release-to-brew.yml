@@ -15,7 +15,7 @@ jobs:
           VERSION: ${{ github.event.release.tag_name }}
         run: |-
           sudo apt-get install -y curl libdigest-sha-perl gettext-base
-          curl "https://github.com/swiftotter/den/archive/${VERSION}.tar.gz" -o release.tar.gz
+          curl "https://codeload.github.com/swiftotter/den/tar.gz/refs/tags/${VERSION}" -o release.tar.gz
           export HASH=$(shasum -a256 release.tar.gz | head -n1 | awk '{print $1;}')
           envsubst '$HASH,$VERSION' < Formula/den.rb.template > Formula/den.rb
           git config user.name github-actions
