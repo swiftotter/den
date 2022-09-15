@@ -9,7 +9,7 @@ Multiple top-level domains may also be setup by following the instructions below
        den sign-certificate alternate1.test
        den sign-certificate alternate2.test
     
-2. Create a `.warden/warden-env.yml` file with the contents below (this will be additive to the docker-compose config Warden uses for the env, anything added here will be merged in, and you can see the complete config using `warden env config`):
+2. Create a `.warden/warden-env.yml` file with the contents below (this will be additive to the docker compose config Warden uses for the env, anything added here will be merged in, and you can see the complete config using `warden env config`):
 
     ```yaml
     version: "3.5"
