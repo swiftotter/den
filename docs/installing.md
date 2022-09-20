@@ -3,7 +3,7 @@ Installing Warden
 
 ### Prerequisites
 
-* [Docker Desktop for Mac](https://hub.docker.com/editions/community/docker-ce-desktop-mac) 2.2.0.0 or later or [Docker for Linux](https://docs.docker.com/install/) (Warden has been tested on Fedora 29 and Ubuntu 18.10) or [Docker for Windows](https://docs.docker.com/desktop/windows/install/)
+* [Docker Desktop for Mac](https://hub.docker.com/editions/community/docker-ce-desktop-mac) 2.2.0.0 or later or [Docker for Linux](https://docs.docker.com/install/) or [Docker for Windows](https://docs.docker.com/desktop/windows/install/)
 * `docker-compose` version 1.25.0 or later is required (this can be installed via `brew`, `apt`, `dnf`, or `pip3` as needed)
 * [Mutagen](https://mutagen.io/) 0.11.4 or later is required for environments leveraging sync sessions on Mac OS. Warden will attempt to install this via `brew` if not present.
 
@@ -15,18 +15,18 @@ Installing Warden
 
 Warden may be installed via [Homebrew](https://brew.sh/) on both macOS and Linux hosts:
 
-    brew install davidalger/warden/warden
+    brew install swiftotter/den/den
     den svc up
 
 ### Alternative Installation
 
 Warden may be installed by cloning the repository to the directory of your choice and adding it to your `$PATH`. This method of installation may be when Homebrew does not already exist on your system or when preparing contributions to the Warden project.
 
-    sudo mkdir /opt/warden
-    sudo chown $(whoami) /opt/warden
-    git clone -b master https://github.com/davidalger/warden.git /opt/warden
-    echo 'export PATH="/opt/warden/bin:$PATH"' >> ~/.bashrc
-    PATH="/opt/warden/bin:$PATH"
+    sudo mkdir /opt/den
+    sudo chown $(whoami) /opt/den
+    git clone -b master https://github.com/swiftotter/den.git /opt/den
+    echo 'export PATH="/opt/den/bin:$PATH"' >> ~/.bashrc
+    PATH="/opt/den/bin:$PATH"
     den svc up
 
 ### Windows Installation (via WSL2)
@@ -38,7 +38,7 @@ Launch wsl from your terminal of choice.
 
         wsl
         /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install.sh)"
-        brew install davidalger/warden/warden
+        brew install swiftotter/den/den
         den svc up
 
 In order for DNS entries to be resolved either add them to your Windows hosts file or add 127.0.0.1 as the first DNS server in your current network adapter in Windows.
