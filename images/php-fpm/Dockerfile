@@ -44,7 +44,7 @@ COPY --from=composer:1 /usr/bin/composer /usr/bin/composer1
 COPY --from=composer:2 /usr/bin/composer /usr/bin/composer2
 
 # Install helpful utilities
-RUN apk --no-cache add jq bash patch pv nano vim mariadb-client sudo busybox-initscripts gettext ca-certificates shadow git
+RUN apk --no-cache add jq bash patch pv nano vim mariadb-client sudo busybox-initscripts gettext ca-certificates shadow git rsync
 
 # Configure www-data user as primary php-fpm user for better local dev experience
 RUN groupmod -g 1000 www-data && usermod -u 1000 www-data \
