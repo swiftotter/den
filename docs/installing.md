@@ -24,7 +24,7 @@ Warden may be installed by cloning the repository to the directory of your choic
 
     sudo mkdir /opt/den
     sudo chown $(whoami) /opt/den
-    git clone -b master https://github.com/swiftotter/den.git /opt/den
+    git clone -b main https://github.com/swiftotter/den.git /opt/den
     echo 'export PATH="/opt/den/bin:$PATH"' >> ~/.bashrc
     PATH="/opt/den/bin:$PATH"
     den svc up
