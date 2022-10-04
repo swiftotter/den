@@ -3,7 +3,7 @@ on:
   push:
     paths:
       - docs/**
-      - .github/workflows/documentation.yml
+      - .github/workflows/build-documentation.yml
 
 jobs:
   build-documentation:
