@@ -78,6 +78,22 @@ function fetchEnvInitFile () {
     echo $envInitPath
 }
 
+function fetchEnvInitCmdFile () {
+    local envInitCmdPath=""
+
+    for ENV_INIT_CMD_PATH in \
+        "${WARDEN_DIR}/environments/${WARDEN_ENV_TYPE}/init.env.cmd" \
+        "${WARDEN_HOME_DIR}/environments/${WARDEN_ENV_TYPE}/init.env.cmd" \
+        "${WARDEN_ENV_PATH}/.warden/environments/${WARDEN_ENV_TYPE}/init.env.cmd"
+    do
+        if [[ -f "${ENV_INIT_CMD_PATH}" ]]; then
+            envInitCmdPath="${ENV_INIT_CMD_PATH}"
+        fi
+    done
+
+    echo $envInitCmdPath
+}
+
 function fetchValidEnvTypes () {
     local lsPaths="${WARDEN_DIR}/environments/"*/*".base.yml"
 

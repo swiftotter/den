@@ -3,7 +3,7 @@
 
 ## Prerequisites
 
-* [Docker Desktop for Mac](https://hub.docker.com/editions/community/docker-ce-desktop-mac) 2.2.0.0 or later or [Docker for Linux](https://docs.docker.com/install/) (Den has been tested on Fedora 29 and Ubuntu 18.10) or [Docker for Windows](https://docs.docker.com/desktop/windows/install/)
+* [Docker Desktop for Mac](https://hub.docker.com/editions/community/docker-ce-desktop-mac) 2.2.0.0 or later or [Docker for Linux](https://docs.docker.com/install/) or [Docker for Windows](https://docs.docker.com/desktop/windows/install/)
 * `docker-compose` version 1.25.0 or later is required (this can be installed via `brew`, `apt`, `dnf`, or `pip3` as needed)
 * [Mutagen](https://mutagen.io/) 0.11.4 or later is required for environments leveraging sync sessions on Mac OS. Den will attempt to install this via `brew` if not present.
 
@@ -33,7 +33,7 @@ Den may be installed by cloning the repository to the directory of your choice a
 
     sudo mkdir /opt/den
     sudo chown $(whoami) /opt/den
-    git clone -b master https://github.com/swiftotter/den.git /opt/den
+    git clone -b main https://github.com/swiftotter/den.git /opt/den
     echo 'export PATH="/opt/den/bin:$PATH"' >> ~/.bashrc
     PATH="/opt/den/bin:$PATH"
     den svc up

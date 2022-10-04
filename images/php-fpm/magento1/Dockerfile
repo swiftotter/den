@@ -4,7 +4,7 @@ FROM ${ENV_SOURCE_IMAGE}:${PHP_VERSION}
 USER root
 
 ADD https://files.magerun.net/n98-magerun.phar /usr/local/bin/n98-magerun
-RUN chmod +x /usr/local/bin/n98-magerun \
+RUN chmod +rx /usr/local/bin/n98-magerun \
     && ln -s /usr/local/bin/n98-magerun /usr/local/bin/magerun \
     && ln -s /usr/local/bin/n98-magerun /usr/local/bin/mr
 

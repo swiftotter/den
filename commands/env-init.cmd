@@ -51,3 +51,8 @@ if [[ ! -z $ENV_INIT_FILE ]]; then
   export GENERATED_APP_KEY="base64:$(dd if=/dev/urandom bs=1 count=32 2>/dev/null | base64)"
   envsubst '$WARDEN_ENV_NAME:$GENERATED_APP_KEY' < "${ENV_INIT_FILE}" >> "${WARDEN_ENV_PATH}/.env"
 fi
+
+ENV_INIT_CMD=$(fetchEnvInitCmdFile)
+if [[ ! -z $ENV_INIT_CMD ]]; then
+  source "${ENV_INIT_CMD}"
+fi
