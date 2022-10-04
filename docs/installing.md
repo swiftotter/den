@@ -1,5 +1,5 @@
 # Installing Den
-==================================
+======
 
 ## Prerequisites
 
@@ -7,17 +7,20 @@
 * `docker-compose` version 1.25.0 or later is required (this can be installed via `brew`, `apt`, `dnf`, or `pip3` as needed)
 * [Mutagen](https://mutagen.io/) 0.11.4 or later is required for environments leveraging sync sessions on Mac OS. Den will attempt to install this via `brew` if not present.
 
-```{warning}
-    **By default Docker Desktop allocates 2GB memory.** This leads to extensive swapping, killed processed and extremely high CPU usage during some Magento actions, like for example running sampledata:deploy and/or installing the application. It is recommended to assign at least 6GB RAM to Docker Desktop prior to deploying any Magento environments on Docker Desktop. This can be corrected via Preferences -> Resources -> Advanced -> Memory. While you are there, it wouldn't hurt to let Docker have the use of a few more vCPUs (keep it at least 4 less than the maximum CPU allocation however to avoid having macOS contend with Docker for use of cores)
-```
+:::{warning}
+**By default Docker Desktop for Mac allocates 2GB memory.**
+
+This leads to extensive swapping, killed processed and extremely high CPU usage during some Magento actions, like for example running sampledata:deploy and/or installing the application. It is recommended to assign at least 6GB RAM to Docker Desktop prior to deploying any Magento environments on Docker Desktop.
+
+This can be corrected via Preferences -> Resources -> Advanced -> Memory. While you are there, it wouldn't hurt to let Docker have the use of a few more vCPUs (keep it at least 4 less than the maximum CPU allocation however to avoid having macOS contend with Docker for use of cores)
+:::
 
 ## Installing via Homebrew
 
-```{warning} Homebrew Status
-
+:::{warning}
 Den is not currently available via Homebrew; however, it is on the list of things to support. If you are knowledgable
 with Homebrew and are able to contribute, please feel free to submit a PR to the repository.
-```
+:::
 
 Den may be installed via [Homebrew](https://brew.sh/) on both macOS and Linux hosts:
 
@@ -49,9 +52,9 @@ Launch wsl from your terminal of choice.
 
 In order for DNS entries to be resolved either add them to your Windows hosts file or add 127.0.0.1 as the first DNS server in your current network adapter in Windows.
 
-```{warning}
-    **For performance reasons code should be located in the WSL Linux home path or other WSL local path ~/code/projectname NOT the default /mnt/c path mapping.**
-```
+:::{warning}
+**For performance reasons code should be located in the WSL Linux home path or other WSL local path ~/code/projectname NOT the default /mnt/c path mapping.**
+:::
 
 GUI tools for Windows should use the network paths provided by WSL2: `\\wsl$\Ubuntu-20.04\home\<USER>\<PROJECTPATH>`.
 
@@ -72,8 +75,8 @@ On MacOS this root CA certificate is automatically added to a users trust settin
 
 On Ubuntu/Debian this CA root is copied into `/usr/local/share/ca-certificates` and on Fedora/CentOS (Enterprise Linux) it is copied into `/etc/pki/ca-trust/source/anchors` and then the trust bundle is updated appropriately. For new systems, this typically is all that is needed for the CA root to be trusted on the default Firefox browser, but it may not be trusted by Chrome or Firefox automatically should the browsers have already been launched prior to the installation of Den (browsers on Linux may and do cache CA bundles)
 
-```{note}
-    If you are using **Firefox** and it warns you the SSL certificate is invalid/untrusted, go to Preferences -> Privacy & Security -> View Certificates (bottom of page) -> Authorities -> Import and select ``~/.den/ssl/rootca/certs/ca.cert.pem`` for import, then reload the page.
+:::{note}
+If you are using **Firefox** and it warns you the SSL certificate is invalid/untrusted, go to Preferences -> Privacy & Security -> View Certificates (bottom of page) -> Authorities -> Import and select ``~/.den/ssl/rootca/certs/ca.cert.pem`` for import, then reload the page.
 
-    If you are using **Chrome** on **Linux** and it warns you the SSL certificate is invalid/untrusted, go to Chrome Settings -> Privacy And Security -> Manage Certificates (see more) -> Authorities -> Import and select ``~/.den/ssl/rootca/certs/ca.cert.pem`` for import, then reload the page.
-```
+If you are using **Chrome** on **Linux** and it warns you the SSL certificate is invalid/untrusted, go to Chrome Settings -> Privacy And Security -> Manage Certificates (see more) -> Authorities -> Import and select ``~/.den/ssl/rootca/certs/ca.cert.pem`` for import, then reload the page.
+:::

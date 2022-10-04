@@ -4,7 +4,7 @@ After running `den svc up` for the first time following installation, the follow
 
 * [https://traefik.den.test/](https://traefik.den.test/)
 * [https://portainer.den.test/](https://portainer.den.test/)
-* [https://dnsmasq.dem.test/](https://dnsmasq.den.test/)
+* [https://dnsmasq.den.test/](https://dnsmasq.den.test/)
 * [https://mailhog.den.test/](https://mailhog.den.test/)
 
 ## Customizable Settings
@@ -17,8 +17,8 @@ The following options are available (with default values indicated):
 * `WARDEN_RESTART_POLICY=always` may be set to `no` to prevent Docker from restarting these service containers or any other valid [restart policy](https://docs.docker.com/config/containers/start-containers-automatically/#use-a-restart-policy) value.
 * `WARDEN_SERVICE_DOMAIN=den.test` may be set to a domain of your choosing if so desired. Please note that this will not currently change network settings or alter `dnsmasq` configuration. Any TLD other than `test` will require DNS resolution be manually configured.
 
-```{warning}
-    Setting ``TRAEFIK_LISTEN=0.0.0.0`` can be quite useful in some cases, but be aware that causing Traefik to listen for requests publicly poses a security risk when on public WiFi or networks otherwise outside of your control.
-```
+:::{warning}
+Setting ``TRAEFIK_LISTEN=0.0.0.0`` can be quite useful in some cases, but be aware that causing Traefik to listen for requests publicly poses a security risk when on public WiFi or networks otherwise outside of your control.
+:::
 
 After changing settings in `~/.den/.env`, please run `den svc up` to apply.

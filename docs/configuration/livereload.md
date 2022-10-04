@@ -29,9 +29,9 @@ Magento 2 bundles an example grunt based server-side compilation workflow which 
    ];
    ```
 
-   ```{note}
-       This can be accomplished via alternative means, the important part is the browser requesting ``/livereload.js?port=443`` when running the site on your local development environment.
-   ```
+   :::{note}
+   This can be accomplished via alternative means, the important part is the browser requesting ``/livereload.js?port=443`` when running the site on your local development environment.
+   :::
 
 5. Run `bin/magento app:config:import` to load merged configuration into the application.
 
@@ -51,9 +51,9 @@ Magento 2 bundles an example grunt based server-side compilation workflow which 
    grunt watch
    ```
 
-   ```{note}
-       Grunt should be used within the php-fpm container entered via ``den shell``
-   ```
+   :::{note}
+   Grunt should be used within the php-fpm container entered via ``den shell``
+   :::
 
 This setup will also be used to persist changes to your compiled CSS. When you run `grunt watch`, a LiveReload server will be started on ports 35729 within the php-fpm container and Traefik will take care of proxying the JavaScript tag and WebSocket requests to this listener.
 

@@ -10,11 +10,14 @@ jobs:
     name: Build Documentation
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v2
-      - uses: ammaraskar/sphinx-action@0.4
+      - name: Checkout repository
+        uses: actions/checkout@v2
+      - name: Run Sphinx documentation build
+        uses: ammaraskar/sphinx-action@0.4
         with:
           docs-folder: "docs/"
-      - uses: actions/upload-artifact@v2
+      - name: Upload documentation artifact
+        uses: actions/upload-artifact@v3
         with:
           name: documentation
           path: docs/_build/html/

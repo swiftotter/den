@@ -28,9 +28,9 @@ extensions = [
 source_suffix = ['.rst', '.md']
 master_doc = 'index'
 
-project = 'Warden'
-copyright = '2019-2021 by David Alger.'
-author = 'David Alger'
+project = 'Den'
+copyright = '2022 by Swift Otter.'
+author = ''
 version = ''
 release = ''
 
@@ -43,6 +43,12 @@ html_show_sourcelink = False
 html_static_path = ['_static']
 templates_path = ['_templates']
 html_extra_path = ['_redirects']
+
+myst_enable_extensions = [
+  "html_admonition",
+  "strikethrough",
+  "colon_fence",
+]
 
 #def setup(app):
   #app.add_config_value('myst_parser_config', {
