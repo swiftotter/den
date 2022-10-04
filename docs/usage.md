@@ -1,6 +1,6 @@
-## Warden Usage
+# Den Usage
 
-### Common Commands
+## Common Commands
 
 Launch a shell session within the project environment's `php-fpm` container:
 
@@ -50,6 +50,6 @@ Remove volumes completely:
 
     den env down -v
 
-### Further Information
+## Further Information
 
 Run `den help` and `den env -h` for more details and useful command information.

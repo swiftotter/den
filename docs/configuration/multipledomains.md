@@ -1,6 +1,6 @@
-## Multiple Domains
+# Multiple Domains
 
-If you need multiple domains configured for your project, Warden will now automatically route all sub-domains of the configured `TRAEFIK_DOMAIN` (as given when running `env-init`) to the Varnish/Nginx containers provided there is not a more specific rule such as for example `rabbitmq.exampleproject.com` which routes to the `rabbitmq` service for the project.
+If you need multiple domains configured for your project, Den will now automatically route all sub-domains of the configured `TRAEFIK_DOMAIN` (as given when running `env-init`) to the Varnish/Nginx containers provided there is not a more specific rule such as for example `rabbitmq.exampleproject.com` which routes to the `rabbitmq` service for the project.
 
 Multiple top-level domains may also be setup by following the instructions below:
 
@@ -9,7 +9,7 @@ Multiple top-level domains may also be setup by following the instructions below
        den sign-certificate alternate1.test
        den sign-certificate alternate2.test
     
-2. Create a `.warden/warden-env.yml` file with the contents below (this will be additive to the docker compose config Warden uses for the env, anything added here will be merged in, and you can see the complete config using `warden env config`):
+2. Create a `.warden/warden-env.yml` file with the contents below (this will be additive to the docker-compose config Den uses for the env, anything added here will be merged in, and you can see the complete config using `den env config`):
 
     ```yaml
     version: "3.5"
@@ -36,12 +36,11 @@ Multiple top-level domains may also be setup by following the instructions below
 
 3. Configure the application to handle traffic coming from each of these domains appropriately. An example on this for Magento 2 environments may be found below.
 
-4. Run `warden env up` to update the containers, after which each of the URLs should work as expected.
+4. Run `den env up` to update the containers, after which each of the URLs should work as expected.
 
-    ``` note::
-        If these alternate domains must be resolvable from within the FPM containers, you must also leverage ``extra_hosts`` to add each specific sub-domain to the ``/etc/hosts`` file of the container as dnsmasq is used only on the host machine, not inside the containers. This should look something like the following excerpt.
-
-    ```
+    :::{note}
+    If these alternate domains must be resolvable from within the FPM containers, you must also leverage ``extra_hosts`` to add each specific sub-domain to the ``/etc/hosts`` file of the container as dnsmasq is used only on the host machine, not inside the containers. This should look something like the following excerpt.
+    :::
 
     ```yaml
     version: "3.5"
@@ -65,7 +64,7 @@ Multiple top-level domains may also be setup by following the instructions below
          - sub2.alternate2.test:${TRAEFIK_ADDRESS:-0.0.0.0}
     ```
 
-### Magento 2 Run Params
+## Magento 2 Run Params
 
 When multiple domains are being used to load different stores or websites on Magento 2, the following configuration should be defined in order to set run codes and types as needed.
 
@@ -100,9 +99,9 @@ When multiple domains are being used to load different stores or websites on Mag
     }
     ```
 
-    ``` note::
-        The above example will not alter production site behavior given the default is to return should the ``HTTP_HOST`` value not match one of the defined ``case`` statements. This is desired as some hosting environments define run codes and types in an Nginx mapping. One may add production host names to the switch block should it be desired to use the same site switching mechanism across all environments.
-    ```
+    :::{note}
+    The above example will not alter production site behavior given the default is to return should the ``HTTP_HOST`` value not match one of the defined ``case`` statements. This is desired as some hosting environments define run codes and types in an Nginx mapping. One may add production host names to the switch block should it be desired to use the same site switching mechanism across all environments.
+    :::
 
 2. Then in `composer.json` add the file created in the previous step to the list of files which are automatically loaded by composer on each web request:
 
@@ -116,9 +115,9 @@ When multiple domains are being used to load different stores or websites on Mag
     }
     ```
 
-    ``` note::
-        This is similar to using `magento-vars.php` on Magento Commerce Cloud, but using composer to load the file rather than relying on Commerce Cloud magic: https://devdocs.magento.com/guides/v2.3/cloud/project/project-multi-sites.html
-    ```
+    :::{note}
+    This is similar to using `magento-vars.php` on Magento Commerce Cloud, but using composer to load the file rather than relying on Commerce Cloud magic: https://devdocs.magento.com/guides/v2.3/cloud/project/project-multi-sites.html
+    :::
 
 3. After editing the `composer.json` regenerate the auto load configuration:
 

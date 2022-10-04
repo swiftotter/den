@@ -1,6 +1,6 @@
 # Testing Magento 2
 
-**Warden** is the first Development Environment that has testing in the blood.
+**Den** is the first Development Environment that has testing in the blood.
 
 To enable testing components, set the following configuration in your project's `.env` file:
 
@@ -35,12 +35,12 @@ That's it! Now you are ready to run Unit Tests.
 
 ### Debugging
 
-If you have [configured Xdebug](xdebug.md), run Unit tests inside **Debug** console (`warden debug` instead of `warden shell`). The code execution will stop at the breakpoints.
+If you have {doc}`configured Xdebug <xdebug>`, run Unit tests inside **Debug** console (`den debug` instead of `den shell`). The code execution will stop at the breakpoints.
 
 ## Running Javascript Unit Tests
 
 1. Configure your `.env` and set `NODE_VERSION=12`
-2. Launch a shell session within the project environment's `php-fpm` container with `warden shell`
+2. Launch a shell session within the project environment's `php-fpm` container with `den shell`
 3. Install javascript unit test dependencies with `npm install`
 4. Deploy static content with
     
@@ -133,7 +133,7 @@ There's one thing you should be aware of: **always provide full path to `phpunit
 
 ### Debugging
 
-If you have [configured Xdebug](xdebug.md), run Integration tests inside **Debug** console (`warden debug` instead of `warden shell`). The code execution will stop at the breakpoints.
+If you have {doc}`configured Xdebug <xdebug>`, run Integration tests inside **Debug** console (`den debug` instead of `den shell`). The code execution will stop at the breakpoints.
 
 
 ### Troubleshooting
@@ -203,7 +203,7 @@ There's one thing you should be aware of: **always provide full path to `phpunit
 
 ### Debugging
 
-If you have [configured Xdebug](xdebug.md), run Integration tests inside **Debug** console (`warden debug` instead of `warden shell`). The code execution will stop at the breakpoints.
+If you have {doc}`configured Xdebug <xdebug>`, run Integration tests inside **Debug** console (`den debug` instead of `den shell`). The code execution will stop at the breakpoints.
 
 ## Running API Functional Tests
 
@@ -282,12 +282,13 @@ When debugging APIs you may need to use Xdebug - configure your `phpunit_{type}.
 
    - `TESTS_XDEBUG_ENABLED` to `true`
    - `TESTS_XDEBUG_SESSION` to `phpstorm`
-   
+
+(magento2-testing-running-mftf-tests)=
 ## Running MFTF Tests
 
 All the MFTF-related operations are operated by `vendor/bin/mftf`, necessary files are located in `dev/tests/acceptance/`.
 
-To run Acceptance tests you need to [configure the MFTF environment](mftf.md). Once you've done that, follow these steps to run the tests.
+To run Acceptance tests you need to {doc}`configure the MFTF environment <mftf>`. Once you've done that, follow these steps to run the tests.
 
 1. Make sure that you enabled following in your `.env` file:
     - `WARDEN_SELENIUM` - Responsible for running virtual browser for your tests
@@ -320,7 +321,7 @@ To run Acceptance tests you need to [configure the MFTF environment](mftf.md). O
 
 ### Debugging
 
-For more information about Debugging MFTF - please follow the [Magento Functional Testing Framework](mftf.md) section.
+For more information about Debugging MFTF - please follow the {doc}`Magento Functional Testing Framework <mftf>` section.
 The process of debugging is based on VNC connection to the Chrome instance.
 
-You can connect to Chrome session with `warden vnc` command.
+You can connect to Chrome session with `den vnc` command.

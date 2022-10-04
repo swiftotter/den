@@ -1,4 +1,4 @@
-## Xdebug Support
+# Xdebug Support
 
 There are two docker containers running FPM, `php-fpm`, `php-debug`. The `php-debug` container has the **Xdebug** extension pre-installed. Nginx will automatically route requests to the `php-debug` container when the `XDEBUG_SESSION` cookie has been set to `PHPSTORM` via the Xdebug Helper browser extension.
 
@@ -6,13 +6,13 @@ Xdebug will automatically connect back to the host machine on port `9000` for `x
 
 If you use a firewall, allow connection to port `9000` for `xdebug2` and `9003` for `xdebug3`.
 
-In similar fashion to the `warden shell` command there is also a debug command to launch into an xdebug enabled container shell for debugging CLI workflows:
+In similar fashion to the `den shell` command there is also a debug command to launch into an xdebug enabled container shell for debugging CLI workflows:
 
 ```
-warden debug
+den debug
 ```
 
-### VSCode
+## VSCode
 
 To configure a project in VSCode for debugging, add the following to `.vscode/launch.json` in the project directory:
 
@@ -33,15 +33,15 @@ To configure a project in VSCode for debugging, add the following to `.vscode/la
 }
 ```
 
-``` note::
-    If your project has (for example) ``WARDEN_WEB_ROOT=/webroot`` in it's ``.env`` file, to mount ``webroot/`` to ``/var/www/html`` rather than the top-level project directory, you may need to set the ``pathMapping`` above to ``${workspaceRoot}/webroot`` for the mapping to function correctly.
-```
+:::{note}
+If your project has (for example) ``WARDEN_WEB_ROOT=/webroot`` in it's ``.env`` file, to mount ``webroot/`` to ``/var/www/html`` rather than the top-level project directory, you may need to set the ``pathMapping`` above to ``${workspaceRoot}/webroot`` for the mapping to function correctly.
+:::
 
 Once this configuration is in place, make sure you have the [PHP Debug extension by Felix Becker](https://marketplace.visualstudio.com/items?itemName=felixfbecker.php-debug) installed. This is required for Xdebug support to function in VSCode. Additional information on launch settings specific to Xdebug use in VSCode [may be found here](https://github.com/felixfbecker/vscode-php-debug#vs-code-configuration).
 
 To learn more about debugging in VSCode, [please go here](https://code.visualstudio.com/docs/editor/debugging).
 
-### PhpStorm
+## PhpStorm
 
 When it receives the first request, PHP Storm should prompt you if the "Server" configuration is missing. The below image demonstrates how this is setup; the important settings are these:
 

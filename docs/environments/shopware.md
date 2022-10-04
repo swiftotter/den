@@ -1,13 +1,13 @@
-## Installing Shopware 6
+# Installing Shopware 6
 
-The below example demonstrates the from-scratch setup of the Shopware 6 application for local development. A similar process can easily be used to configure an environment of any other type. This assumes that Warden has been previously started via `warden svc up` as part of the installation procedure.
+The below example demonstrates the from-scratch setup of the Shopware 6 application for local development. A similar process can easily be used to configure an environment of any other type. This assumes that Den has been previously started via `den svc up` as part of the installation procedure.
 
 1.  Create a new directory on your host machine at the location of your choice and then jump into the new directory to get started:
 
         mkdir -p ~/Sites/exampleproject
         cd ~/Sites/exampleproject
 
-2.  From the root of your new project directory, run `env-init` to create the `.env` file with configuration needed for Warden and Docker to work with the project.
+2.  From the root of your new project directory, run `env-init` to create the `.env` file with configuration needed for Den and Docker to work with the project.
 
         den env-init exampleproject shopware
 
@@ -40,7 +40,7 @@ The below example demonstrates the from-scratch setup of the Shopware 6 applicat
 
         den sign-certificate exampleproject.test
 
-4.  Configure the project to use `./webroot` so the Shopware installer won't overwrite Warden's `.env` file
+4.  Configure the project to use `./webroot` so the Shopware installer won't overwrite Den's `.env` file
 
         perl -pi -e 's#^WARDEN_WEB_ROOT.*#WARDEN_WEB_ROOT=/webroot#' .env
 
@@ -52,9 +52,9 @@ The below example demonstrates the from-scratch setup of the Shopware 6 applicat
 
         den env up
 
-    ```warning::
-        If you encounter an error about ``Mounts denied``, follow the instructions in the error message and run ``warden env up`` again.
-    ```
+    :::{warning}
+    If you encounter an error about ``Mounts denied``, follow the instructions in the error message and run ``den env up`` again.
+    :::
 
 7.  Drop into a shell within the project environment. Commands following this step in the setup procedure will be run from within the `php-fpm` docker container this launches you into:
 
@@ -73,10 +73,10 @@ The below example demonstrates the from-scratch setup of the Shopware 6 applicat
     - [https://app.exampleproject.test/](https://app.exampleproject.test/)
     - [https://app.exampleproject.test/admin/](https://app.exampleproject.test/admin/)
 
-```note::
-    The default username for Shopware 6 is ``admin`` with password ``shopware``.
-```
+:::{note}
+The default username for Shopware 6 is ``admin`` with password ``shopware``.
+:::
 
-```note::
-    To completely destroy the ``exampleproject`` environment we just created, run ``warden env down -v`` to tear down the project's Docker containers, volumes, etc.
-```
+:::{note}
+To completely destroy the ``exampleproject`` environment we just created, run ``den env down -v`` to tear down the project's Docker containers, volumes, etc.
+:::

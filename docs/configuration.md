@@ -1,9 +1,11 @@
-## Configuration
+# Den Configuration
 
-``` toctree::
-    :maxdepth: 2
-    :caption: Table of Contents
-    :glob:
+```{toctree}
+---
+maxdepth: 2
+caption: Table of Contents
+glob:
+---
 
-    configuration/*
+configuration/*
 ```

@@ -1,8 +1,8 @@
-## Magento Functional Testing Framework
+# Magento Functional Testing Framework
 
 For information what **Magento Functional Testing Framework** is - please follow to [MFTF DevDocs](https://devdocs.magento.com/mftf/docs/introduction.html).
 
-MFTF is part of Magento 2. To run tests you need [Selenium](https://selenium.dev/) instance with [Chrome Webdriver](https://sites.google.com/a/chromium.org/chromedriver/). Warden provides Docker setup that contains Selenium Standalone with Chrome. You can enable it by adding the following to the project's `.env` file (or exporting them to environment variables prior to starting the environment):
+MFTF is part of Magento 2. To run tests you need [Selenium](https://selenium.dev/) instance with [Chrome Webdriver](https://sites.google.com/a/chromium.org/chromedriver/). Den provides Docker setup that contains Selenium Standalone with Chrome. You can enable it by adding the following to the project's `.env` file (or exporting them to environment variables prior to starting the environment):
 
 ```
 WARDEN_SELENIUM=1
@@ -15,13 +15,13 @@ SELENIUM_HOST=selenium
 BROWSER=chrome
 ```
 
-### Running Tests
+## Running Tests
 
-We provide complex instruction on [How to run MFTF Tests](magento2-testing.html#running-mftf-tests) in Warden environment.
+We provide complex instruction on {ref}`How to run MFTF Tests <magento2-testing-running-mftf-tests>` in Den environment.
 
-### Debugging MFTF Tests
+## Debugging MFTF Tests
 
-By default Warden uses headless Chrome browser. If you want to preview the tests - you need to extend `.env` file and update environment containers (`warden env up`)
+By default Den uses headless Chrome browser. If you want to preview the tests - you need to extend `.env` file and update environment containers (`den env up`)
 
 ```
 WARDEN_SELENIUM_DEBUG=1
@@ -31,15 +31,15 @@ WARDEN_SELENIUM_DEBUG=1
 
 To preview the process of testing, you need any **VLC** client that provides **SSH Tunnel** support (eg. [Remmina](https://remmina.org/how-to-install-remmina/)). To preview the process of testing, you need to use `tunnel.den.test:2222` (login: `user`):
 
-### Remote Desktop Viewer
+## Remote Desktop Viewer
 
   ![Remote Desktop Viewer](screenshots/selenium-remote-desktop-viewer.png)
 
-### Remmina
+## Remmina
 
   ![Remmina Configuration](screenshots/remmina-ssh-tunnel.png)
 
-### Mac OS X
+## Mac OS X
 
 To preview the process in Mac OS X, you must first create an SSH tunnel to the docker instance hosting the VNC server.  That would look something like:
 

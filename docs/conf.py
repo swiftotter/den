@@ -1,8 +1,9 @@
 import sys, os
 import sphinx_rtd_theme
 
-import recommonmark
-from recommonmark.transform import AutoStructify
+#import recommonmark
+import myst_parser
+#from recommonmark.transform import AutoStructify
 
 from sphinx.highlighting import lexers
 from pygments.lexers.web import PhpLexer
@@ -17,7 +18,8 @@ lexers['html'] = HtmlLexer(startinline=True)
 lexers['json'] = JsonLexer(startinline=True)
 
 extensions = [
-  'recommonmark',
+  #'recommonmark',
+  'myst_parser',
   'sphinx_rtd_theme',
   'sphinx_copybutton',
   'sphinx_markdown_tables',
@@ -26,9 +28,9 @@ extensions = [
 source_suffix = ['.rst', '.md']
 master_doc = 'index'
 
-project = 'Warden'
-copyright = '2019-2021 by David Alger.'
-author = 'David Alger'
+project = 'Den'
+copyright = '2022 by Swift Otter.'
+author = ''
 version = ''
 release = ''
 
@@ -42,11 +44,20 @@ html_static_path = ['_static']
 templates_path = ['_templates']
 html_extra_path = ['_redirects']
 
-def setup(app):
-    app.add_config_value('recommonmark_config', {
-        'auto_toc_tree_section': ['Table of Contents'],
-        'enable_math': False,
-        'enable_inline_math': False,
-        'enable_eval_rst': True,
-    }, True)
-    app.add_transform(AutoStructify)
+myst_enable_extensions = [
+  "html_admonition",
+  "strikethrough",
+  "colon_fence",
+]
+
+#def setup(app):
+  #app.add_config_value('myst_parser_config', {
+  #  
+  #}, True)
+    #app.add_config_value('recommonmark_config', {
+    #    'auto_toc_tree_section': ['Table of Contents'],
+    #    'enable_math': False,
+    #    'enable_inline_math': False,
+    #    'enable_eval_rst': True,
+    #}, True)
+    #app.add_transform(AutoStructify)
