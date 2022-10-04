@@ -1,8 +1,8 @@
-## Customizing An Environment
+# Customizing An Environment
 
 Further information on customizing or extending an environment is forthcoming. For now, this section is limited to very simple and somewhat common customizations.
 
-To configure your project with a non-default PHP version, add the following to the project's `.env` file and run `warden env up` to re-create the affected containers:
+To configure your project with a non-default PHP version, add the following to the project's `.env` file and run `den env up` to re-create the affected containers:
 
     PHP_VERSION=7.2
 
@@ -22,11 +22,11 @@ Start of some environments could be skipped by using variables in `.env` file:
   * `WARDEN_DB=0`
   * `WARDEN_REDIS=0`
 
-### Docker Specific Customizations
+## Docker Specific Customizations
 To override default docker settings, add a custom configuration file in your project root
 folder: `/.warden/warden-env.yml`
 This file will be merged with the default environment configuration.
-One example for a use case is [the setup of multiple domains](https://docs.warden.dev/configuration/multipledomains.html?highlight=warden%20env%20yml#multiple-domains).
+One example for a use case is {doc}`the setup of multiple domains <../configuration/multipledomains>`.
 
 If that's not enough, it's possible to extend the environment config by leveraging, like for example (`.warden/environments/magento2/magento2.base.yml`):
 ```
@@ -40,9 +40,9 @@ services:
       - ./.warden/nginx/custom.conf:/etc/nginx/default.d/custom.conf
 ```
 
-It is a silly example (set pub root to `/` instead of `/pub` and include some custom NGINX config), but it shows how you can add configuration to a certain Warden environment type for a specific project. It is very useful when you want to keep using `.warden/warden-env.yml` for your very own environment, but want to share environment config with your teammates.
+It is a silly example (set pub root to `/` instead of `/pub` and include some custom NGINX config), but it shows how you can add configuration to a certain Den environment type for a specific project. It is very useful when you want to keep using `.warden/warden-env.yml` for your very own environment, but want to share environment config with your teammates.
 
-### PHP Specific Customizations
+## PHP Specific Customizations
 To override default php settings, follow the docker customization above and include your custom `php.ini` file.
 In this case the `warden-env.yml` should look like this:
 
@@ -73,7 +73,7 @@ post_max_size = 25M
 session.auto_start = Off
 upload_max_filesize = 25M
 ```
-### Nginx Specific Customizations
+## Nginx Specific Customizations
 To override the default nginx configuration of your project, add a new file
 `.warden/warden-env.yml` to your project root with the following content:
 ```
@@ -85,12 +85,12 @@ services:
 ```
 There you can specify a custom Nginx configuration which will be included following the `.conf` files within the `/etc/nginx/available.d` directory: `include /etc/nginx/default.d/*.conf`
 
-### Magento 1 Specific Customizations
+## Magento 1 Specific Customizations
 
 If you use a `modman` structure, initialize the environment in your project path.
 The `.modman` folder and the corresponding `.basedir` file will be recognized and set up automatically.
 
-### Magento 2 Specific Customizations
+## Magento 2 Specific Customizations
 
 The following variables can be added to the project's `.env` file to enable additional database containers for use with the Magento 2 (Commerce Only) [split-database solution](https://devdocs.magento.com/guides/v2.3/config-guide/multi-master/multi-master.html).
 

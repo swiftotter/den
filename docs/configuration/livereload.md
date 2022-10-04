@@ -1,10 +1,10 @@
-## LiveReload Setup
+# LiveReload Setup
 
 LiveReload routing is currently supported only on the `magento2` environment type. Other environment types may utilize LiveReload via per-project compose configurations to setup the routing for LiveReload JS and WebSocket endpoints.
 
-### Configuration for Magento 2
+## Configuration for Magento 2
 
-Magento 2 bundles an example grunt based server-side compilation workflow which includes LiveReload and it works within the Warden shell environment. In order to use this:
+Magento 2 bundles an example grunt based server-side compilation workflow which includes LiveReload and it works within the Den shell environment. In order to use this:
 
 1. Rename or copy `Gruntfile.js.sample` file to `Gruntfile.js` in your project root.
 
@@ -29,13 +29,13 @@ Magento 2 bundles an example grunt based server-side compilation workflow which 
    ];
    ```
 
-   ``` note::
+   ```{note}
        This can be accomplished via alternative means, the important part is the browser requesting ``/livereload.js?port=443`` when running the site on your local development environment.
    ```
 
 5. Run `bin/magento app:config:import` to load merged configuration into the application.
 
-**With the above configuration in place**, you'll first enter the FPM container via `warden shell` and then setup as follows:
+**With the above configuration in place**, you'll first enter the FPM container via `den shell` and then setup as follows:
 
 1. Clean and build the project theme using grunt:
 
@@ -51,12 +51,12 @@ Magento 2 bundles an example grunt based server-side compilation workflow which 
    grunt watch
    ```
 
-   ``` note::
-       Grunt should be used within the php-fpm container entered via ``warden shell``
+   ```{note}
+       Grunt should be used within the php-fpm container entered via ``den shell``
    ```
 
 This setup will also be used to persist changes to your compiled CSS. When you run `grunt watch`, a LiveReload server will be started on ports 35729 within the php-fpm container and Traefik will take care of proxying the JavaScript tag and WebSocket requests to this listener.
 
-On a working setup with `grunt watch` running within `warden shell` you should see something like the following in the network inspector after reloading the project in a web browser.
+On a working setup with `grunt watch` running within `den shell` you should see something like the following in the network inspector after reloading the project in a web browser.
 
 ![LiveReload Network Requests](screenshots/livereload.png)

@@ -1,0 +1,20 @@
+name: Build documentation
+on:
+  push:
+    paths:
+      - docs/**
+      - .github/workflows/documentation.yml
+
+jobs:
+  build-documentation:
+    name: Build Documentation
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+      - uses: ammaraskar/sphinx-action@0.4
+        with:
+          docs-folder: "docs/"
+      - uses: actions/upload-artifacts@v2
+        with:
+          name: documentation
+          path: docs/_build/html/

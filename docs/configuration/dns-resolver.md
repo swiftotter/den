@@ -1,13 +1,13 @@
-## Automatic DNS Resolution
+# Automatic DNS Resolution
 
 In order to allow automatic DNS resolution using the provided dnsmasq service we will need to make sure DNS request are routed through our local network.
 This requires some configuration.
 
-### Configuration per network
+## Configuration per network
 
-#### Mac
+### Mac
 
-On Mac OS, DNS resolution is configured automatically for `*.test` domains using a feature Mac OS inherits from BSD. When `warden install` is run (or `warden svc up` for the first time) the following contents are placed in the `/etc/resolver/test` file. This has the effect of having zero impact on DNS queries except for those under the `.test` TLD.
+On Mac OS, DNS resolution is configured automatically for `*.test` domains using a feature Mac OS inherits from BSD. When `den install` is run (or `den svc up` for the first time) the following contents are placed in the `/etc/resolver/test` file. This has the effect of having zero impact on DNS queries except for those under the `.test` TLD.
 
 ```
 nameserver 127.0.0.1
@@ -21,7 +21,7 @@ If you desire to have more than this route through the `dnsmasq` container, you 
 1.0.0.1
 ```
 
-#### systemd-resolved
+### systemd-resolved
 
 This approach works on most modern (systemd based) operating systems.
 
@@ -29,10 +29,10 @@ This approach works on most modern (systemd based) operating systems.
 
     sudo mkdir -p /etc/systemd/resolved.conf.d
     echo -e "[Resolve]\nDNS=127.0.0.1\nDomains=~test\n" \
-      | sudo tee /etc/systemd/resolved.conf.d/warden.conf > /dev/null
+      | sudo tee /etc/systemd/resolved.conf.d/den.conf > /dev/null
     sudo systemctl restart systemd-resolved
 
-#### Ubuntu resolvconf
+### Ubuntu resolvconf
 
 Use the `resolvconf` service to add a permanent entry in your `/etc/resolv.conf` file.
 
@@ -57,11 +57,11 @@ Restart network-manager
 sudo service network-manager restart
 ```
 
-``` note::
+```{note}
     In the above examples you can replace ``1.1.1.1`` and ``1.0.0.1`` (CloudFlare) with the IP of your own preferred DNS resolution service such as ``8.8.8.8`` and ``8.8.4.4`` (Google) or ``9.9.9.9`` and ``149.112.112.112`` (Quad9)
 ```
 
-#### Windows
+### Windows
 
 Add the local dnsmasq resolver as the first DNS server:
 
