@@ -11,5 +11,6 @@ RUN chmod +rx /usr/local/bin/n98-magerun2 \
     && ln -s /usr/local/bin/n98-magerun2 /usr/local/bin/mr
 
 ADD https://raw.githubusercontent.com/netz98/n98-magerun2/master/res/autocompletion/bash/n98-magerun2.phar.bash /etc/bash_completion.d/n98-magerun2.phar
+RUN chmod +r /etc/bash_completion.d/n98-magerun2.phar
 
 USER www-data
