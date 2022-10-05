@@ -4,6 +4,7 @@ on:
     paths:
       - docs/**
       - .github/workflows/build-documentation.yml
+      - CHANGELOG.md
 
 jobs:
   build-documentation:
