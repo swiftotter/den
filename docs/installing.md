@@ -4,7 +4,7 @@
 ## Prerequisites
 
 * [Docker Desktop for Mac](https://hub.docker.com/editions/community/docker-ce-desktop-mac) 2.2.0.0 or later or [Docker for Linux](https://docs.docker.com/install/) or [Docker for Windows](https://docs.docker.com/desktop/windows/install/)
-* `docker-compose` version 1.25.0 or later is required (this can be installed via `brew`, `apt`, `dnf`, or `pip3` as needed)
+* `docker-compose` version 2.0 or later is required (this can be installed via `brew`, `apt`, `dnf`, or `pip3` as needed)
 * [Mutagen](https://mutagen.io/) 0.11.4 or later is required for environments leveraging sync sessions on Mac OS. Den will attempt to install this via `brew` if not present.
 
 :::{warning}
@@ -17,14 +17,9 @@ This can be corrected via Preferences -> Resources -> Advanced -> Memory. While 
 
 ## Installing via Homebrew
 
-:::{warning}
-Den is not currently available via Homebrew; however, it is on the list of things to support. If you are knowledgable
-with Homebrew and are able to contribute, please feel free to submit a PR to the repository.
-:::
-
 Den may be installed via [Homebrew](https://brew.sh/) on both macOS and Linux hosts:
 
-    brew install davidalger/warden/warden
+    brew install swiftotter/den/den
     den svc up
 
 ## Alternative Installation
@@ -47,7 +42,7 @@ Launch wsl from your terminal of choice.
 
         wsl
         /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install.sh)"
-        brew install davidalger/warden/warden
+        brew install swiftotter/den/den
         den svc up
 
 In order for DNS entries to be resolved either add them to your Windows hosts file or add 127.0.0.1 as the first DNS server in your current network adapter in Windows.

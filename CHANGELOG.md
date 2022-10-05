@@ -6,8 +6,8 @@
 First version is based on [Warden v0.12.0](https://github.com/davidalger/warden).
 
 **Migration from Warden**:
-* Certificates and other service-related data will now be located in `~/.den`.
-* You should `warden svc down` before running `den install;den svc up`. Den Install will change the path of the `tunnel.warden.test` certificate, and Warden will not know to replace it if you switch back.
+* Certificates and other service-related data will now be located in `~/.den`.  You should **not** rename `~/.warden` to `~/.den`.
+* You should `warden svc down` and then run `den install;den svc up`. Den Install will change the path of the `tunnel.warden.test` certificate, and Warden will not know to replace it if you switch back.
 * When running `den install` Den will automatically regenerate SSL certificates for all existing Warden projects ([swiftotter/den#44](https://github.com/swiftotter/den/pull/44) by @ihor-sviziev) 
 
 **Migration from DrPaynne**:
