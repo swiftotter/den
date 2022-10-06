@@ -33,7 +33,7 @@ function assertWardenInstall {
   if [[ ! -f "${WARDEN_HOME_DIR}/.installed" ]] \
     || [[ "${WARDEN_HOME_DIR}/.installed" -ot "${WARDEN_DIR}/bin/den" ]]
   then
-    [[ -f "${WARDEN_HOME_DIR}/.installed" ]] && echo "==> Updating warden" || echo "==> Starting initialization"
+    [[ -f "${WARDEN_HOME_DIR}/.installed" ]] && echo "==> Updating den" || echo "==> Starting initialization"
 
     "${WARDEN_DIR}/bin/den" install
 
