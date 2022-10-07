@@ -22,7 +22,14 @@ Den may be installed via [Homebrew](https://brew.sh/) on both macOS and Linux ho
     brew install swiftotter/den/den
     den svc up
 
-## Alternative Installation
+### Updating via Homebrew
+
+Den is updated like other [Homebrew](https://brew.sh/) software by running brew upgrade:
+
+    brew upgrade swiftotter/den/den
+    den svc restart
+
+## Alternative (Manual) Installation
 
 Den may be installed by cloning the repository to the directory of your choice and adding it to your `$PATH`. This method of installation may be when Homebrew does not already exist on your system or when preparing contributions to the Den project.
 
@@ -33,6 +40,18 @@ Den may be installed by cloning the repository to the directory of your choice a
     PATH="/opt/den/bin:$PATH"
     den svc up
 
+### Updating Alternative (Manual) Installations
+
+To update Den just pull the latest changes from git, or check out a specific release tag. You'll also want to rebuild your dashboard image to reflect the latest changes (if any).
+
+    cd /opt/den
+    git fetch --tags
+    git pull
+    # git switch <tag>
+    den svc build --no-cache --build-arg DEN_VERSION=$(cat version | tr -d '\n' | sed -e 's/^[[:space:]]*//g; s/[[:space:]]*$//g') dashboard
+    den svc ps --status=running -q dashboard >/dev/null 2>&1 && den svc restart dashboard
+    den svc up
+
 ## Windows Installation (via WSL2)
 
 Install and enable [WSL2 in Windows 10](https://docs.microsoft.com/en-us/windows/wsl/install-win10).  
@@ -40,10 +59,10 @@ Install Ubuntu 20.04 or other compatible Linux version from the Windows store or
 Launch Docker for Windows, make sure that the option for WSL2 integration is set.  
 Launch wsl from your terminal of choice.  
 
-        wsl
-        /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install.sh)"
-        brew install swiftotter/den/den
-        den svc up
+    wsl
+    /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install.sh)"
+    brew install swiftotter/den/den
+    den svc up
 
 In order for DNS entries to be resolved either add them to your Windows hosts file or add 127.0.0.1 as the first DNS server in your current network adapter in Windows.
 
