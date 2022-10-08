@@ -20,6 +20,10 @@ WARDEN_USAGE=$(cat <<EOF
                       session with pub/media, pub/static and var dirs excluded.
                       On Linux code is mounted natively.
 
+  magento-cloud       Same as magento2, but the version of the services are
+                      configured to match the versions used by your
+                      Magento Cloud project.
+
   magento1            Nginx, php-fpm, db (mariadb), and redis services
                       pre-configured for running Magento 1
 
