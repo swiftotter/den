@@ -14,6 +14,13 @@ function getDBVersion {
     if [[ $ENV_DATA =~ elasticsearch:([0-9|\.]*) ]]
     then
         ELASTICSEARCH_VERSION=${BASH_REMATCH[1]}
+        ELASTICSEARCH_ENABLED=1
+    else
+        if [[ $ENV_DATA =~ opensearch:([0-9|\.]*) ]]
+        then
+            OPENSEARCH_VERSION=${BASH_REMATCH[1]}
+            OPENSEARCH_ENABLED=1
+        fi
     fi
     if [[ $ENV_DATA =~ mysql:([0-9|\.]*) ]]
     then
@@ -55,11 +62,14 @@ getComposerVersion
 
 cat .env | \
 sed "s/=magento-cloud/=magento2/g" | \
-sed "s/%ELASTICSEARCH_VERSION%/${ELASTICSEARCH_VERSION:-7.6}/g" | \
 sed "s/%MARIADB_VERSION%/${MARIADB_VERSION:-10.3}/g" | \
 sed "s/%COMPOSER_VERSION%/${COMPOSER_VERSION:-1}/g" | \
 sed "s/%PHP_VERSION%/${PHP_VERSION:-7.4}/g" | \
 sed "s/%RABBITMQ_VERSION%/${RABBITMQ_VERSION:-3.8}/g" | \
 sed "s/%REDIS_VERSION%/${REDIS_VERSION:-5.0}/g" | \
+sed "s/%ELASTICSEARCH_ENABLED%/${ELASTICSEARCH_ENABLED:-0}/g" | \
+sed "s/%ELASTICSEARCH_VERSION%/${ELASTICSEARCH_VERSION:-7.6}/g" | \
+sed "s/%OPENSEARCH_ENABLED%/${OPENSEARCH_ENABLED:-0}/g" | \
+sed "s/%OPENSEARCH_VERSION%/${OPENSEARCH_VERSION:-1.2}/g" | \
 sed "s/%PROJECT%/${PROJECT}/g" | \
 sed "s/%ENVIRONMENT%/${ENVIRONMENT}/g" > .env
