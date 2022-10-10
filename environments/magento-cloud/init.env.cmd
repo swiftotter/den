@@ -73,3 +73,36 @@ sed "s/%OPENSEARCH_ENABLED%/${OPENSEARCH_ENABLED:-0}/g" | \
 sed "s/%OPENSEARCH_VERSION%/${OPENSEARCH_VERSION:-1.2}/g" | \
 sed "s/%PROJECT%/${PROJECT}/g" | \
 sed "s/%ENVIRONMENT%/${ENVIRONMENT}/g" > .env
+
+
+function getEnvironmentVariables {
+    ENV_DATA=$(magento-cloud var --columns=Name --no-header --format=csv --project=$PROJECT --environment=$ENVIRONMENT)
+    ENV_DATA=$(echo "$ENV_DATA" | sort -u)
+    mkdir -p .warden
+    echo "version: '3.5'
+services:
+  php-fpm:
+    environment:" > .warden/warden-env.yml
+
+    for LINE in $ENV_DATA
+    do
+        if [[ $LINE =~ ^env:([a-zA-Z0-9_]+) ]]
+        then
+            VAR=$(magento-cloud vget --property=value --level=environment --project=$PROJECT --environment=$ENVIRONMENT $LINE)
+            LINE=$(echo $LINE | sed 's/env://g')
+            echo "      $LINE: '$VAR'" >> .warden/warden-env.yml
+        fi
+    done
+}
+
+while true; do
+    read -p $'\033[32mDo you want to import Environment variables? y/n\033[0m ' resp
+    case $resp in
+      [Yy]*)
+            echo "Saving enviroment variables in .warden/warden-env.yml";
+            getEnvironmentVariables
+            break;;
+      [Nn]*) exit;;
+      *) echo "Please answer (y)es or (n)o";;
+    esac
+done
