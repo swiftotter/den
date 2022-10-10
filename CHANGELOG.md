@@ -32,6 +32,7 @@ First version is based on [Warden v0.12.0](https://github.com/davidalger/warden)
 * Portainer is now optional and disabled by default ([swiftotter/den#69](https://github.com/swiftotter/den/pull/69) by @bap14)
 * Added a Drupal environment type ([swiftotter/den#70](https://github.com/swiftotter/den/pull/70) by @bap14)
 * `den help` and `den list` will alo list any custom commands in the environment it is ran in ([swiftotter/den#78](https://github.com/swiftotter/den/pull/78) by @bap14)
+* A new `magento-cloud` environment type has been added that, during env-init, automatically detects and configures Den to use the same service versions as Adobe Commerce Cloud in ([swiftotter/den#93](https://github.com/swiftotter/den/pull/93) by @henriquekieckbusch)
 
 **Available Services Versions:**
 
