@@ -1,12 +1,7 @@
 #!/usr/bin/env bash
 [[ ! ${WARDEN_DIR} ]] && >&2 echo -e "\033[31mThis script is not intended to be run directly!\033[0m" && exit 1
 
-docker=$(which docker || true)
-
-if [[ -z "${docker}" ]]; then
-    echo -e "🛑 \033[31mDocker does not appear to be installed or is not available in your \$PATH.\033[0m"
-    exit 1
-fi
+assertDockerRunning
 
 dockerVersion=$(docker version -f '{{.Server.Version}}')
 dockerComposeVersion=$(docker compose version --short)
