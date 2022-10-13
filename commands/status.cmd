@@ -13,11 +13,14 @@ fi
 
 denTraefikId=$(docker container ls --filter network="${denNetworkId}" --filter status=running --filter name=traefik -q)
 projectNetworks=$(docker container inspect --format '{{ range $k,$v := .NetworkSettings.Networks }}{{ if ne $k "${denNetworkName}" }}{{println $k }}{{ end }}{{end}}' "${denTraefikId}")
+OLDIFS="$IFS";
+IFS=$'\n'
 projectNetworkList=($projectNetworks)
+IFS="$OLDIFS"
 
 messageList=()
-for projectNetwork in $projectNetworkList; do
-    [[ -z "${projectNetwork}" ]] && continue # Skip empty project network names (if any)
+for projectNetwork in "${projectNetworkList[@]}"; do
+    [[ -z "${projectNetwork}" || "${projectNetwork}" == "${denNetworkName}" ]] && continue # Skip empty project network names (if any)
 
     prefix="${projectNetwork%_default}"
     prefixLen="${#prefix}"
