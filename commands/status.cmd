@@ -20,7 +20,7 @@ if [[ -z "${denNetworkId}" ]]; then
 fi
 
 denTraefikId=$(docker container ls --filter network="${denNetworkId}" --filter status=running --filter name=traefik -q)
-projectNetworkList=$(docker container inspect --format '{{ range $k,$v := .NetworkSettings.Networks }}{{ if ne $k "warden" }}{{printf "%s\n" $k }}{{ end }}{{end}}' "${denTraefikId}")
+projectNetworkList=$(docker container inspect --format '{{ range $k,$v := .NetworkSettings.Networks }}{{ if ne $k "warden" }}{{println $k }}{{ end }}{{end}}' "${denTraefikId}")
 
 echo -e "Found the following \033[32mrunning\033[0m environments:"
 for projectNetwork in $projectNetworkList; do
