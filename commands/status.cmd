@@ -25,7 +25,7 @@ for projectNetwork in "${projectNetworkList[@]}"; do
     prefix="${projectNetwork%_default}"
     prefixLen="${#prefix}"
     ((prefixLen+=1))
-    projectContainers=$(docker network inspect --format '{{ range $k,$v := .Containers }}{{ $prefix := slice $v.Name 0 '"${prefixLen}"' }}{{ if eq $prefix "'"${prefix}-"'" }}{{ println $v.Name }}{{end}}{{end}}' "${projectNetwork}")
+    projectContainers=$(docker network inspect --format '{{ range $k,$v := .Containers }}{{ $nameLen := len $v.Name }}{{ if gt $nameLen '"${prefixLen}"' }}{{ $prefix := slice $v.Name 0 '"${prefixLen}"' }}{{ if eq $prefix "'"${prefix}-"'" }}{{ println $v.Name }}{{end}}{{end}}{{end}}' "${projectNetwork}")
     container=$(echo "$projectContainers" | head -n1)
 
     [[ -z "${container}" ]] && continue # Project is not running, skip it
