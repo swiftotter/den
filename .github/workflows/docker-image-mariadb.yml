@@ -26,8 +26,9 @@ jobs:
           - "10.6"
           - "10.7"
           - "10.8"
+          - "10.9"
         include:
-          - version: "10.9"
+          - version: "10.10"
             modifier: "-rc"
 
     steps:

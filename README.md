@@ -38,7 +38,7 @@ We at SwiftOtter are committed to maintaining Den in an open-source and accessib
 | OpenSearch | 1.1, 1.2, 1.3, 2.0, 2.1, 2.2 |
 | Nginx | 1.16, 1.17, 1.18, 1.19, 1.20, 1.21, 1.22, 1.23 |
 | MySQL | 5.5, 5.6, 5.7, 8.0.28, 8.0 |
-| MariaDB | 10.0, 10.1, 10.2, 10.3, 10.4, 10.5, 10.6, 10.7, 10.8, 10.9-rc |
+| MariaDB | 10.0, 10.1, 10.2, 10.3, 10.4, 10.5, 10.6, 10.7, 10.8, 10.9, 10.10-rc |
 | Magepack | 2.3, 2.4, 2.5, 2.6, 2.7, 2.8 |
 
 ## Contributing
