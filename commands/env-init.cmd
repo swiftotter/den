@@ -6,7 +6,7 @@ WARDEN_ENV_PATH="$(pwd -P)"
 # Prompt user if there is an extant .env file to ensure they intend to overwrite
 if test -f "${WARDEN_ENV_PATH}/.env"; then
   while true; do
-    read -p $'\033[32mA warden env file already exists at '"${WARDEN_ENV_PATH}/.env"$'; would you like to overwrite? y/n\033[0m ' resp
+    read -p $'\033[32mA den env file already exists at '"${WARDEN_ENV_PATH}/.env"$'; would you like to overwrite? y/n\033[0m ' resp
     case $resp in
       [Yy]*) echo "Overwriting extant .env file"; break;;
       [Nn]*) exit;;
@@ -17,7 +17,7 @@ fi
 
 WARDEN_ENV_NAME="${WARDEN_PARAMS[0]:-}"
 
-# If warden environment name was not provided, prompt user for it
+# If den environment name was not provided, prompt user for it
 while [ -z "${WARDEN_ENV_NAME}" ]; do
   read -p $'\033[32mAn environment name was not provided; please enter one:\033[0m ' WARDEN_ENV_NAME
 done
