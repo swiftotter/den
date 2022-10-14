@@ -14,7 +14,7 @@ function locateEnvPath () {
     done
 
     if [[ "${WARDEN_ENV_PATH}" = "/" ]]; then
-        >&2 echo -e "\033[31mEnvironment config could not be found. Please run \"warden env-init\" and try again!\033[0m"
+        >&2 echo -e "\033[31mEnvironment config could not be found. Please run \"den env-init\" and try again!\033[0m"
         return 1
     fi
 

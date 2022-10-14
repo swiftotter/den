@@ -12,6 +12,8 @@ ENV VARNISHD_PARAMS -p default_ttl=3600 -p default_grace=3600 \
 
 COPY default.vcl /etc/varnish/default.vcl.template
 RUN chown -R varnish:varnish /etc/varnish
+RUN chgrp -R varnish /var/lib/varnish
+RUN chmod -R g+rwx /var/lib/varnish
 
 ENV BACKEND_HOST    nginx
 ENV BACKEND_PORT    80
