@@ -1,7 +1,15 @@
 function getProjectAndEnvironment {
-    ENV_DATA=$(magento-cloud environment:info --format=csv --no-header)
-    [[ $ENV_DATA =~ ^id,([^[:space:]]*) ]] && ENVIRONMENT=${BASH_REMATCH[1]}
-    [[ $ENV_DATA =~ project,([a-z|A-Z|1-9]*) ]] && PROJECT=${BASH_REMATCH[1]}
+
+    if [[ -f ".magento/local/project.yaml" ]] && [[ -f ".git/HEAD" ]]; then
+        PROJECT=$(cat .magento/local/project.yaml | grep id | sed "s/id: //")
+        ENVIRONMENT=$(cat .git/HEAD | sed "s/ref: refs\/heads\///")
+    fi
+
+    if [ -z "$PROJECT" ]; then
+        ENV_DATA=$(magento-cloud environment:info --format=csv --no-header)
+        [[ $ENV_DATA =~ ^id,([^[:space:]]*) ]] && ENVIRONMENT=${BASH_REMATCH[1]}
+        [[ $ENV_DATA =~ project,([a-z|A-Z|1-9]*) ]] && PROJECT=${BASH_REMATCH[1]}
+    fi
 }
 
 function getPHPVersion {
@@ -76,7 +84,7 @@ sed "s/%ENVIRONMENT%/${ENVIRONMENT}/g" > .env
 
 
 function getEnvironmentVariables {
-    ENV_DATA=$(magento-cloud var --columns=Name --no-header --format=csv --project=$PROJECT --environment=$ENVIRONMENT)
+    ENV_DATA=$(magento-cloud var --columns=Name --level=environment --no-header --format=csv --project=$PROJECT --environment=$ENVIRONMENT)
     ENV_DATA=$(echo "$ENV_DATA" | sort -u)
     mkdir -p .warden
     echo "version: '3.5'
