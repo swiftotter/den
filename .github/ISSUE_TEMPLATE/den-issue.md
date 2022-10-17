@@ -1,5 +1,5 @@
 ---
-name: Den Issue
+name: Den Command Issue
 about: Report an issue with the Den software (e.g. `den` commands or sync)
 title: ''
 labels: bug
