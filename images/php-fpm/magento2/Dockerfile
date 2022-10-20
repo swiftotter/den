@@ -3,7 +3,7 @@ ARG PHP_VERSION
 FROM ${ENV_SOURCE_IMAGE}:${PHP_VERSION}
 USER root
 
-ADD https://files.magerun.net/n98-magerun2.phar /usr/local/bin/n98-magerun2
+ADD https://files.magerun.net/n98-magerun2-latest.phar /usr/local/bin/n98-magerun2
 RUN chmod +rx /usr/local/bin/n98-magerun2 \
     && ln -s /usr/local/bin/n98-magerun2 /usr/local/bin/n98-magerun \
     && ln -s /usr/local/bin/n98-magerun2 /usr/local/bin/magerun2 \
