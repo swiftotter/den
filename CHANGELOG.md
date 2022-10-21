@@ -33,6 +33,7 @@ First version is based on [Warden v0.12.0](https://github.com/davidalger/warden)
 * Added a Drupal environment type ([swiftotter/den#70](https://github.com/swiftotter/den/pull/70) by @bap14)
 * `den help` and `den list` will alo list any custom commands in the environment it is ran in ([swiftotter/den#78](https://github.com/swiftotter/den/pull/78) by @bap14)
 * A new `magento-cloud` environment type has been added that, during env-init, automatically detects and configures Den to use the same service versions as Adobe Commerce Cloud in ([swiftotter/den#93](https://github.com/swiftotter/den/pull/93) by @henriquekieckbusch)
+* mage2tv/magento-cache-clean has been added to all Magento 2 images.  It is available on the command line the command `cache-clean.js` or simply `cache-clean` ([swiftotter/den#105](https://github.com/swiftotter/den/pull/105) by @navarr)
 
 **Available Services Versions:**
 
