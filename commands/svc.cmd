@@ -75,8 +75,10 @@ if [[ "${WARDEN_PARAMS[0]}" == "up" ]]; then
     fi
 fi
 
+DEN_VERSION=$(cat ${WARDEN_DIR}/version)
+
 ## pass ochestration through to docker compose
-WARDEN_SERVICE_DIR=${WARDEN_DIR} docker compose \
+WARDEN_SERVICE_DIR=${WARDEN_DIR} DEN_VERSION=${DEN_VERSION:-"in-dev"} docker compose \
     --project-directory "${WARDEN_HOME_DIR}" -p den \
     "${DOCKER_COMPOSE_ARGS[@]}" "${WARDEN_PARAMS[@]}" "$@"
 

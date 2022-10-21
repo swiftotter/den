@@ -1,0 +1,9 @@
+#!/bin/sh
+
+DEN_VERSION=${DEN_VERSION:-"in-dev"}
+
+# Update version with current version
+sed -ie "s/{{DEN_VERSION}}/${DEN_VERSION}/g" /usr/share/nginx/html/index.html
+
+# Start Nginx
+/docker-entrypoint.sh nginx -g 'daemon off;'
