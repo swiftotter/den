@@ -2,7 +2,7 @@ version: "3.5"
 services:
   dashboard:
     container_name: dashboard
-    build: ${WARDEN_SERVICE_DIR}/docker/dashboard
+    image: ghcr.io/swiftotter/den-dashboard
     labels:
       - traefik.enable=true
       - traefik.http.routers.dashboard.tls=true
