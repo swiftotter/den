@@ -24,6 +24,10 @@ The `magento2` environment type provides necessary containerized services for ru
 
 In order to achieve a well performing experience on macOS, files in the webroot are synced into the container using a Mutagen sync session with the exception of `pub/media` which remains mounted using a delegated mount.
 
+## Magento Cloud
+
+The `magento-cloud` environment type uses `magento2` as a base and adds the versions of the services used by your Magento Cloud project.
+
 ## Magento 1
 
 The `magento1` environment type supports development of Magento 1 projects, launching containers including:

@@ -32,6 +32,8 @@ First version is based on [Warden v0.12.0](https://github.com/davidalger/warden)
 * Portainer is now optional and disabled by default ([swiftotter/den#69](https://github.com/swiftotter/den/pull/69) by @bap14)
 * Added a Drupal environment type ([swiftotter/den#70](https://github.com/swiftotter/den/pull/70) by @bap14)
 * `den help` and `den list` will alo list any custom commands in the environment it is ran in ([swiftotter/den#78](https://github.com/swiftotter/den/pull/78) by @bap14)
+* A new `magento-cloud` environment type has been added that, during env-init, automatically detects and configures Den to use the same service versions as Adobe Commerce Cloud in ([swiftotter/den#93](https://github.com/swiftotter/den/pull/93) by @henriquekieckbusch)
+* mage2tv/magento-cache-clean has been added to all Magento 2 images.  It is available on the command line the command `cache-clean.js` or simply `cache-clean` ([swiftotter/den#105](https://github.com/swiftotter/den/pull/105) by @navarr)
 
 **Available Services Versions:**
 
@@ -42,9 +44,9 @@ First version is based on [Warden v0.12.0](https://github.com/davidalger/warden)
 | RabbitMQ | 3.7, 3.8, 3.9, 3.10 |
 | PHP | 7.2, 7.3, 7.4, 8.0, 8.1, 8.2-rc |
 | Node JS | 10, 12, 13, 14, 15, 16, 17, 18 |
-| Elasticsearch | 5, 6, 7.6, 7.7, 7.9, 7.10, 7.12, 7.13, 7.14, 7.15, 7.16, 7.17, 8.0, 8.1, 8.2 |
-| OpenSearch | 1.1, 1.2, 1.3, 2.0, 2.1, 2.2 |
+| Elasticsearch | 5, 6, 7.6, 7.7, 7.9, 7.10, 7.12, 7.13, 7.14, 7.15, 7.16, 7.17, 8.0, 8.1, 8.2, 8.3, 8.4 |
+| OpenSearch | 1.1, 1.2, 1.3, 2.0, 2.1, 2.2, 2.3 |
 | Nginx | 1.16, 1.17, 1.18, 1.19, 1.20, 1.21, 1.22, 1.23 |
 | MySQL | 5.5, 5.6, 5.7, 8.0.28, 8.0 |
-| MariaDB | 10.0, 10.1, 10.2, 10.3, 10.4, 10.5, 10.6, 10.7, 10.8, 10.9-rc |
+| MariaDB | 10.0, 10.1, 10.2, 10.3, 10.4, 10.5, 10.6, 10.7, 10.8, 10.9, 10.10-rc |
 | Magepack | 2.3, 2.4, 2.5, 2.6, 2.7, 2.8 |

@@ -9,6 +9,8 @@ services:
       - traefik.http.routers.dashboard.rule=Host(`${WARDEN_SERVICE_DOMAIN:-den.test}`)||Host(`www.${WARDEN_SERVICE_DOMAIN:-den.test}`)
       - traefik.http.services.dashboard.loadbalancer.server.port=80
     restart: ${WARDEN_RESTART_POLICY:-always}
+    environment:
+      - DEN_VERSION=${DEN_VERSION:-"in-dev"}
   traefik:
     container_name: traefik
     image: traefik:${TRAEFIK_VERSION:-2.2}
