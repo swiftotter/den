@@ -68,7 +68,8 @@ RUN apk --no-cache add \
     fish
 
 # Enable command completion in Zsh
-RUN echo "autoload -U compinit; compinit" > /etc/zsh/zshrc.d/completions.zsh \
+RUN mkdir -p /etc/zsh/zshrc.d  \
+    && echo "autoload -U compinit; compinit" > /etc/zsh/zshrc.d/completions.zsh \
     && ln -s /usr/bin/fish /bin/fish
 
 # Configure www-data user as primary php-fpm user for better local dev experience
