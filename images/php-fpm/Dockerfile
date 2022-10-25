@@ -55,6 +55,7 @@ RUN apk --no-cache add \
     vim \
     mariadb-client \
     sudo \
+    busybox-suid \
     busybox-initscripts \
     gettext \
     ca-certificates \
