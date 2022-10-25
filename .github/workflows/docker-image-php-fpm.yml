@@ -64,7 +64,7 @@ jobs:
       max-parallel: 6
       matrix:
         php_version: [ "7.2", "7.3", "7.4", "8.0", "8.1" ]
-        node_version: [ "10", "12", "13", "14", "15", "16", "17", "18"]
+        node_version: [ "10", "12", "13", "14", "15", "16", "17", "18", "19"]
         experimental: [ false ]
         include:
           - php_version: 8.2-rc
