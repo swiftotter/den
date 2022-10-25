@@ -66,38 +66,38 @@ updates:
     schedule:
       interval: "daily"
   - package-ecosystem: "docker"
-    directory: "/images/php-fpm/opensearch"
+    directory: "/images/opensearch"
     schedule:
       interval: "daily"
   - package-ecosystem: "docker"
-    directory: "/images/php-fpm/nginx"
+    directory: "/images/nginx"
     schedule:
       interval: "daily"
   - package-ecosystem: "docker"
-    directory: "/images/php-fpm/mysql"
+    directory: "/images/mysql"
     schedule:
       interval: "daily"
   - package-ecosystem: "docker"
-    directory: "/images/php-fpm/mariadb"
+    directory: "/images/mariadb"
     schedule:
       interval: "daily"
   - package-ecosystem: "docker"
-    directory: "/images/php-fpm/mailhog"
+    directory: "/images/mailhog"
     schedule:
       interval: "daily"
   - package-ecosystem: "docker"
-    directory: "/images/php-fpm/magepack"
+    directory: "/images/magepack"
     schedule:
       interval: "daily"
   - package-ecosystem: "docker"
-    directory: "/images/php-fpm/elasticsearch"
+    directory: "/images/elasticsearch"
     schedule:
       interval: "daily"
   - package-ecosystem: "docker"
-    directory: "/images/php-fpm/dnsmasq"
+    directory: "/images/dnsmasq"
     schedule:
       interval: "daily"
   - package-ecosystem: "docker"
-    directory: "/images/php-fpm/dashboard"
+    directory: "/images/dashboard"
     schedule:
       interval: "daily"
