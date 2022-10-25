@@ -39,7 +39,7 @@ First version is based on [Warden v0.12.0](https://github.com/davidalger/warden)
 
 |Service|Versions|
 |:--|:--|
-| Varnish | 6.0, 6.5, 6.6, 7.0, 7.1 |
+| Varnish | 6.0, 6.5, 6.6, 7.0, 7.1, 7.2 |
 | Redis | 3.2, 4.0, 5.0, 6.0, 6.2, 7.0 |
 | RabbitMQ | 3.7, 3.8, 3.9, 3.10 |
 | PHP | 7.2, 7.3, 7.4, 8.0, 8.1, 8.2-rc |

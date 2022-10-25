@@ -20,6 +20,7 @@ jobs:
           - "6.6"
           - "7.0"
           - "7.1"
+          - "7.2"
 
     steps:
       - uses: actions/checkout@v3
