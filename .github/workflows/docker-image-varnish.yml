@@ -23,7 +23,7 @@ jobs:
 
     steps:
       - uses: actions/checkout@v2
-      - uses: docker/setup-qemu-action@v1
+      - uses: docker/setup-qemu-action@v2
       - uses: docker/setup-buildx-action@v2
 
       - name: Login to Github Container Registry
@@ -70,7 +70,7 @@ jobs:
 
     steps:
       - uses: actions/checkout@v2
-      - uses: docker/setup-qemu-action@v1
+      - uses: docker/setup-qemu-action@v2
       - uses: docker/setup-buildx-action@v2
 
       - name: Login to Github Container Registry
@@ -118,7 +118,7 @@ jobs:
 
     steps:
       - uses: actions/checkout@v2
-      - uses: docker/setup-qemu-action@v1
+      - uses: docker/setup-qemu-action@v2
       - uses: docker/setup-buildx-action@v2
 
       - name: Login to Github Container Registry
