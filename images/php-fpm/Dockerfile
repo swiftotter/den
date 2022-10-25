@@ -72,6 +72,10 @@ RUN mkdir -p /etc/zsh/zshrc.d  \
     && echo "autoload -U compinit; compinit" > /etc/zsh/zshrc.d/completions.zsh \
     && ln -s /usr/bin/fish /bin/fish
 
+# Install Oh My Zsh including the following Plugins: git, composer and n98-magerun
+RUN sh -c "$(curl -fsSL https://raw.github.com/ohmyzsh/ohmyzsh/master/tools/install.sh)" \
+    && sed -i 's/plugins=(git)/plugins=(git composer n98-magerun)/g' /root/.zshrc
+
 # Configure www-data user as primary php-fpm user for better local dev experience
 RUN groupmod -g 1000 www-data && usermod -u 1000 www-data \
     && chmod 0755 ~www-data \
