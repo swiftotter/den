@@ -57,4 +57,4 @@ The following shells are currently available for use:
  - ash
  - bash
  - fish
- - zsh
+ - zsh (including oh my zsh)
