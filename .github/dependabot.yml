@@ -13,3 +13,91 @@ updates:
     directory: "/docs"
     schedule:
       interval: "daily"
+  - package-ecosystem: "docker"
+    directory: "/images/varnish"
+    schedule:
+      interval: "daily"
+  - package-ecosystem: "docker"
+    directory: "/images/redis"
+    schedule:
+      interval: "daily"
+  - package-ecosystem: "docker"
+    directory: "/images/rabbitmq"
+    schedule:
+      interval: "daily"
+  - package-ecosystem: "docker"
+    directory: "/images/php-fpm"
+    schedule:
+      interval: "daily"
+  - package-ecosystem: "docker"
+    directory: "/images/php-fpm/xdebug3"
+    schedule:
+      interval: "daily"
+  - package-ecosystem: "docker"
+    directory: "/images/php-fpm/node"
+    schedule:
+      interval: "daily"
+  - package-ecosystem: "docker"
+    directory: "/images/php-fpm/magento2"
+    schedule:
+      interval: "daily"
+  - package-ecosystem: "docker"
+    directory: "/images/php-fpm/magento2/xdebug3"
+    schedule:
+      interval: "daily"
+  - package-ecosystem: "docker"
+    directory: "/images/php-fpm/magento2/blackfire"
+    schedule:
+      interval: "daily"
+  - package-ecosystem: "docker"
+    directory: "/images/php-fpm/magento1"
+    schedule:
+      interval: "daily"
+  - package-ecosystem: "docker"
+    directory: "/images/php-fpm/magento1/xdebug3"
+    schedule:
+      interval: "daily"
+  - package-ecosystem: "docker"
+    directory: "/images/php-fpm/magento1/blackfire"
+    schedule:
+      interval: "daily"
+  - package-ecosystem: "docker"
+    directory: "/images/php-fpm/blackfire"
+    schedule:
+      interval: "daily"
+  - package-ecosystem: "docker"
+    directory: "/images/php-fpm/opensearch"
+    schedule:
+      interval: "daily"
+  - package-ecosystem: "docker"
+    directory: "/images/php-fpm/nginx"
+    schedule:
+      interval: "daily"
+  - package-ecosystem: "docker"
+    directory: "/images/php-fpm/mysql"
+    schedule:
+      interval: "daily"
+  - package-ecosystem: "docker"
+    directory: "/images/php-fpm/mariadb"
+    schedule:
+      interval: "daily"
+  - package-ecosystem: "docker"
+    directory: "/images/php-fpm/mailhog"
+    schedule:
+      interval: "daily"
+  - package-ecosystem: "docker"
+    directory: "/images/php-fpm/magepack"
+    schedule:
+      interval: "daily"
+  - package-ecosystem: "docker"
+    directory: "/images/php-fpm/elasticsearch"
+    schedule:
+      interval: "daily"
+  - package-ecosystem: "docker"
+    directory: "/images/php-fpm/dnsmasq"
+    schedule:
+      interval: "daily"
+  - package-ecosystem: "docker"
+    directory: "/images/php-fpm/dashboard"
+    schedule:
+      interval: "daily"
