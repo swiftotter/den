@@ -6,6 +6,7 @@ RUN go install github.com/mailhog/mhsendmail@latest
 
 FROM ${ENV_SOURCE_IMAGE:-php}:${PHP_VERSION}-fpm-alpine
 USER root
+ARG PHP_VERSION
 
 ENV MAILHOG_HOST    mailhog
 ENV MAILHOG_PORT    1025
@@ -64,9 +65,11 @@ RUN apk --no-cache add \
     rsync \
     bash-completion \
     zsh \
-    composer-zsh-completion \
     git-zsh-completion \
     fish
+
+RUN if [[ $(printf "7.2\n${PHP_VERSION}" | sort -V | head -n1) == "7.2" ]]; \
+    then apk --no-cache add composer-zsh-completion; fi
 
 # Enable command completion in Zsh
 RUN mkdir -p /etc/zsh/zshrc.d  \
