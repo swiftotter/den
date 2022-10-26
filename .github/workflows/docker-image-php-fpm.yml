@@ -17,7 +17,7 @@ jobs:
     strategy:
       fail-fast: false
       matrix:
-        php_version: [ "7.2", "7.3", "7.4", "8.0", "8.1" ]
+        php_version: [ "7.0", "7.1", "7.2", "7.3", "7.4", "8.0", "8.1" ]
         experimental: [ false ]
         include:
           - php_version: 8.2-rc
@@ -116,7 +116,7 @@ jobs:
       fail-fast: false
       max-parallel: 2
       matrix:
-        php_version: [ "7.2", "7.3", "7.4", "8.0", "8.1" ]
+        php_version: [ "7.0", "7.1", "7.2", "7.3", "7.4", "8.0", "8.1" ]
         node_version: [ 'x',  "10", "12", "13", "14", "15", "16", "17", "18"]
         experimental: [ false ]
         xdebug_type: [ "xdebug-stable" ]
@@ -191,7 +191,7 @@ jobs:
       fail-fast: false
       max-parallel: 2
       matrix:
-        php_version: [ "7.2", "7.3", "7.4", "8.0", "8.1" ]
+        php_version: [ "7.0", "7.1", "7.2", "7.3", "7.4", "8.0", "8.1" ]
         node_version: [ 'x',  "10", "12", "13", "14", "15", "16", "17", "18"]
         experimental: [ false ]
         include:
@@ -259,7 +259,7 @@ jobs:
       fail-fast: false
       max-parallel: 2
       matrix:
-        php_version: [ "7.2", "7.3", "7.4", "8.0", "8.1" ]
+        php_version: [ "7.0", "7.1", "7.2", "7.3", "7.4", "8.0", "8.1" ]
         node_version: [ 'x',  "10", "12", "13", "14", "15", "16", "17", "18"]
         experimental: [ false ]
         include:
@@ -327,7 +327,7 @@ jobs:
       fail-fast: false
       max-parallel: 2
       matrix:
-        php_version: [ "7.2", "7.3", "7.4", "8.0", "8.1" ]
+        php_version: [ "7.0", "7.1", "7.2", "7.3", "7.4", "8.0", "8.1" ]
         node_version: [ 'x',  "10", "12", "13", "14", "15", "16", "17", "18"]
         experimental: [ false ]
         xdebug_type: [ "xdebug-stable" ]
@@ -402,7 +402,7 @@ jobs:
       fail-fast: false
       max-parallel: 2
       matrix:
-        php_version: [ "7.2", "7.3", "7.4", "8.0", "8.1" ]
+        php_version: [ "7.0", "7.1", "7.2", "7.3", "7.4", "8.0", "8.1" ]
         node_version: [ 'x',  "10", "12", "13", "14", "15", "16", "17", "18"]
         experimental: [ false ]
         include:
@@ -470,7 +470,7 @@ jobs:
       fail-fast: false
       max-parallel: 2
       matrix:
-        php_version: [ "7.2", "7.3", "7.4", "8.0", "8.1" ]
+        php_version: [ "7.0", "7.1", "7.2", "7.3", "7.4", "8.0", "8.1" ]
         node_version: [ 'x',  "10", "12", "13", "14", "15", "16", "17", "18"]
         experimental: [ false ]
         include:
@@ -538,7 +538,7 @@ jobs:
       fail-fast: false
       max-parallel: 2
       matrix:
-        php_version: [ "7.2", "7.3", "7.4", "8.0", "8.1" ]
+        php_version: [ "7.0", "7.1", "7.2", "7.3", "7.4", "8.0", "8.1" ]
         node_version: [ 'x',  "10", "12", "13", "14", "15", "16", "17", "18"]
         experimental: [ false ]
         xdebug_type: [ "xdebug-stable" ]
@@ -613,7 +613,7 @@ jobs:
       fail-fast: false
       max-parallel: 2
       matrix:
-        php_version: [ "7.2", "7.3", "7.4", "8.0", "8.1" ]
+        php_version: [ "7.0", "7.1", "7.2", "7.3", "7.4", "8.0", "8.1" ]
         node_version: [ 'x',  "10", "12", "13", "14", "15", "16", "17", "18"]
         experimental: [ false ]
         include:
