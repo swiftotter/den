@@ -15,4 +15,4 @@ foreach (PHP_VERSIONS as $phpVersion) {
     }
 }
 
-echo 'matrix=' . json_encode($matrix);
+echo 'matrix=' . json_encode(['include' => $matrix]);
