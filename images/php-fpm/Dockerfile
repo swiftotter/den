@@ -35,16 +35,6 @@ RUN chmod +x /usr/local/bin/install-php-extensions && install-php-extensions \
     xsl \
     zip
 
-COPY docker-entrypoint /usr/local/bin/
-COPY etc/profile.d/*.sh /etc/profile.d/
-COPY etc/*.ini /usr/local/etc/php/
-COPY etc/php.d/*.ini /usr/local/etc/php/conf.d/
-COPY etc/php.d/05-additions.ini.template /usr/local/etc/php/conf.d/
-
-# Install Composer
-COPY --from=composer:1 /usr/bin/composer /usr/bin/composer1
-COPY --from=composer:2 /usr/bin/composer /usr/bin/composer2
-
 # Install helpful utilities
 RUN apk --no-cache add \
     jq \
@@ -68,7 +58,22 @@ RUN apk --no-cache add \
     git-zsh-completion \
     fish
 
-RUN if [[ $(printf "7.2\n${PHP_VERSION}" | sort -V | head -n1) == "7.2" ]]; \
+# Bring in the files
+COPY docker-entrypoint /usr/local/bin/
+COPY etc/profile.d/*.sh /etc/profile.d/
+COPY etc/*.ini /usr/local/etc/php/
+COPY etc/php.d/*.ini /usr/local/etc/php/conf.d/
+COPY etc/php.d/05-additions.ini.template /usr/local/etc/php/conf.d/
+
+# Install Composer
+COPY --from=composer:1 /usr/bin/composer /usr/bin/composer1
+COPY --from=composer:2.2 /usr/bin/composer /usr/bin/composer2lts
+COPY --from=composer:2 /usr/bin/composer /usr/bin/composer2
+
+RUN if [[ $(printf "7.2\n${PHP_VERSION}" | sort -g | head -n1) != "7.2" ]]; \
+    then mv /usr/bin/composer2lts /usr/bin/composer2; fi
+
+RUN if [[ $(printf "7.2\n${PHP_VERSION}" | sort -g | head -n1) == "7.2" ]]; \
     then apk --no-cache add composer-zsh-completion; fi
 
 # Enable command completion in Zsh
