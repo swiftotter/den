@@ -23,7 +23,7 @@ jobs:
       - id: matrix
         run: |
           php .github/workflows/php-matrix/php-generator.php >> $GITHUB_OUTPUT
-      - run: echo "Matrix is ${{ steps.matrix.outputs.matrix }}
+      - run: echo "Matrix is ${{ steps.matrix.outputs.matrix }}"
   node-matrix:
     name: Generate Base PHP-Node Matrix
     runs-on: ubuntu-latest
@@ -37,7 +37,7 @@ jobs:
       - id: matrix
         run: |
           php .github/workflows/php-matrix/node-generator.php >> $GITHUB_OUTPUT
-      - run: echo "Matrix is ${{ steps.matrix.outputs.matrix }}
+      - run: echo "Matrix is ${{ steps.matrix.outputs.matrix }}"
   full-matrix:
     name: Generate Full Matrix
     runs-on: ubuntu-latest
@@ -51,7 +51,7 @@ jobs:
       - id: matrix
         run: |
           php .github/workflows/php-matrix/full-generator.php >> $GITHUB_OUTPUT
-      - run: echo "Matrix is ${{ steps.matrix.outputs.matrix }}
+      - run: echo "Matrix is ${{ steps.matrix.outputs.matrix }}"
   php-fpm:
     needs: php-matrix
     name: PHP-FPM ${{ matrix.php_version }}
