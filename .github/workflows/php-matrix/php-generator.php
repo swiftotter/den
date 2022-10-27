@@ -12,4 +12,4 @@ foreach (PHP_VERSIONS as $phpVersion) {
     ];
 }
 
-echo '::set-output name=matrix::' . json_encode($matrix);
+echo 'matrix=' . json_encode($matrix);
