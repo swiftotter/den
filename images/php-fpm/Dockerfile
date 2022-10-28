@@ -25,6 +25,7 @@ RUN chmod +x /usr/local/bin/install-php-extensions && install-php-extensions \
     gd \
     intl \
     imagick \
+    mcrypt \
     mysqli \
     pcntl \
     pdo_mysql \
