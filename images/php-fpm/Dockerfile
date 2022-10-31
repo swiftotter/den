@@ -21,10 +21,12 @@ COPY --from=mhs-builder /go/bin/mhsendmail /usr/local/bin/mhsendmail
 RUN chmod +x /usr/local/bin/install-php-extensions && install-php-extensions \
     amqp \
     bcmath \
+    calendar \
     exif \
     gd \
     intl \
     imagick \
+    imap \
     mcrypt \
     mysqli \
     pcntl \
