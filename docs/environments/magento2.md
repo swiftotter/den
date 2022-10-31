@@ -37,7 +37,7 @@ In addition to the below manual process, there is a `Github Template available f
         DB_DISTRIBUTION=mariadb
         DB_DISTRIBUTION_VERSION=10.3
         NODE_VERSION=12
-        COMPOSER_VERSION=1
+        COMPOSER_VERSION=2.2
         PHP_VERSION=7.3
         PHP_XDEBUG_3=1
         RABBITMQ_VERSION=3.8
