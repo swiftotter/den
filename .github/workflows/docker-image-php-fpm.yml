@@ -116,7 +116,7 @@ jobs:
       fail-fast: false
       matrix: ${{fromJson(needs.php-matrix.outputs.matrix)}}
     steps:
-      - uses: ghcr.io/${{ github.repository_owner }}/den-php-fpm:${{ matrix.php_version }}
+      - uses: docker://ghcr.io/${{ github.repository_owner }}/den-php-fpm:${{ matrix.php_version }}
         with:
           args: php -v
   php-node:
@@ -167,7 +167,7 @@ jobs:
       fail-fast: false
       matrix: ${{fromJson(needs.node-matrix.outputs.matrix)}}
     steps:
-      - uses: ghcr.io/${{ github.repository_owner }}/den-php-fpm:${{ matrix.php_version }}-node${{ matrix.node_version }}
+      - uses: docker://ghcr.io/${{ github.repository_owner }}/den-php-fpm:${{ matrix.php_version }}-node${{ matrix.node_version }}
         with:
           args: node -v
   xdebug:
