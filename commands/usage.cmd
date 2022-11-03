@@ -40,7 +40,7 @@ else
   WARDEN_ENV_PATH="$(locateEnvPath)" || true
   source "${WARDEN_DIR}/commands/usage.help"
   sourceCustomCommands "Your PC" "${WARDEN_HOME_DIR}/commands"
-  sourceCustomCommands "Environment (deprecated) \033[35m${WARDEN_ENV_PATH##*/}" "${WARDEN_ENV_PATH}/.warden/commands"
+  sourceCustomCommands "Environment (Warden) \033[35m${WARDEN_ENV_PATH##*/}" "${WARDEN_ENV_PATH}/.warden/commands"
   sourceCustomCommands "Environment \033[35m${WARDEN_ENV_PATH##*/}" "${WARDEN_ENV_PATH}/.den/commands"
 fi
 
