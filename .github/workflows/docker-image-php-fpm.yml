@@ -116,9 +116,7 @@ jobs:
       fail-fast: false
       matrix: ${{fromJson(needs.php-matrix.outputs.matrix)}}
     steps:
-      - uses: docker://ghcr.io/swiftotter/den-php-fpm:${{ matrix.php_version }}
-        with:
-          args: php -v
+      - run: docker run ghcr.io/${{ github.repository_owner }}/den-php-fpm:${{ matrix.php_version }} php -v
   php-node:
     name: PHP-FPM ${{ matrix.php_version }} + Node ${{ matrix.node_version }}
     runs-on: ubuntu-latest
@@ -167,9 +165,7 @@ jobs:
       fail-fast: false
       matrix: ${{fromJson(needs.node-matrix.outputs.matrix)}}
     steps:
-      - uses: docker://ghcr.io/swiftotter/den-php-fpm:${{ matrix.php_version }}-node${{ matrix.node_version }}
-        with:
-          args: node -v
+      - uses: docker run ghcr.io/swiftotter/den-php-fpm:${{ matrix.php_version }}-node${{ matrix.node_version }} node -v
   xdebug:
     name: PHP-FPM ${{ matrix.php_version }} + XDebug - Node ${{ matrix.node_version }}
     runs-on: ubuntu-latest
