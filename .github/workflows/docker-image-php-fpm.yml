@@ -107,7 +107,18 @@ jobs:
           tags: ghcr.io/${{ github.repository_owner }}/den-php-fpm:${{ matrix.php_version }}
           cache-from: type=registry,ref=ghcr.io/${{ github.repository_owner }}/den-php-fpm:${{ matrix.php_version }}-buildcache
           cache-to: type=registry,ref=ghcr.io/${{ github.repository_owner }}/den-php-fpm:${{ matrix.php_version }}-buildcache,mode=max
-
+  php-fpm-test:
+    needs: [php-matrix, php-fpm]
+    name: Test PHP ${{matrix.php_version }}
+    runs-on: ubuntu-latest
+    continue-on-error: true
+    strategy:
+      fail-fast: false
+      matrix: ${{fromJson(needs.php-matrix.outputs.matrix)}}
+    steps:
+      - uses: ghcr.io/${{ github.repository_owner }}/den-php-fpm:${{ matrix.php_version }}
+        with:
+          args: php -v
   php-node:
     name: PHP-FPM ${{ matrix.php_version }} + Node ${{ matrix.node_version }}
     runs-on: ubuntu-latest
@@ -147,7 +158,18 @@ jobs:
             NODE_VERSION=${{ matrix.node_version }}
           push: ${{ github.ref == 'refs/heads/main' && !env.ACT }}
           tags: ghcr.io/${{ github.repository_owner }}/den-php-fpm:${{ matrix.php_version }}-node${{ matrix.node_version }}
-
+  php-node-test:
+    name: Test PHP+Node ${{ matrix.node_version }}
+    runs-on: ubuntu-latest
+    needs: [ php-node, node-matrix ]
+    continue-on-error: true
+    strategy:
+      fail-fast: false
+      matrix: ${{fromJson(needs.node-matrix.outputs.matrix)}}
+    steps:
+      - uses: ghcr.io/${{ github.repository_owner }}/den-php-fpm:${{ matrix.php_version }}-node${{ matrix.node_version }}
+        with:
+          args: node -v
   xdebug:
     name: PHP-FPM ${{ matrix.php_version }} + XDebug - Node ${{ matrix.node_version }}
     runs-on: ubuntu-latest
