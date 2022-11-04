@@ -2,17 +2,17 @@ ARG ENV_SOURCE_IMAGE
 ARG PHP_VERSION
 ARG NODE_VERSION
 
-FROM node:${NODE_VERSION:-18}-alpine AS node
+FROM node:${NODE_VERSION}-alpine AS node
 RUN npm install -g grunt-cli gulp
 
 FROM ${ENV_SOURCE_IMAGE}:${PHP_VERSION}
 USER root
 
 # Copy Node to PHP
-COPY --from=node /usr/local/lib/node_modules /usr/local/lib/node_modules
-COPY --from=node /usr/local/bin/node /usr/local/bin/node
-RUN ln -s /usr/local/lib/node_modules/npm/bin/npm-cli.js /usr/local/bin/npm
-RUN ln -s /usr/local/lib/node_modules/gulp/bin/gulp.js /usr/local/bin/gulp
-RUN ln -s /usr/local/lib/node_modules/grunt-cli/bin/grunt /usr/local/bin/grunt
+COPY --from=node /usr/lib /usr/lib
+COPY --from=node /usr/local/share /usr/local/share
+COPY --from=node /usr/local/lib /usr/local/lib
+COPY --from=node /usr/local/include /usr/local/include
+COPY --from=node /usr/local/bin /usr/local/bin
 
 USER www-data
