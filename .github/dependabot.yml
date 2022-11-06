@@ -1,0 +1,103 @@
+# To get started with Dependabot version updates, you'll need to specify which
+# package ecosystems to update and where the package manifests are located.
+# Please see the documentation for all configuration options:
+# https://docs.github.com/github/administering-a-repository/configuration-options-for-dependency-updates
+
+version: 2
+updates:
+  - package-ecosystem: "github-actions" # See documentation for possible values
+    directory: "/" # Location of package manifests
+    schedule:
+      interval: "daily"
+  - package-ecosystem: "pip"
+    directory: "/docs"
+    schedule:
+      interval: "daily"
+  - package-ecosystem: "docker"
+    directory: "/images/varnish"
+    schedule:
+      interval: "daily"
+  - package-ecosystem: "docker"
+    directory: "/images/redis"
+    schedule:
+      interval: "daily"
+  - package-ecosystem: "docker"
+    directory: "/images/rabbitmq"
+    schedule:
+      interval: "daily"
+  - package-ecosystem: "docker"
+    directory: "/images/php-fpm"
+    schedule:
+      interval: "daily"
+  - package-ecosystem: "docker"
+    directory: "/images/php-fpm/xdebug3"
+    schedule:
+      interval: "daily"
+  - package-ecosystem: "docker"
+    directory: "/images/php-fpm/node"
+    schedule:
+      interval: "daily"
+  - package-ecosystem: "docker"
+    directory: "/images/php-fpm/magento2"
+    schedule:
+      interval: "daily"
+  - package-ecosystem: "docker"
+    directory: "/images/php-fpm/magento2/xdebug3"
+    schedule:
+      interval: "daily"
+  - package-ecosystem: "docker"
+    directory: "/images/php-fpm/magento2/blackfire"
+    schedule:
+      interval: "daily"
+  - package-ecosystem: "docker"
+    directory: "/images/php-fpm/magento1"
+    schedule:
+      interval: "daily"
+  - package-ecosystem: "docker"
+    directory: "/images/php-fpm/magento1/xdebug3"
+    schedule:
+      interval: "daily"
+  - package-ecosystem: "docker"
+    directory: "/images/php-fpm/magento1/blackfire"
+    schedule:
+      interval: "daily"
+  - package-ecosystem: "docker"
+    directory: "/images/php-fpm/blackfire"
+    schedule:
+      interval: "daily"
+  - package-ecosystem: "docker"
+    directory: "/images/opensearch"
+    schedule:
+      interval: "daily"
+  - package-ecosystem: "docker"
+    directory: "/images/nginx"
+    schedule:
+      interval: "daily"
+  - package-ecosystem: "docker"
+    directory: "/images/mysql"
+    schedule:
+      interval: "daily"
+  - package-ecosystem: "docker"
+    directory: "/images/mariadb"
+    schedule:
+      interval: "daily"
+  - package-ecosystem: "docker"
+    directory: "/images/mailhog"
+    schedule:
+      interval: "daily"
+  - package-ecosystem: "docker"
+    directory: "/images/magepack"
+    schedule:
+      interval: "daily"
+  - package-ecosystem: "docker"
+    directory: "/images/elasticsearch"
+    schedule:
+      interval: "daily"
+  - package-ecosystem: "docker"
+    directory: "/images/dnsmasq"
+    schedule:
+      interval: "daily"
+  - package-ecosystem: "docker"
+    directory: "/images/dashboard"
+    schedule:
+      interval: "daily"

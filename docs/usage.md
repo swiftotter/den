@@ -6,6 +6,9 @@ Launch a shell session within the project environment's `php-fpm` container:
 
     den shell
 
+For use with alternative shells, see the
+[Alternative Shells](configuration/alternative-shells.md) page
+
 Stopping a running environment:
 
     den env stop

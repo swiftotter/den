@@ -57,6 +57,13 @@ if (( "$#" )); then
     WARDEN_CMD_EXEC="${WARDEN_DIR}/commands/${1}.cmd"
     WARDEN_CMD_HELP="${WARDEN_DIR}/commands/${1}.help"
     shift
+  elif [[ -f "${WARDEN_ENV_PATH}/.den/commands/${1}.cmd" ]]; then
+    WARDEN_CMD_VERB="$1"
+    WARDEN_CMD_ANYARGS+=("$1")
+    WARDEN_CMD_EXEC="${WARDEN_ENV_PATH}/.den/commands/${1}.cmd"
+    WARDEN_CMD_HELP="${WARDEN_ENV_PATH}/.den/commands/${1}.help"
+    shift
+  ## leave .warden/commands for backward-compatibility
   elif [[ -f "${WARDEN_ENV_PATH}/.warden/commands/${1}.cmd" ]]; then
     WARDEN_CMD_VERB="$1"
     WARDEN_CMD_ANYARGS+=("$1")

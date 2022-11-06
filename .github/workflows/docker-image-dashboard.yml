@@ -1,31 +1,17 @@
-name: Docker Image Magepack
+name: Docker Image Den Dashboard
 on:
   schedule:
     - cron: "0 6 * * *" # 6 AM Daily
   push:
     paths:
       - images/.trigger
-      - images/magepack/**
-      - .github/workflows/*magepack*
+      - images/dashboard/**
+      - .github/workflows/*dashboard*
 
 jobs:
-  magepack:
-    name: Magepack
+  dashboard:
+    name: Den Dashboard
     runs-on: ubuntu-latest
-
-    strategy:
-      fail-fast: false
-      matrix:
-        version:
-          - "2.3"
-          - "2.4"
-          - "2.5"
-          - "2.6"
-          - "2.7"
-          - "2.8"
-          - "2.9"
-          - "2.10"
-          - "2.11"
 
     steps:
       - uses: actions/checkout@v3
@@ -49,8 +35,7 @@ jobs:
 
       - uses: docker/build-push-action@v3
         with:
-          context: images/magepack
+          context: images/dashboard
           platforms: linux/amd64,linux/arm64
-          build-args: MAGEPACK_VERSION=${{ matrix.version }}
           push: ${{ github.ref == 'refs/heads/main' && !env.ACT }}
-          tags: ghcr.io/${{ github.repository_owner }}/den-magepack:${{ matrix.version }}
+          tags: ghcr.io/${{ github.repository_owner }}/den-dashboard:latest
