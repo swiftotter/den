@@ -124,7 +124,7 @@ done
 function backupEnvPhpFile {
     if [[ -f "app/etc/env.php" ]]; then
         cp app/etc/env.php app/etc/env.php.bak
-        :: Backup of app/etc/env.php => app/etc/env.php.bak
+        :: "Backup of app/etc/env.php => app/etc/env.php.bak"
     fi
 }
 
@@ -231,7 +231,7 @@ function createStoresPhpFile {
     mkdir -p app/etc
     if [[ -f "app/etc/stores.php" ]]; then
         cp app/etc/stores.php app/etc/stores.php.bak
-        :: Backup of app/etc/stores.php => app/etc/stores.php.bak
+        :: "Backup of app/etc/stores.php => app/etc/stores.php.bak"
     fi
 
     echo "<?php
