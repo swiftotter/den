@@ -60,7 +60,8 @@ RUN apk --no-cache add \
     zsh \
     git-zsh-completion \
     fish \
-    pwgen
+    pwgen \
+    openssh
 
 # Bring in the files
 COPY docker-entrypoint /usr/local/bin/
