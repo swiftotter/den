@@ -15,14 +15,16 @@ foreach (PHP_VERSIONS as $phpVersion) {
         'php_version' => $phpVersion,
         'node_version' => 'x',
         'xdebug_type' => $xdebugType,
-        'experimental' => $experimental
+        'experimental' => $experimental,
+        'latest' => $phpVersion === PHP_LATEST,
     ];
     foreach (NODE_VERSIONS as $nodeVersion) {
         $matrix[] = [
             'php_version' => $phpVersion,
             'node_version' => $nodeVersion,
             'xdebug_type' => $xdebugType,
-            'experimental' => $experimental
+            'experimental' => $experimental,
+            'latest' => $phpVersion === PHP_LATEST && $nodeVersion === NODE_LATEST,
         ];
     }
 }
