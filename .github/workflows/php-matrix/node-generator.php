@@ -10,7 +10,8 @@ foreach (PHP_VERSIONS as $phpVersion) {
         $matrix[] = [
             'php_version' => $phpVersion,
             'node_version' => $nodeVersion,
-            'experimental' => $experimental
+            'experimental' => $experimental,
+            'latest' => $phpVersion === PHP_LATEST && $nodeVersion === NODE_LATEST,
         ];
     }
 }

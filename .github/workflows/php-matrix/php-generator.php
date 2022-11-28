@@ -8,7 +8,8 @@ foreach (PHP_VERSIONS as $phpVersion) {
     $experimental = in_array($phpVersion, EXPERIMENTAL_PHP_VERSIONS);
     $matrix[] = [
         'php_version' => $phpVersion,
-        'experimental' => $experimental
+        'experimental' => $experimental,
+        'latest' => $phpVersion === PHP_LATEST,
     ];
 }
 
