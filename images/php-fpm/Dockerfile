@@ -51,7 +51,6 @@ RUN apk --no-cache add \
     mariadb-client \
     sudo \
     busybox-suid \
-    busybox-initscripts \
     gettext \
     ca-certificates \
     shadow \
