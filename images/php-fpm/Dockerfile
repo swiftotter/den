@@ -50,7 +50,6 @@ RUN apk --no-cache add \
     mariadb-client \
     sudo \
     busybox-suid \
-    busybox-initscripts \
     gettext \
     ca-certificates \
     shadow \
@@ -62,6 +61,9 @@ RUN apk --no-cache add \
     fish \
     pwgen \
     openssh
+
+# Add Cron
+RUN apk --no-cache add busybox-openrc || apk --no-cache add busybox-initscripts
 
 # Bring in the files
 COPY docker-entrypoint /usr/local/bin/
