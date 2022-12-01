@@ -24,6 +24,7 @@ RUN chmod +x /usr/local/bin/install-php-extensions && install-php-extensions \
     calendar \
     exif \
     gd \
+    gmp \
     intl \
     imagick \
     imap \
