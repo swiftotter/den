@@ -2,7 +2,7 @@ version: "3.5"
 services:
   dashboard:
     container_name: dashboard
-    image: ${WARDEN_IMAGE_REPOSITORY}/den-dashboard
+    image: ${WARDEN_IMAGE_REPOSITORY:-ghcr.io/swiftotter}/den-dashboard
     labels:
       - traefik.enable=true
       - traefik.http.routers.dashboard.tls=true
@@ -31,7 +31,7 @@ services:
 
   dnsmasq:
     container_name: dnsmasq
-    image: ${WARDEN_IMAGE_REPOSITORY}/den-dnsmasq
+    image: ${WARDEN_IMAGE_REPOSITORY:-ghcr.io/swiftotter}/den-dnsmasq
     ports:
       - "127.0.0.1:53:53/udp"
     environment:
@@ -67,7 +67,7 @@ services:
 
   mailhog:
     container_name: mailhog
-    image: ${WARDEN_IMAGE_REPOSITORY}/den-mailhog:1.0
+    image: ${WARDEN_IMAGE_REPOSITORY:-ghcr.io/swiftotter}/den-mailhog:1.0
     labels:
       - traefik.enable=true
       - traefik.http.routers.mailhog.tls=true
