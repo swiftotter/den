@@ -78,9 +78,15 @@ COPY --from=composer:1 /usr/bin/composer /usr/bin/composer1
 COPY --from=composer:2.2 /usr/bin/composer /usr/bin/composer2lts
 COPY --from=composer:2 /usr/bin/composer /usr/bin/composer2
 
+# If PHP < 7.2
 RUN if [[ $(printf "7.2\n${PHP_VERSION}" | sort -g | head -n1) != "7.2" ]]; \
     then mv /usr/bin/composer2lts /usr/bin/composer2; fi
 
+# If PHP >= 7.1
+RUN if [[ $(printf "7.1\n${PHP_VERSION}" | sort -g | head -n1) == "7.1" ]]; \
+    then apk --no-cache add mariadb-connector-c; fi
+
+# If PHP >= 7.2
 RUN if [[ $(printf "7.2\n${PHP_VERSION}" | sort -g | head -n1) == "7.2" ]]; \
     then apk --no-cache add composer-zsh-completion; fi
 
