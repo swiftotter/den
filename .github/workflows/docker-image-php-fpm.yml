@@ -106,11 +106,11 @@ jobs:
             PHP_VERSION=${{ matrix.php_version }}
             ENV_SOURCE_IMAGE=php
           push: false
-          tags: ghcr.io/${{ github.repository_owner }}/den-php-fpm:${{ matrix.php_version }}
+          tags: test-image
           cache-from: type=registry,ref=ghcr.io/${{ github.repository_owner }}/den-php-fpm:${{ matrix.php_version }}-buildcache
           cache-to: type=registry,ref=ghcr.io/${{ github.repository_owner }}/den-php-fpm:${{ matrix.php_version }}-buildcache,mode=max
 
-      - run: docker run ${{ steps.build.outputs.imageid }} php -v
+      - run: docker run test-image php -v
 
       - uses: docker/build-push-action@v3
         with:
@@ -177,9 +177,9 @@ jobs:
             PHP_VERSION=${{ matrix.php_version }}
             NODE_VERSION=${{ matrix.node_version }}
           push: false
-          tags: ghcr.io/${{ github.repository_owner }}/den-php-fpm:${{ matrix.php_version }}-node${{ matrix.node_version }}
+          tags: test-image
 
-      - run: docker run ${{ steps.build.outputs.imageid }} node -v
+      - run: docker run test-image node -v
 
       - uses: docker/build-push-action@v3
         with:
