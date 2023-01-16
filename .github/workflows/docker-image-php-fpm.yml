@@ -101,7 +101,7 @@ jobs:
         with:
           file: images/php-fpm/Dockerfile
           context: images/php-fpm/context
-          platforms: linux/amd64,linux/arm64
+          platforms: linux/amd64
           build-args: |
             PHP_VERSION=${{ matrix.php_version }}
             ENV_SOURCE_IMAGE=php
@@ -170,7 +170,7 @@ jobs:
         with:
           file: images/php-fpm/node/Dockerfile
           context: images/php-fpm/context
-          platforms: linux/amd64,linux/arm64
+          platforms: linux/amd64
           build-args: |
             ENV_SOURCE_IMAGE=ghcr.io/${{ github.repository_owner }}/den-php-fpm
             PHP_VERSION=${{ matrix.php_version }}
