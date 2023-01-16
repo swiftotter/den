@@ -18,4 +18,6 @@ COPY --from=node /usr/local/bin /usr/local/bin
 # Copy Yarn
 COPY --from=node /opt /opt
 
+RUN apk del ghostscript imagemagick gcc x265-libs libheif mariadb-client fish icu-libs libde265 libjxl libstdc++ && apk add --update --no-cache ghostscript imagemagick gcc x265-libs libheif mariadb-client fish icu-libs libde265 libjxl libstdc++
+
 USER www-data
