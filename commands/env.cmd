@@ -40,9 +40,9 @@ if [[ -z ${DB_DISTRIBUTION_VERSION} ]]; then
 fi
 
 ## configure xdebug version
-export XDEBUG_VERSION="debug" # xdebug2 image
+export XDEBUG_VERSION="xdebug2" # xdebug2 image
 if [[ ${PHP_XDEBUG_3} -eq 1 ]]; then
-    export XDEBUG_VERSION="xdebug3"
+    export XDEBUG_VERSION="debug"
 fi
 
 if [[ ${WARDEN_ENV_TYPE} != local ]]; then

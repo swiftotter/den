@@ -33,7 +33,7 @@ services:
 
   php-debug:
     hostname: "${WARDEN_ENV_NAME}-php-debug"
-    image: ${WARDEN_IMAGE_REPOSITORY}/den-php-fpm${WARDEN_SVC_PHP_VARIANT:-}-debug:${PHP_VERSION:-7.4}${WARDEN_SVC_PHP_NODE:-}
+    image: ${WARDEN_IMAGE_REPOSITORY}/den-php-fpm${WARDEN_SVC_PHP_VARIANT:-}-${XDEBUG_VERSION}:${PHP_VERSION:-7.4}${WARDEN_SVC_PHP_NODE:-}
     environment:
       - TRAEFIK_DOMAIN
       - TRAEFIK_SUBDOMAIN
