@@ -96,7 +96,7 @@ jobs:
           password: ${{ secrets.DOCKER_PASSWORD }}
         if: ${{ !env.ACT }}
 
-      - uses: docker/build-push-action@v3
+      - uses: docker/build-push-action@v4
         id: build
         with:
           file: images/php-fpm/Dockerfile
@@ -111,7 +111,7 @@ jobs:
 
       - run: docker run den/test-image:latest php -v
 
-      - uses: docker/build-push-action@v3
+      - uses: docker/build-push-action@v4
         with:
           file: images/php-fpm/Dockerfile
           context: images/php-fpm/context
@@ -124,7 +124,7 @@ jobs:
           cache-from: type=registry,ref=ghcr.io/${{ github.repository_owner }}/den-php-fpm:${{ matrix.php_version }}-buildcache
           cache-to: type=registry,ref=ghcr.io/${{ github.repository_owner }}/den-php-fpm:${{ matrix.php_version }}-buildcache,mode=max
 
-      - uses: docker/build-push-action@v3
+      - uses: docker/build-push-action@v4
         if: ${{ matrix.latest }}
         with:
           file: images/php-fpm/Dockerfile
@@ -165,7 +165,7 @@ jobs:
           password: ${{ secrets.DOCKER_PASSWORD }}
         if: ${{ !env.ACT }}
 
-      - uses: docker/build-push-action@v3
+      - uses: docker/build-push-action@v4
         id: build
         with:
           file: images/php-fpm/node/Dockerfile
@@ -180,7 +180,7 @@ jobs:
 
       - run: docker run den/test-image:latest node -v
 
-      - uses: docker/build-push-action@v3
+      - uses: docker/build-push-action@v4
         with:
           file: images/php-fpm/node/Dockerfile
           context: images/php-fpm/context
@@ -191,7 +191,7 @@ jobs:
             NODE_VERSION=${{ matrix.node_version }}
           push: ${{ github.ref == 'refs/heads/main' && !env.ACT }}
           tags: ghcr.io/${{ github.repository_owner }}/den-php-fpm:${{ matrix.php_version }}-node${{ matrix.node_version }}
-      - uses: docker/build-push-action@v3
+      - uses: docker/build-push-action@v4
         if: ${{ matrix.latest }}
         with:
           file: images/php-fpm/node/Dockerfile
@@ -231,7 +231,7 @@ jobs:
           password: ${{ secrets.DOCKER_PASSWORD }}
         if: ${{ !env.ACT }}
 
-      - uses: docker/build-push-action@v3
+      - uses: docker/build-push-action@v4
         if: ${{ matrix.node_version!='x' }}
         with:
           file: images/php-fpm/xdebug3/Dockerfile
@@ -244,7 +244,7 @@ jobs:
           push: ${{ github.ref == 'refs/heads/main' && !env.ACT }}
           tags: ghcr.io/${{ github.repository_owner }}/den-php-fpm-debug:${{ matrix.php_version }}-node${{ matrix.node_version }}
 
-      - uses: docker/build-push-action@v3
+      - uses: docker/build-push-action@v4
         if: ${{ matrix.node_version=='x' }}
         with:
           file: images/php-fpm/xdebug3/Dockerfile
@@ -257,7 +257,7 @@ jobs:
           push: ${{ github.ref == 'refs/heads/main' && !env.ACT }}
           tags: ghcr.io/${{ github.repository_owner }}/den-php-fpm-debug:${{ matrix.php_version }}
 
-      - uses: docker/build-push-action@v3
+      - uses: docker/build-push-action@v4
         if: ${{ matrix.node_version!='x' && matrix.latest }}
         with:
           file: images/php-fpm/xdebug3/Dockerfile
@@ -270,7 +270,7 @@ jobs:
           push: ${{ github.ref == 'refs/heads/main' && !env.ACT }}
           tags: ghcr.io/${{ github.repository_owner }}/den-php-fpm-debug:latest-nodelatest
 
-      - uses: docker/build-push-action@v3
+      - uses: docker/build-push-action@v4
         if: ${{ matrix.node_version=='x' && matrix.latest }}
         with:
           file: images/php-fpm/xdebug3/Dockerfile
@@ -310,7 +310,7 @@ jobs:
           password: ${{ secrets.DOCKER_PASSWORD }}
         if: ${{ !env.ACT }}
 
-      - uses: docker/build-push-action@v3
+      - uses: docker/build-push-action@v4
         if: ${{ matrix.node_version!='x' }}
         with:
           file: images/php-fpm/blackfire/Dockerfile
@@ -322,7 +322,7 @@ jobs:
           push: ${{ github.ref == 'refs/heads/main' && !env.ACT }}
           tags: ghcr.io/${{ github.repository_owner }}/den-php-fpm-blackfire:${{ matrix.php_version }}-node${{ matrix.node_version }}
 
-      - uses: docker/build-push-action@v3
+      - uses: docker/build-push-action@v4
         if: ${{ matrix.node_version=='x' }}
         with:
           file: images/php-fpm/blackfire/Dockerfile
@@ -334,7 +334,7 @@ jobs:
           push: ${{ github.ref == 'refs/heads/main' && !env.ACT }}
           tags: ghcr.io/${{ github.repository_owner }}/den-php-fpm-blackfire:${{ matrix.php_version }}
 
-      - uses: docker/build-push-action@v3
+      - uses: docker/build-push-action@v4
         if: ${{ matrix.node_version!='x' && matrix.latest }}
         with:
           file: images/php-fpm/blackfire/Dockerfile
@@ -346,7 +346,7 @@ jobs:
           push: ${{ github.ref == 'refs/heads/main' && !env.ACT }}
           tags: ghcr.io/${{ github.repository_owner }}/den-php-fpm-blackfire:latest-nodelatest
 
-      - uses: docker/build-push-action@v3
+      - uses: docker/build-push-action@v4
         if: ${{ matrix.node_version=='x' && matrix.latest }}
         with:
           file: images/php-fpm/blackfire/Dockerfile
@@ -385,7 +385,7 @@ jobs:
           password: ${{ secrets.DOCKER_PASSWORD }}
         if: ${{ !env.ACT }}
 
-      - uses: docker/build-push-action@v3
+      - uses: docker/build-push-action@v4
         if: ${{ matrix.node_version!='x' }}
         with:
           file: images/php-fpm/magento1/Dockerfile
@@ -397,7 +397,7 @@ jobs:
           push: ${{ github.ref == 'refs/heads/main' && !env.ACT }}
           tags: ghcr.io/${{ github.repository_owner }}/den-php-fpm-magento1:${{ matrix.php_version }}-node${{ matrix.node_version }}
 
-      - uses: docker/build-push-action@v3
+      - uses: docker/build-push-action@v4
         if: ${{ matrix.node_version=='x' }}
         with:
           file: images/php-fpm/magento1/Dockerfile
@@ -409,7 +409,7 @@ jobs:
           push: ${{ github.ref == 'refs/heads/main' && !env.ACT }}
           tags: ghcr.io/${{ github.repository_owner }}/den-php-fpm-magento1:${{ matrix.php_version }}
 
-      - uses: docker/build-push-action@v3
+      - uses: docker/build-push-action@v4
         if: ${{ matrix.node_version!='x' && matrix.latest }}
         with:
           file: images/php-fpm/magento1/Dockerfile
@@ -421,7 +421,7 @@ jobs:
           push: ${{ github.ref == 'refs/heads/main' && !env.ACT }}
           tags: ghcr.io/${{ github.repository_owner }}/den-php-fpm-magento1:latest-nodelatest
 
-      - uses: docker/build-push-action@v3
+      - uses: docker/build-push-action@v4
         if: ${{ matrix.node_version=='x' && matrix.latest }}
         with:
           file: images/php-fpm/magento1/Dockerfile
@@ -460,7 +460,7 @@ jobs:
           password: ${{ secrets.DOCKER_PASSWORD }}
         if: ${{ !env.ACT }}
 
-      - uses: docker/build-push-action@v3
+      - uses: docker/build-push-action@v4
         if: ${{ matrix.node_version!='x' }}
         with:
           file: images/php-fpm/magento1/xdebug3/Dockerfile
@@ -473,7 +473,7 @@ jobs:
           push: ${{ github.ref == 'refs/heads/main' && !env.ACT }}
           tags: ghcr.io/${{ github.repository_owner }}/den-php-fpm-magento1-debug:${{ matrix.php_version }}-node${{ matrix.node_version }}
 
-      - uses: docker/build-push-action@v3
+      - uses: docker/build-push-action@v4
         if: ${{ matrix.node_version=='x' }}
         with:
           file: images/php-fpm/magento1/xdebug3/Dockerfile
@@ -486,7 +486,7 @@ jobs:
           push: ${{ github.ref == 'refs/heads/main' && !env.ACT }}
           tags: ghcr.io/${{ github.repository_owner }}/den-php-fpm-magento1-debug:${{ matrix.php_version }}
 
-      - uses: docker/build-push-action@v3
+      - uses: docker/build-push-action@v4
         if: ${{ matrix.node_version!='x' && matrix.latest }}
         with:
           file: images/php-fpm/magento1/xdebug3/Dockerfile
@@ -499,7 +499,7 @@ jobs:
           push: ${{ github.ref == 'refs/heads/main' && !env.ACT }}
           tags: ghcr.io/${{ github.repository_owner }}/den-php-fpm-magento1-debug:latest-nodelatest
 
-      - uses: docker/build-push-action@v3
+      - uses: docker/build-push-action@v4
         if: ${{ matrix.node_version=='x' && matrix.latest }}
         with:
           file: images/php-fpm/magento1/xdebug3/Dockerfile
@@ -539,7 +539,7 @@ jobs:
           password: ${{ secrets.DOCKER_PASSWORD }}
         if: ${{ !env.ACT }}
 
-      - uses: docker/build-push-action@v3
+      - uses: docker/build-push-action@v4
         if: ${{ matrix.node_version!='x' }}
         with:
           file: images/php-fpm/magento1/blackfire/Dockerfile
@@ -551,7 +551,7 @@ jobs:
           push: ${{ github.ref == 'refs/heads/main' && !env.ACT }}
           tags: ghcr.io/${{ github.repository_owner }}/den-php-fpm-magento1-blackfire:${{ matrix.php_version }}-node${{ matrix.node_version }}
 
-      - uses: docker/build-push-action@v3
+      - uses: docker/build-push-action@v4
         if: ${{ matrix.node_version=='x' }}
         with:
           file: images/php-fpm/magento1/blackfire/Dockerfile
@@ -563,7 +563,7 @@ jobs:
           push: ${{ github.ref == 'refs/heads/main' && !env.ACT }}
           tags: ghcr.io/${{ github.repository_owner }}/den-php-fpm-magento1-blackfire:${{ matrix.php_version }}
 
-      - uses: docker/build-push-action@v3
+      - uses: docker/build-push-action@v4
         if: ${{ matrix.node_version!='x' && matrix.latest }}
         with:
           file: images/php-fpm/magento1/blackfire/Dockerfile
@@ -575,7 +575,7 @@ jobs:
           push: ${{ github.ref == 'refs/heads/main' && !env.ACT }}
           tags: ghcr.io/${{ github.repository_owner }}/den-php-fpm-magento1-blackfire:latest-nodelatest
 
-      - uses: docker/build-push-action@v3
+      - uses: docker/build-push-action@v4
         if: ${{ matrix.node_version=='x' && matrix.latest }}
         with:
           file: images/php-fpm/magento1/blackfire/Dockerfile
@@ -614,7 +614,7 @@ jobs:
           password: ${{ secrets.DOCKER_PASSWORD }}
         if: ${{ !env.ACT }}
 
-      - uses: docker/build-push-action@v3
+      - uses: docker/build-push-action@v4
         if: ${{ matrix.node_version!='x' }}
         with:
           file: images/php-fpm/magento2/Dockerfile
@@ -626,7 +626,7 @@ jobs:
           push: ${{ github.ref == 'refs/heads/main' && !env.ACT }}
           tags: ghcr.io/${{ github.repository_owner }}/den-php-fpm-magento2:${{ matrix.php_version }}-node${{ matrix.node_version }}
 
-      - uses: docker/build-push-action@v3
+      - uses: docker/build-push-action@v4
         if: ${{ matrix.node_version=='x' }}
         with:
           file: images/php-fpm/magento2/Dockerfile
@@ -638,7 +638,7 @@ jobs:
           push: ${{ github.ref == 'refs/heads/main' && !env.ACT }}
           tags: ghcr.io/${{ github.repository_owner }}/den-php-fpm-magento2:${{ matrix.php_version }}
 
-      - uses: docker/build-push-action@v3
+      - uses: docker/build-push-action@v4
         if: ${{ matrix.node_version!='x' && matrix.latest }}
         with:
           file: images/php-fpm/magento2/Dockerfile
@@ -650,7 +650,7 @@ jobs:
           push: ${{ github.ref == 'refs/heads/main' && !env.ACT }}
           tags: ghcr.io/${{ github.repository_owner }}/den-php-fpm-magento2:latest-nodelatest
 
-      - uses: docker/build-push-action@v3
+      - uses: docker/build-push-action@v4
         if: ${{ matrix.node_version=='x' && matrix.latest }}
         with:
           file: images/php-fpm/magento2/Dockerfile
@@ -689,7 +689,7 @@ jobs:
           password: ${{ secrets.DOCKER_PASSWORD }}
         if: ${{ !env.ACT }}
 
-      - uses: docker/build-push-action@v3
+      - uses: docker/build-push-action@v4
         if: ${{ matrix.node_version!='x' }}
         with:
           file: images/php-fpm/magento2/xdebug3/Dockerfile
@@ -702,7 +702,7 @@ jobs:
           push: ${{ github.ref == 'refs/heads/main' && !env.ACT }}
           tags: ghcr.io/${{ github.repository_owner }}/den-php-fpm-magento2-debug:${{ matrix.php_version }}-node${{ matrix.node_version }}
 
-      - uses: docker/build-push-action@v3
+      - uses: docker/build-push-action@v4
         if: ${{ matrix.node_version=='x' }}
         with:
           file: images/php-fpm/magento2/xdebug3/Dockerfile
@@ -715,7 +715,7 @@ jobs:
           push: ${{ github.ref == 'refs/heads/main' && !env.ACT }}
           tags: ghcr.io/${{ github.repository_owner }}/den-php-fpm-magento2-debug:${{ matrix.php_version }}
 
-      - uses: docker/build-push-action@v3
+      - uses: docker/build-push-action@v4
         if: ${{ matrix.node_version!='x' && matrix.latest }}
         with:
           file: images/php-fpm/magento2/xdebug3/Dockerfile
@@ -728,7 +728,7 @@ jobs:
           push: ${{ github.ref == 'refs/heads/main' && !env.ACT }}
           tags: ghcr.io/${{ github.repository_owner }}/den-php-fpm-magento2-debug:latest-nodelatest
 
-      - uses: docker/build-push-action@v3
+      - uses: docker/build-push-action@v4
         if: ${{ matrix.node_version=='x' && matrix.latest }}
         with:
           file: images/php-fpm/magento2/xdebug3/Dockerfile
@@ -768,7 +768,7 @@ jobs:
           password: ${{ secrets.DOCKER_PASSWORD }}
         if: ${{ !env.ACT }}
 
-      - uses: docker/build-push-action@v3
+      - uses: docker/build-push-action@v4
         if: ${{ matrix.node_version!='x' }}
         with:
           file: images/php-fpm/magento2/blackfire/Dockerfile
@@ -780,7 +780,7 @@ jobs:
           push: ${{ github.ref == 'refs/heads/main' && !env.ACT }}
           tags: ghcr.io/${{ github.repository_owner }}/den-php-fpm-magento2-blackfire:${{ matrix.php_version }}-node${{ matrix.node_version }}
 
-      - uses: docker/build-push-action@v3
+      - uses: docker/build-push-action@v4
         if: ${{ matrix.node_version=='x' }}
         with:
           file: images/php-fpm/magento2/blackfire/Dockerfile
@@ -792,7 +792,7 @@ jobs:
           push: ${{ github.ref == 'refs/heads/main' && !env.ACT }}
           tags: ghcr.io/${{ github.repository_owner }}/den-php-fpm-magento2-blackfire:${{ matrix.php_version }}
 
-      - uses: docker/build-push-action@v3
+      - uses: docker/build-push-action@v4
         if: ${{ matrix.node_version!='x' && matrix.latest }}
         with:
           file: images/php-fpm/magento2/blackfire/Dockerfile
@@ -804,7 +804,7 @@ jobs:
           push: ${{ github.ref == 'refs/heads/main' && !env.ACT }}
           tags: ghcr.io/${{ github.repository_owner }}/den-php-fpm-magento2-blackfire:latest-nodelatest
 
-      - uses: docker/build-push-action@v3
+      - uses: docker/build-push-action@v4
         if: ${{ matrix.node_version=='x' && matrix.latest }}
         with:
           file: images/php-fpm/magento2/blackfire/Dockerfile

@@ -51,7 +51,7 @@ jobs:
           )
           echo "VARNISH_VERSION=${VARNISH_VERSION}" | tee /dev/stderr >> $GITHUB_ENV
 
-      - uses: docker/build-push-action@v3
+      - uses: docker/build-push-action@v4
         with:
           context: images/varnish
           platforms: linux/amd64,linux/arm64
@@ -98,7 +98,7 @@ jobs:
           )
           echo "VARNISH_VERSION=${VARNISH_VERSION}" | tee /dev/stderr >> $GITHUB_ENV
 
-      - uses: docker/build-push-action@v3
+      - uses: docker/build-push-action@v4
         with:
           context: images/varnish
           file: images/varnish/Dockerfile.lts
@@ -140,7 +140,7 @@ jobs:
       - name: Configure RPM repository
         run: echo "VARNISH_VERSION=$(echo ${{ matrix.version }} | tr -d .)" >> $GITHUB_ENV
 
-      - uses: docker/build-push-action@v3
+      - uses: docker/build-push-action@v4
         with:
           context: images/varnish
           file: images/varnish/Dockerfile.legacy
