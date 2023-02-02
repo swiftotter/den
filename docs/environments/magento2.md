@@ -98,6 +98,10 @@ In addition to the below manual process, there is a [Github Template available f
 
 8.  Install the application and you should be all set:
 
+    :::{note}
+    If you are using OpenSearch instead of ElasticSearch, use `--elasticsearch-host=opensearch` instead of `--elasticsearch-host=elasticsearch`.
+    :::
+
         ## Install Application
         bin/magento setup:install \
             --backend-frontname=backend \
