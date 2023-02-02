@@ -1,4 +1,4 @@
-# LiveReload Setup
+# Grunt and LiveReload Setup
 
 LiveReload routing is currently supported only on the `magento2` environment type. Other environment types may utilize LiveReload via per-project compose configurations to setup the routing for LiveReload JS and WebSocket endpoints.
 
@@ -9,6 +9,12 @@ Magento 2 bundles an example grunt based server-side compilation workflow which 
 1. Rename or copy `Gruntfile.js.sample` file to `Gruntfile.js` in your project root.
 
 2. Rename or copy `package.json.sample` file to `package.json` in your project root.
+
+   :::{note}
+   If you are running your dev environment on a Mac with Apple Silicon, you may encounter a compatibility issue in the next
+   step. Before moving on to `npm install`, find the line for the package `grunt-contrib-jasmine` in `package.json` and
+   remove it.
+   :::
 
 3. Run `npm install` to install the required NodeJS packages as defined in `package.json`.
 
