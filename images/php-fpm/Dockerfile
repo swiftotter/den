@@ -28,7 +28,6 @@ RUN chmod +x /usr/local/bin/install-php-extensions && install-php-extensions \
     intl \
     imagick \
     imap \
-    mcrypt \
     mysqli \
     pcntl \
     pdo_mysql \
@@ -77,6 +76,10 @@ COPY etc/php.d/05-additions.ini.template /usr/local/etc/php/conf.d/
 COPY --from=composer:1 /usr/bin/composer /usr/bin/composer1
 COPY --from=composer:2.2 /usr/bin/composer /usr/bin/composer2lts
 COPY --from=composer:2 /usr/bin/composer /usr/bin/composer2
+
+# If PHP < 8.2
+RUN if [[ $(printf "8.2\n${PHP_VERSION}" | sort -g |head -n1) != "8.2" ]]; \
+    then install-php-extensions mcrypt; fi
 
 # If PHP < 7.2
 RUN if [[ $(printf "7.2\n${PHP_VERSION}" | sort -g | head -n1) != "7.2" ]]; \
