@@ -2,7 +2,6 @@ name: Docker Image PHP-FPM
 on:
   schedule:
     - cron: "0 6 * * *"   # 6 AM daily
-  pull_request:
   push:
     paths:
       - images/.trigger
