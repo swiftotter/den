@@ -3,4 +3,4 @@ services:
   php-blackfire:
     volumes:
       - /run/host-services/ssh-auth.sock:/run/host-services/ssh-auth.sock
-
+      - .${WARDEN_WEB_ROOT:-}/var:/var/www/html/var:cached
