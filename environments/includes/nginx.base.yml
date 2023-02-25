@@ -14,4 +14,5 @@ services:
     volumes:
       - .${WARDEN_WEB_ROOT:-}/:/var/www/html:cached
     environment:
+      - FORCE_DEBUG=${WARDEN_FORCE_DEBUG:-}
       - XDEBUG_CONNECT_BACK_HOST=${XDEBUG_CONNECT_BACK_HOST:-''}
