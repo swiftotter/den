@@ -65,7 +65,7 @@ jobs:
           )
           echo "ES_VERSION=${ES_VERSION}" | tee /dev/stderr >> $GITHUB_ENV
 
-      - uses: docker/build-push-action@v3
+      - uses: docker/build-push-action@v4
         with:
           context: images/elasticsearch
           platforms: linux/amd64,linux/arm64
