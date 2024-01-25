@@ -1,6 +1,6 @@
 ; Enable xdebug extension module
 zend_extension=xdebug.so
-
+xdebug.start_with_request=yes
 xdebug.discover_client_host="on"
 xdebug.client_discovery_header="HTTP_X_DEBUG_HOST,HTTP_X_FORWARDED_FOR,REMOTE_ADDR"
 xdebug.idekey="PHPSTORM"
