@@ -6,10 +6,11 @@ x-volumes: &volumes
   - .${WARDEN_WEB_ROOT:-}/:/var/www/html:cached
   - bashhistory:/bash_history
   - sshdirectory:/home/www-data/.ssh
+  - bashcompletion:/etc/bash_completion.d
 
 x-extra_hosts: &extra_hosts
-    - ${TRAEFIK_DOMAIN}:${TRAEFIK_ADDRESS:-0.0.0.0}
-    - ${TRAEFIK_SUBDOMAIN:-app}.${TRAEFIK_DOMAIN}:${TRAEFIK_ADDRESS:-0.0.0.0}
+  - ${TRAEFIK_DOMAIN}:${TRAEFIK_ADDRESS:-0.0.0.0}
+  - ${TRAEFIK_SUBDOMAIN:-app}.${TRAEFIK_DOMAIN}:${TRAEFIK_ADDRESS:-0.0.0.0}
 
 services:
   nginx:
@@ -51,3 +52,4 @@ services:
 volumes:
   bashhistory:
   sshdirectory:
+  bashcompletion:
