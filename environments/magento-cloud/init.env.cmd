@@ -104,7 +104,7 @@ services:
 }
 
 while true; do
-    read -p $'\033[32mDo you want to import the Environment variables from '"$ENVIRONMENT"'? y/n\033[0m ' resp
+    read -p $'\033[32mDo you want to import the Environment variables from '"$ENVIRONMENT"$'? y/n\033[0m ' resp
     case $resp in
       [Yy]*)
             echo "Saving enviroment variables in .warden/warden-env.yml";
