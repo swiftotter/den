@@ -19,3 +19,6 @@ services:
           HostRegexp(`{subdomain:.+}.${TRAEFIK_DOMAIN}`) || Host(`${TRAEFIK_DOMAIN}`)
       - traefik.http.services.${WARDEN_ENV_NAME}-varnish.loadbalancer.server.port=80
       - traefik.docker.network=${WARDEN_ENV_NAME}_default
+    environment:
+      - HTTP_RESP_HDR_LEN=${WARDEN_VARNISH_HTTP_RESP_HDR_LEN:-32k}
+      - HTTP_RESP_SIZE=${WARDEN_VARNISH_HTTP_RESP_SIZE:-32k}

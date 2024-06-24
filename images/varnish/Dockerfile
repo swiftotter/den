@@ -3,10 +3,15 @@ FROM varnish:${VARNISH_VERSION}
 
 USER root
 
-ENV VCL_CONFIG      /etc/varnish/default.vcl
-ENV CACHE_SIZE      256m
-ENV VARNISHD_PARAMS -p default_ttl=3600 -p default_grace=3600 \
-    -p feature=+esi_ignore_https -p feature=+esi_disable_xml_check -p http_resp_hdr_len=32k
+ENV VCL_CONFIG         /etc/varnish/default.vcl
+ENV CACHE_SIZE         256m
+ENV HTTP_RESP_HDR_LEN  32k
+ENV HTTP_RESP_SIZE     32k
+ENV VARNISHD_PARAMS \
+    -p default_ttl=3600 \
+    -p default_grace=3600 \
+    -p feature=+esi_ignore_https \
+    -p feature=+esi_disable_xml_check
 
 COPY default.vcl /etc/varnish/default.vcl.template
 RUN apk add --no-cache gettext
@@ -20,4 +25,6 @@ USER varnish
 EXPOSE 	80
 CMD envsubst '${BACKEND_HOST} ${BACKEND_PORT} ${ACL_PURGE_HOST}' \
         < /etc/varnish/default.vcl.template > /etc/varnish/default.vcl \
-    && varnishd -F -f $VCL_CONFIG -s malloc,$CACHE_SIZE $VARNISHD_PARAMS
+    && varnishd -F -f $VCL_CONFIG -s malloc,$CACHE_SIZE $VARNISHD_PARAMS \
+        -p http_resp_hdr_len=${HTTP_RESP_HDR_LEN} \
+    	-p http_resp_size=${HTTP_RESP_SIZE}
