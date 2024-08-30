@@ -60,7 +60,8 @@ RUN apk --no-cache add \
     git-zsh-completion \
     fish \
     pwgen \
-    openssh
+    openssh \
+    make
 
 # Add Cron
 RUN apk --no-cache add busybox-openrc || apk --no-cache add busybox-initscripts
